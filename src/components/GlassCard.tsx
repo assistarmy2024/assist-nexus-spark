@@ -11,6 +11,7 @@ interface GlassCardProps {
   is3D?: boolean;
   metallic?: boolean;
   hoverEffect?: boolean;
+  neoEffect?: boolean;
 }
 
 const GlassCard = ({ 
@@ -22,6 +23,7 @@ const GlassCard = ({
   is3D = false,
   metallic = false,
   hoverEffect = true,
+  neoEffect = false,
 }: GlassCardProps) => {
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
@@ -37,8 +39,8 @@ const GlassCard = ({
     const centerX = width / 2;
     const centerY = height / 2;
     
-    const rotateXValue = ((y - centerY) / 10) * -1;
-    const rotateYValue = (x - centerX) / 10;
+    const rotateXValue = ((y - centerY) / 15) * -1;
+    const rotateYValue = (x - centerX) / 15;
     
     setRotateX(rotateXValue);
     setRotateY(rotateYValue);
@@ -58,12 +60,13 @@ const GlassCard = ({
   return (
     <div 
       className={cn(
-        'glass-card',
+        'glass-card backdrop-blur-md',
         theme && `${theme}-theme`,
         glowing && 'glowing-card',
-        is3D && 'card-3d',
+        is3D && 'card-3d transform-gpu',
         metallic && 'metallic-gradient',
-        hoverEffect && 'hover:shadow-lg',
+        neoEffect && 'neo-morphism',
+        hoverEffect && 'hover:shadow-xl transition-all duration-300',
         onClick && 'cursor-pointer',
         className
       )}

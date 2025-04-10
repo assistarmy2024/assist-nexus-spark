@@ -7,7 +7,8 @@ interface AvatarProps {
   alt: string;
   className?: string;
   size?: 'sm' | 'md' | 'lg' | 'xl';
-  fallback?: string; // Added fallback prop
+  fallback?: string; // Fallback prop for when image fails to load
+  glow?: boolean;
 }
 
 const sizeClasses = {
@@ -17,10 +18,14 @@ const sizeClasses = {
   xl: 'w-40 h-40'
 };
 
-const Avatar = ({ src, alt, className, size = 'md', fallback }: AvatarProps) => {
+const Avatar = ({ src, alt, className, size = 'md', fallback, glow = false }: AvatarProps) => {
   return (
-    <div className={cn('relative', className)}>
-      <div className={cn('rounded-full overflow-hidden', sizeClasses[size])}>
+    <div className={cn('relative', glow && 'avatar-glow', className)}>
+      <div className={cn(
+        'rounded-full overflow-hidden shadow-xl', 
+        sizeClasses[size],
+        glow && 'animate-pulse-gentle'
+      )}>
         <img 
           src={src} 
           alt={alt} 
@@ -32,12 +37,15 @@ const Avatar = ({ src, alt, className, size = 'md', fallback }: AvatarProps) => 
               target.style.display = 'none';
               const parent = target.parentNode as HTMLElement;
               if (parent) {
-                parent.innerHTML = `<div class="w-full h-full flex items-center justify-center bg-gray-200 text-4xl">${fallback}</div>`;
+                parent.innerHTML = `<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-700 to-slate-900 text-4xl">${fallback}</div>`;
               }
             }
           }}
         />
       </div>
+      {glow && (
+        <div className="absolute inset-0 -z-10 rounded-full blur-xl opacity-60 bg-gradient-to-r from-blue-400 to-blue-600"></div>
+      )}
     </div>
   );
 };

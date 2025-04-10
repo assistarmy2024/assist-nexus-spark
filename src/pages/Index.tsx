@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import GlassCard from '@/components/GlassCard';
 import GlassButton from '@/components/GlassButton';
 import CharacterAvatar from '@/components/CharacterAvatar';
-import { ArrowRight, Search, MessageCircle, Home, Sparkles, Shield, Users } from 'lucide-react';
+import { ArrowRight, MessageCircle, Sparkles, Shield, Users } from 'lucide-react';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-background to-background/80">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#070B34] to-[#0A1128]">
       {/* Hero section */}
       <header className="w-full py-10 px-6">
         <div className="container mx-auto">
@@ -22,7 +22,7 @@ const Index = () => {
             <div className="inline-block mb-4">
               <div className="relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-assist-blue via-assist-purple to-assist-pink rounded-full blur"></div>
-                <div className="relative px-6 py-3 bg-background rounded-full">
+                <div className="relative px-6 py-3 bg-[#070B34]/80 backdrop-blur-md rounded-full">
                   <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-assist-blue via-assist-purple to-assist-pink text-transparent bg-clip-text">
                     AssistSphere
                   </h1>
@@ -33,88 +33,88 @@ const Index = () => {
           </div>
           
           <GlassCard className="max-w-4xl mx-auto" is3D={true} metallic={true}>
-            <h2 className="text-xl md:text-2xl font-semibold mb-6 text-center">
+            <h2 className="text-xl md:text-2xl font-semibold mb-8 text-center">
               Choose your personalized journey
             </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Child Journey */}
-              <GlassCard 
-                className="flex flex-col items-center p-6"
-                glowing={true}
-                theme="children"
-                is3D={true}
-                onClick={() => handlePathSelect('/child')}
-              >
-                <div className="relative">
-                  <div className="absolute inset-0 bg-assist-yellow/20 rounded-full blur-md animate-pulse-gentle"></div>
-                  <CharacterAvatar character="child" size="lg" />
+              <div className="relative group" onClick={() => handlePathSelect('/child')}>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur opacity-60 group-hover:opacity-90 transition duration-1000 group-hover:duration-200 animate-pulse-gentle"></div>
+                <div className="relative flex flex-col items-center p-6 bg-gradient-to-br from-[#101643]/80 to-[#0F2357]/90 backdrop-blur-md rounded-2xl border border-blue-500/20 shadow-[0_8px_16px_rgba(0,0,0,0.4)] transition-all duration-300 group-hover:translate-y-[-4px] group-hover:shadow-blue-400/20 cursor-pointer">
+                  <div className="p-3 bg-gradient-to-br from-blue-400/20 to-indigo-600/20 rounded-full mb-4">
+                    <img 
+                      src="/lovable-uploads/6092619e-e957-4c21-b480-20454027a7e2.png" 
+                      alt="Child Assistant" 
+                      className="w-24 h-24 object-contain"
+                    />
+                  </div>
+                  <h3 className="text-xl font-medium text-white mb-1">Chhota Dost</h3>
+                  <p className="text-gray-300 text-sm text-center">Fun learning & interactive stories for kids</p>
+                  <div className="mt-4 w-full">
+                    <GlassButton 
+                      className="w-full bg-gradient-to-r from-blue-500/20 to-indigo-500/20 text-white border border-blue-500/30"
+                      variant="neon"
+                      icon={<ArrowRight className="h-4 w-4" />}
+                      iconPosition="right"
+                    >
+                      Start
+                    </GlassButton>
+                  </div>
                 </div>
-                <h3 className="text-xl font-medium mt-4 text-assist-yellow">Chhota Dost</h3>
-                <p className="text-gray-400 text-sm mt-2 text-center">Fun learning & interactive stories for kids</p>
-                <GlassButton 
-                  className="mt-4 bg-assist-yellow/10 text-assist-yellow"
-                  variant="neon"
-                  theme="children"
-                  icon={<ArrowRight className="h-4 w-4" />}
-                  iconPosition="right"
-                  onClick={() => handlePathSelect('/child')}
-                >
-                  Start
-                </GlassButton>
-              </GlassCard>
+              </div>
               
               {/* Elderly Journey */}
-              <GlassCard 
-                className="flex flex-col items-center p-6"
-                glowing={true}
-                theme="elderly"
-                is3D={true}
-                onClick={() => handlePathSelect('/elderly')}
-              >
-                <div className="relative">
-                  <div className="absolute inset-0 bg-assist-teal/20 rounded-full blur-md animate-pulse-gentle"></div>
-                  <CharacterAvatar character="elderly" size="lg" />
+              <div className="relative group" onClick={() => handlePathSelect('/elderly')}>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-teal-500 to-blue-500 rounded-2xl blur opacity-60 group-hover:opacity-90 transition duration-1000 group-hover:duration-200 animate-pulse-gentle"></div>
+                <div className="relative flex flex-col items-center p-6 bg-gradient-to-br from-[#153346]/80 to-[#0F2357]/90 backdrop-blur-md rounded-2xl border border-teal-500/20 shadow-[0_8px_16px_rgba(0,0,0,0.4)] transition-all duration-300 group-hover:translate-y-[-4px] group-hover:shadow-teal-400/20 cursor-pointer">
+                  <div className="p-3 bg-gradient-to-br from-teal-400/20 to-blue-600/20 rounded-full mb-4">
+                    <img 
+                      src="/lovable-uploads/90dbbc65-0863-4336-be06-5bb181d34086.png" 
+                      alt="Elderly Assistant" 
+                      className="w-24 h-24 object-contain"
+                    />
+                  </div>
+                  <h3 className="text-xl font-medium text-white mb-1">Mitraji</h3>
+                  <p className="text-gray-300 text-sm text-center">Simple, accessible support for seniors</p>
+                  <div className="mt-4 w-full">
+                    <GlassButton 
+                      className="w-full bg-gradient-to-r from-teal-500/20 to-blue-500/20 text-white border border-teal-500/30"
+                      variant="neon"
+                      icon={<ArrowRight className="h-4 w-4" />}
+                      iconPosition="right"
+                    >
+                      Start
+                    </GlassButton>
+                  </div>
                 </div>
-                <h3 className="text-xl font-medium mt-4 text-assist-teal">Mitraji</h3>
-                <p className="text-gray-400 text-sm mt-2 text-center">Simple, accessible support for seniors</p>
-                <GlassButton 
-                  className="mt-4 bg-assist-teal/10 text-assist-teal"
-                  variant="neon"
-                  theme="elderly"
-                  icon={<ArrowRight className="h-4 w-4" />}
-                  iconPosition="right"
-                  onClick={() => handlePathSelect('/elderly')}
-                >
-                  Start
-                </GlassButton>
-              </GlassCard>
+              </div>
               
               {/* Homemaker Journey */}
-              <GlassCard 
-                className="flex flex-col items-center p-6"
-                glowing={true}
-                theme="homemaker"
-                is3D={true}
-                onClick={() => handlePathSelect('/homemaker')}
-              >
-                <div className="relative">
-                  <div className="absolute inset-0 bg-assist-pink/20 rounded-full blur-md animate-pulse-gentle"></div>
-                  <CharacterAvatar character="homemaker" size="lg" />
+              <div className="relative group" onClick={() => handlePathSelect('/homemaker')}>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-purple-500 rounded-2xl blur opacity-60 group-hover:opacity-90 transition duration-1000 group-hover:duration-200 animate-pulse-gentle"></div>
+                <div className="relative flex flex-col items-center p-6 bg-gradient-to-br from-[#2D1434]/80 to-[#1F1346]/90 backdrop-blur-md rounded-2xl border border-pink-500/20 shadow-[0_8px_16px_rgba(0,0,0,0.4)] transition-all duration-300 group-hover:translate-y-[-4px] group-hover:shadow-pink-400/20 cursor-pointer">
+                  <div className="p-3 bg-gradient-to-br from-pink-400/20 to-purple-600/20 rounded-full mb-4">
+                    <img 
+                      src="/lovable-uploads/e6e6ee8f-a56b-41f0-9f84-b710bc57526c.png" 
+                      alt="Homemaker Assistant" 
+                      className="w-24 h-24 object-contain"
+                    />
+                  </div>
+                  <h3 className="text-xl font-medium text-white mb-1">GharSakhi</h3>
+                  <p className="text-gray-300 text-sm text-center">Home management & daily task assistance</p>
+                  <div className="mt-4 w-full">
+                    <GlassButton 
+                      className="w-full bg-gradient-to-r from-pink-500/20 to-purple-500/20 text-white border border-pink-500/30"
+                      variant="neon"
+                      icon={<ArrowRight className="h-4 w-4" />}
+                      iconPosition="right"
+                    >
+                      Start
+                    </GlassButton>
+                  </div>
                 </div>
-                <h3 className="text-xl font-medium mt-4 text-assist-pink">GharSakhi</h3>
-                <p className="text-gray-400 text-sm mt-2 text-center">Home management & daily task assistance</p>
-                <GlassButton 
-                  className="mt-4 bg-assist-pink/10 text-assist-pink"
-                  variant="neon"
-                  theme="homemaker"
-                  icon={<ArrowRight className="h-4 w-4" />}
-                  iconPosition="right"
-                  onClick={() => handlePathSelect('/homemaker')}
-                >
-                  Start
-                </GlassButton>
-              </GlassCard>
+              </div>
             </div>
           </GlassCard>
         </div>
@@ -129,21 +129,21 @@ const Index = () => {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="flex flex-col items-center group">
-                <div className="w-20 h-20 rounded-full bg-assist-blue/10 flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110 group-hover:bg-assist-blue/20">
+                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-assist-blue/20 to-assist-purple/20 flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110 group-hover:bg-assist-blue/30 shadow-lg shadow-assist-blue/10 group-hover:shadow-assist-blue/30">
                   <Sparkles className="h-10 w-10 text-assist-blue" />
                 </div>
                 <h3 className="text-lg font-medium mb-2 text-assist-blue">Smart Search</h3>
                 <p className="text-gray-400 text-center">Intelligent searching tailored to your needs</p>
               </div>
               <div className="flex flex-col items-center group">
-                <div className="w-20 h-20 rounded-full bg-assist-purple/10 flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110 group-hover:bg-assist-purple/20">
+                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-assist-purple/20 to-assist-pink/20 flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110 group-hover:bg-assist-purple/30 shadow-lg shadow-assist-purple/10 group-hover:shadow-assist-purple/30">
                   <MessageCircle className="h-10 w-10 text-assist-purple" />
                 </div>
                 <h3 className="text-lg font-medium mb-2 text-assist-purple">Personalized Chat</h3>
                 <p className="text-gray-400 text-center">Context-aware conversations that understand you</p>
               </div>
               <div className="flex flex-col items-center group">
-                <div className="w-20 h-20 rounded-full bg-assist-pink/10 flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110 group-hover:bg-assist-pink/20">
+                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-assist-pink/20 to-assist-orange/20 flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110 group-hover:bg-assist-pink/30 shadow-lg shadow-assist-pink/10 group-hover:shadow-assist-pink/30">
                   <Shield className="h-10 w-10 text-assist-pink" />
                 </div>
                 <h3 className="text-lg font-medium mb-2 text-assist-pink">Private & Secure</h3>
@@ -152,7 +152,7 @@ const Index = () => {
             </div>
           </GlassCard>
           
-          <GlassCard className="metallic-gradient neo-shadow">
+          <GlassCard className="bg-gradient-to-r from-blue-900/40 to-indigo-900/40 shadow-[0_8px_32px_rgba(31,41,55,0.3)] border border-white/10">
             <div className="flex flex-col md:flex-row items-center justify-between p-6">
               <div className="md:w-2/3 mb-6 md:mb-0">
                 <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">Join the AssistSphere family</h3>
@@ -162,7 +162,7 @@ const Index = () => {
                 <GlassButton 
                   variant="metallic" 
                   size="lg"
-                  className="shadow-lg" 
+                  className="shadow-lg bg-gradient-to-r from-blue-500/20 to-indigo-500/20 border border-white/20 hover:border-white/30" 
                   icon={<Users className="h-5 w-5" />}
                 >
                   Learn More
