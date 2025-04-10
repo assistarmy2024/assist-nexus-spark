@@ -11,21 +11,21 @@ interface CharacterAvatarProps {
 }
 
 const characterImages = {
-  child: "/lovable-uploads/6092619e-e957-4c21-b480-20454027a7e2.png",
-  elderly: "/lovable-uploads/90dbbc65-0863-4336-be06-5bb181d34086.png",
-  homemaker: "/lovable-uploads/e6e6ee8f-a56b-41f0-9f84-b710bc57526c.png"
+  child: "/lovable-uploads/610f4704-240f-4beb-afc6-e84478522871.png",
+  homemaker: "/lovable-uploads/7682db02-e18a-405a-937a-7b7f525828eb.png",
+  elderly: "/lovable-uploads/4f8f135a-6243-488c-92ba-c324f470b2a9.png"
 };
 
 const characterAlternatives = {
   child: "👦",
-  elderly: "👵",
-  homemaker: "👩‍🍳"
+  elderly: "👴",
+  homemaker: "👩"
 };
 
 const characterNames = {
-  child: "KidBot",
-  elderly: "ElderAssist",
-  homemaker: "HomeCompanion"
+  child: "Alex",
+  elderly: "Professor Wilson",
+  homemaker: "Sarah"
 };
 
 const characterGradients = {

@@ -5,18 +5,32 @@ import GlassCard from '@/components/GlassCard';
 import GlassButton from '@/components/GlassButton';
 import CharacterAvatar from '@/components/CharacterAvatar';
 import LiveInteraction from '@/components/LiveInteraction';
-import { ArrowLeft, Video, Share2 } from 'lucide-react';
+import Quiz from '@/components/Quiz';
+import InteractiveVideo from '@/components/InteractiveVideo';
+import Documents from '@/components/Documents';
+import { ArrowLeft, Video, MessageCircle, Sparkles, Shield, Users, PhoneCall, Calendar, Clock, Brain, Gamepad2, Trophy, BookOpen, Rocket } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 
 const ChildJourney = () => {
   const navigate = useNavigate();
   const [showLiveInteraction, setShowLiveInteraction] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
+  const [showDocuments, setShowDocuments] = useState(false);
 
   const handleFeatureClick = (feature: string) => {
     toast({
-      title: `KidBot says:`,
+      title: `Alex says:`,
       description: `Let's explore ${feature} together!`,
     });
+    
+    if (feature === 'quiz') {
+      setShowQuiz(true);
+    } else if (feature === 'videos') {
+      setShowVideo(true);
+    } else if (feature === 'documents') {
+      setShowDocuments(true);
+    }
   };
 
   return (
@@ -56,7 +70,7 @@ const ChildJourney = () => {
               <div className="flex flex-col md:flex-row items-center justify-between">
                 <div className="md:w-1/2 mb-6 md:mb-0">
                   <h1 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-                    Hello! I'm KidBot!
+                    Hello! I'm Alex!
                   </h1>
                   <p className="text-gray-300 mb-4 text-lg">
                     What exciting adventure shall we go on today?
@@ -74,7 +88,7 @@ const ChildJourney = () => {
                   <div className="relative">
                     <div className="absolute -inset-4 rounded-full bg-blue-500/30 blur-xl animate-pulse-gentle"></div>
                     <img 
-                      src="/lovable-uploads/6092619e-e957-4c21-b480-20454027a7e2.png" 
+                      src="/lovable-uploads/610f4704-240f-4beb-afc6-e84478522871.png" 
                       alt="Child Assistant" 
                       className="w-60 h-60 object-contain animate-float"
                     />
@@ -86,11 +100,11 @@ const ChildJourney = () => {
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             {/* Activity Tiles - Tell me a story */}
-            <div className="relative group cursor-pointer" onClick={() => handleFeatureClick('storytelling')}>
+            <div className="relative group cursor-pointer" onClick={() => handleFeatureClick('interactive stories')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#101643]/90 to-[#0F2357]/90 backdrop-blur-md rounded-2xl border border-blue-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
                 <div className="p-3 mb-3 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
-                  <div className="text-blue-400 text-3xl">📚</div>
+                  <BookOpen className="h-8 w-8 text-blue-400" />
                 </div>
                 <p className="text-white font-bold text-center">Stories</p>
                 <p className="text-xs text-blue-300 text-center mt-1">Magical adventures</p>
@@ -98,11 +112,11 @@ const ChildJourney = () => {
             </div>
             
             {/* Fun facts */}
-            <div className="relative group cursor-pointer" onClick={() => handleFeatureClick('fun facts')}>
+            <div className="relative group cursor-pointer" onClick={() => handleFeatureClick('documents')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#3A1F0B]/90 to-[#2C1A14]/90 backdrop-blur-md rounded-2xl border border-orange-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
                 <div className="p-3 mb-3 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
-                  <div className="text-orange-400 text-3xl">🎨</div>
+                  <Brain className="h-8 w-8 text-orange-400" />
                 </div>
                 <p className="text-white font-bold text-center">Fun Facts</p>
                 <p className="text-xs text-orange-300 text-center mt-1">Amazing discoveries</p>
@@ -110,31 +124,31 @@ const ChildJourney = () => {
             </div>
             
             {/* Let's draw */}
-            <div className="relative group cursor-pointer" onClick={() => handleFeatureClick('drawing')}>
+            <div className="relative group cursor-pointer" onClick={() => handleFeatureClick('videos')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#0B2A3A]/90 to-[#0D1F36]/90 backdrop-blur-md rounded-2xl border border-cyan-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
                 <div className="p-3 mb-3 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
-                  <div className="text-cyan-400 text-3xl">🚀</div>
+                  <Rocket className="h-8 w-8 text-cyan-400" />
                 </div>
-                <p className="text-white font-bold text-center">Let's Draw</p>
-                <p className="text-xs text-cyan-300 text-center mt-1">Create art together</p>
+                <p className="text-white font-bold text-center">Videos</p>
+                <p className="text-xs text-cyan-300 text-center mt-1">Watch and learn</p>
               </div>
             </div>
             
             {/* Games */}
-            <div className="relative group cursor-pointer" onClick={() => handleFeatureClick('games')}>
+            <div className="relative group cursor-pointer" onClick={() => handleFeatureClick('quiz')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-purple-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#2D1434]/90 to-[#1F1346]/90 backdrop-blur-md rounded-2xl border border-pink-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
                 <div className="p-3 mb-3 bg-gradient-to-br from-pink-500/20 to-purple-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
-                  <div className="text-pink-400 text-3xl">🎮</div>
+                  <Gamepad2 className="h-8 w-8 text-pink-400" />
                 </div>
-                <p className="text-white font-bold text-center">Games</p>
+                <p className="text-white font-bold text-center">Quiz</p>
                 <p className="text-xs text-pink-300 text-center mt-1">Fun learning games</p>
               </div>
             </div>
             
             {/* Additional activity tiles */}
-            <div className="relative group cursor-pointer" onClick={() => handleFeatureClick('math')}>
+            <div className="relative group cursor-pointer" onClick={() => handleFeatureClick('math games')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#0F342B]/90 to-[#0D2D20]/90 backdrop-blur-md rounded-2xl border border-green-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
                 <div className="p-3 mb-3 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
@@ -146,7 +160,7 @@ const ChildJourney = () => {
             </div>
             
             {/* Animals */}
-            <div className="relative group cursor-pointer" onClick={() => handleFeatureClick('animals')}>
+            <div className="relative group cursor-pointer" onClick={() => handleFeatureClick('animal facts')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#332D0B]/90 to-[#2D270B]/90 backdrop-blur-md rounded-2xl border border-yellow-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
                 <div className="p-3 mb-3 bg-gradient-to-br from-yellow-500/20 to-amber-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
@@ -174,9 +188,9 @@ const ChildJourney = () => {
               <div className="absolute -inset-0.5 bg-gradient-to-r from-sky-500 to-blue-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#0B2A3A]/90 to-[#0D1F36]/90 backdrop-blur-md rounded-2xl border border-sky-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
                 <div className="p-3 mb-3 bg-gradient-to-br from-sky-500/20 to-blue-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
-                  <div className="text-sky-400 text-3xl">🧩</div>
+                  <Trophy className="h-8 w-8 text-sky-400" />
                 </div>
-                <p className="text-white font-bold text-center">Puzzles</p>
+                <p className="text-white font-bold text-center">Challenges</p>
                 <p className="text-xs text-sky-300 text-center mt-1">Brain teasers</p>
               </div>
             </div>
@@ -225,10 +239,18 @@ const ChildJourney = () => {
               <div className="relative">
                 <input 
                   type="text" 
-                  placeholder="Ask KidBot..." 
+                  placeholder="Ask Alex..." 
                   className="w-full bg-blue-900/20 border border-blue-500/30 rounded-full px-6 py-3 pr-12 text-white outline-none focus:ring-2 focus:ring-blue-500/50"
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      setShowLiveInteraction(true);
+                    }
+                  }}
                 />
-                <button className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full p-2 shadow-lg shadow-blue-500/20">
+                <button 
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full p-2 shadow-lg shadow-blue-500/20"
+                  onClick={() => setShowLiveInteraction(true)}
+                >
                   <div className="h-5 w-5 text-white flex items-center justify-center">
                     🚀
                   </div>
@@ -239,9 +261,21 @@ const ChildJourney = () => {
         </div>
       </footer>
 
-      {/* Live Interaction Modal */}
+      {/* Interactive Components */}
       {showLiveInteraction && (
         <LiveInteraction character="child" onClose={() => setShowLiveInteraction(false)} />
+      )}
+      
+      {showQuiz && (
+        <Quiz character="child" onClose={() => setShowQuiz(false)} />
+      )}
+      
+      {showVideo && (
+        <InteractiveVideo character="child" onClose={() => setShowVideo(false)} />
+      )}
+      
+      {showDocuments && (
+        <Documents character="child" onClose={() => setShowDocuments(false)} />
       )}
     </div>
   );

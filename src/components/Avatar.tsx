@@ -19,6 +19,8 @@ const sizeClasses = {
 };
 
 const Avatar = ({ src, alt, className, size = 'md', fallback, glow = false }: AvatarProps) => {
+  const [error, setError] = React.useState(false);
+  
   return (
     <div className={cn('relative', glow && 'avatar-glow', className)}>
       <div className={cn(
@@ -26,22 +28,18 @@ const Avatar = ({ src, alt, className, size = 'md', fallback, glow = false }: Av
         sizeClasses[size],
         glow && 'animate-pulse-gentle'
       )}>
-        <img 
-          src={src} 
-          alt={alt} 
-          className="w-full h-full object-cover"
-          onError={(e) => {
-            // If image fails to load and fallback is provided, show fallback content
-            if (fallback) {
-              const target = e.target as HTMLImageElement;
-              target.style.display = 'none';
-              const parent = target.parentNode as HTMLElement;
-              if (parent) {
-                parent.innerHTML = `<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-700 to-slate-900 text-4xl">${fallback}</div>`;
-              }
-            }
-          }}
-        />
+        {!error ? (
+          <img 
+            src={src} 
+            alt={alt} 
+            className="w-full h-full object-cover"
+            onError={() => setError(true)}
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-700 to-slate-900 text-4xl">
+            {fallback || '👤'}
+          </div>
+        )}
       </div>
       {glow && (
         <div className="absolute inset-0 -z-10 rounded-full blur-xl opacity-60 bg-gradient-to-r from-blue-400 to-blue-600"></div>

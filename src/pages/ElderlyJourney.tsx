@@ -5,18 +5,32 @@ import GlassCard from '@/components/GlassCard';
 import GlassButton from '@/components/GlassButton';
 import CharacterAvatar from '@/components/CharacterAvatar';
 import LiveInteraction from '@/components/LiveInteraction';
-import { ArrowLeft, Video, MessageCircle, Sparkles, Shield, Users, PhoneCall, Calendar, Bell, Clock, Heart } from 'lucide-react';
+import Quiz from '@/components/Quiz';
+import InteractiveVideo from '@/components/InteractiveVideo';
+import Documents from '@/components/Documents';
+import { ArrowLeft, Video, MessageCircle, Sparkles, Shield, Users, PhoneCall, Calendar, Bell, Clock, Heart, BookOpen, Brain, Lightbulb } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 
 const ElderlyJourney = () => {
   const navigate = useNavigate();
   const [showLiveInteraction, setShowLiveInteraction] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
+  const [showDocuments, setShowDocuments] = useState(false);
 
   const handleFeatureClick = (feature: string) => {
     toast({
-      title: `ElderAssist says:`,
+      title: `Professor Wilson says:`,
       description: `I'll help you with ${feature}.`,
     });
+    
+    if (feature === 'health knowledge') {
+      setShowQuiz(true);
+    } else if (feature === 'video tutorials') {
+      setShowVideo(true);
+    } else if (feature === 'health guides') {
+      setShowDocuments(true);
+    }
   };
 
   return (
@@ -56,7 +70,7 @@ const ElderlyJourney = () => {
               <div className="flex flex-col md:flex-row items-center justify-between">
                 <div className="md:w-1/2 mb-6 md:mb-0">
                   <h1 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-                    Welcome back! I'm ElderAssist
+                    Welcome back! I'm Professor Wilson
                   </h1>
                   <p className="text-gray-300 mb-4 text-lg">
                     How may I assist you today?
@@ -74,7 +88,7 @@ const ElderlyJourney = () => {
                   <div className="relative">
                     <div className="absolute -inset-4 rounded-full bg-teal-500/30 blur-xl animate-pulse-gentle"></div>
                     <img 
-                      src="/lovable-uploads/90dbbc65-0863-4336-be06-5bb181d34086.png" 
+                      src="/lovable-uploads/4f8f135a-6243-488c-92ba-c324f470b2a9.png" 
                       alt="Elderly Assistant" 
                       className="w-60 h-60 object-contain animate-float"
                     />
@@ -113,6 +127,34 @@ const ElderlyJourney = () => {
               </div>
             </div>
             
+            {/* Interactive Learning Tiles */}
+            <div className="relative group cursor-pointer col-span-1 md:col-span-2" onClick={() => handleFeatureClick('health knowledge')}>
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
+              <div className="relative p-5 bg-gradient-to-br from-[#0F2540]/90 to-[#0A192F]/90 backdrop-blur-md rounded-2xl border border-emerald-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex items-center">
+                <div className="p-4 mr-4 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
+                  <Brain className="h-8 w-8 text-emerald-400" />
+                </div>
+                <div>
+                  <p className="text-white font-bold">Health Quiz</p>
+                  <p className="text-gray-400 text-sm">Test your knowledge</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Video Tutorials */}
+            <div className="relative group cursor-pointer col-span-1 md:col-span-2" onClick={() => handleFeatureClick('video tutorials')}>
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
+              <div className="relative p-5 bg-gradient-to-br from-[#0F2540]/90 to-[#0A192F]/90 backdrop-blur-md rounded-2xl border border-blue-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex items-center">
+                <div className="p-4 mr-4 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
+                  <Video className="h-8 w-8 text-blue-400" />
+                </div>
+                <div>
+                  <p className="text-white font-bold">Video Guides</p>
+                  <p className="text-gray-400 text-sm">Watch helpful tutorials</p>
+                </div>
+              </div>
+            </div>
+            
             {/* Reminder */}
             <div className="relative group cursor-pointer col-span-1 md:col-span-2" onClick={() => handleFeatureClick('medication reminders')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-yellow-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
@@ -127,16 +169,16 @@ const ElderlyJourney = () => {
               </div>
             </div>
             
-            {/* Emergency */}
-            <div className="relative group cursor-pointer col-span-1 md:col-span-2" onClick={() => handleFeatureClick('emergency assistance')}>
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-red-500 to-rose-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
-              <div className="relative p-5 bg-gradient-to-br from-[#0F2540]/90 to-[#0A192F]/90 backdrop-blur-md rounded-2xl border border-red-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex items-center">
-                <div className="p-4 mr-4 bg-gradient-to-br from-red-500/20 to-rose-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
-                  <Heart className="h-8 w-8 text-red-400" />
+            {/* Health Guides */}
+            <div className="relative group cursor-pointer col-span-1 md:col-span-2" onClick={() => handleFeatureClick('health guides')}>
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
+              <div className="relative p-5 bg-gradient-to-br from-[#0F2540]/90 to-[#0A192F]/90 backdrop-blur-md rounded-2xl border border-teal-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex items-center">
+                <div className="p-4 mr-4 bg-gradient-to-br from-teal-500/20 to-emerald-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
+                  <BookOpen className="h-8 w-8 text-teal-400" />
                 </div>
                 <div>
-                  <p className="text-white font-bold">Emergency</p>
-                  <p className="text-gray-400 text-sm">Get immediate assistance</p>
+                  <p className="text-white font-bold">Health Guides</p>
+                  <p className="text-gray-400 text-sm">Important information</p>
                 </div>
               </div>
             </div>
@@ -195,6 +237,30 @@ const ElderlyJourney = () => {
             </GlassCard>
           </div>
           
+          {/* Daily Learning */}
+          <div className="relative mb-4">
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur opacity-50"></div>
+            <GlassCard className="relative bg-gradient-to-br from-[#0F2540]/90 to-[#0A192F]/90 border border-blue-500/20">
+              <h2 className="text-xl font-semibold mb-3 text-white flex items-center">
+                <Lightbulb className="h-5 w-5 mr-2 text-yellow-400" />
+                Daily Learning
+              </h2>
+              <div className="p-4 bg-gradient-to-br from-blue-900/30 to-indigo-900/30 rounded-xl">
+                <h3 className="text-lg font-medium text-white mb-2">Did You Know?</h3>
+                <p className="text-gray-300">Regular brain exercises like puzzles, reading, and learning new skills can help maintain cognitive function as you age.</p>
+                <div className="mt-3">
+                  <GlassButton
+                    variant="outline"
+                    className="text-sm"
+                    onClick={() => handleFeatureClick('brain health')}
+                  >
+                    Learn More
+                  </GlassButton>
+                </div>
+              </div>
+            </GlassCard>
+          </div>
+          
           {/* Emergency button */}
           <div className="relative" onClick={() => handleFeatureClick('emergency services')}>
             <div className="absolute -inset-1 bg-gradient-to-r from-red-500 to-rose-500 rounded-xl blur opacity-70"></div>
@@ -215,8 +281,8 @@ const ElderlyJourney = () => {
             <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 to-blue-500 rounded-2xl blur opacity-60"></div>
             <GlassCard className="relative p-6 bg-gradient-to-br from-[#0F2540]/90 to-[#0A192F]/90 border border-teal-500/20">
               <div className="text-center mb-4">
-                <p className="text-xl text-teal-400">Speak to ElderAssist</p>
-                <p className="text-gray-400">Just say "Hey ElderAssist" or tap the button below</p>
+                <p className="text-xl text-teal-400">Speak to Professor Wilson</p>
+                <p className="text-gray-400">Just say "Hello Professor" or tap the button below</p>
               </div>
               <div className="flex justify-center">
                 <button 
@@ -231,9 +297,21 @@ const ElderlyJourney = () => {
         </div>
       </footer>
 
-      {/* Live Interaction Modal */}
+      {/* Interactive Components */}
       {showLiveInteraction && (
         <LiveInteraction character="elderly" onClose={() => setShowLiveInteraction(false)} />
+      )}
+      
+      {showQuiz && (
+        <Quiz character="elderly" onClose={() => setShowQuiz(false)} />
+      )}
+      
+      {showVideo && (
+        <InteractiveVideo character="elderly" onClose={() => setShowVideo(false)} />
+      )}
+      
+      {showDocuments && (
+        <Documents character="elderly" onClose={() => setShowDocuments(false)} />
       )}
     </div>
   );

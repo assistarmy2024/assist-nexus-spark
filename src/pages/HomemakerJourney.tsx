@@ -5,18 +5,32 @@ import GlassCard from '@/components/GlassCard';
 import GlassButton from '@/components/GlassButton';
 import CharacterAvatar from '@/components/CharacterAvatar';
 import LiveInteraction from '@/components/LiveInteraction';
-import { ArrowLeft, Calendar, ShoppingCart, Utensils, Wallet, Clock, Bell, Heart, Check, Plus, Video } from 'lucide-react';
+import Quiz from '@/components/Quiz';
+import InteractiveVideo from '@/components/InteractiveVideo';
+import Documents from '@/components/Documents';
+import { ArrowLeft, Calendar, ShoppingCart, Utensils, Wallet, Clock, Bell, Heart, Check, Plus, Video, BookOpen, ImageIcon, Sparkles } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 
 const HomemakerJourney = () => {
   const navigate = useNavigate();
   const [showLiveInteraction, setShowLiveInteraction] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
+  const [showDocuments, setShowDocuments] = useState(false);
 
   const handleFeatureClick = (feature: string) => {
     toast({
-      title: `HomeCompanion says:`,
+      title: `Sarah says:`,
       description: `I'll help you manage your ${feature}.`,
     });
+    
+    if (feature === 'home knowledge') {
+      setShowQuiz(true);
+    } else if (feature === 'video guides') {
+      setShowVideo(true);
+    } else if (feature === 'management guides') {
+      setShowDocuments(true);
+    }
   };
 
   return (
@@ -63,7 +77,7 @@ const HomemakerJourney = () => {
             <div className="flex flex-col md:flex-row items-center justify-between">
               <div className="md:w-1/2 mb-6 md:mb-0">
                 <h1 className="text-3xl md:text-4xl font-bold mb-4 text-assist-pink">
-                  Welcome to HomeCompanion!
+                  Welcome to Home with Sarah!
                 </h1>
                 <p className="text-gray-300 mb-4">
                   Your personal home management assistant for planning, meals, and household tasks.
@@ -81,8 +95,8 @@ const HomemakerJourney = () => {
                 <div className="relative">
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-assist-pink/20 to-assist-purple/20 blur-xl animate-pulse-gentle"></div>
                   <img 
-                    src="/lovable-uploads/e6e6ee8f-a56b-41f0-9f84-b710bc57526c.png" 
-                    alt="HomeCompanion" 
+                    src="/lovable-uploads/7682db02-e18a-405a-937a-7b7f525828eb.png" 
+                    alt="HomeMaker Assistant" 
                     className="w-60 h-60 object-contain animate-float"
                   />
                 </div>
@@ -180,6 +194,37 @@ const HomemakerJourney = () => {
                   onClick={() => handleFeatureClick('expenses')}
                 >
                   Track Expense
+                </GlassButton>
+              </div>
+              
+              <h3 className="text-lg font-semibold mt-6 mb-3 text-assist-pink">Learning & Tools</h3>
+              <div className="space-y-3">
+                <GlassButton 
+                  className="w-full bg-assist-pink/10 text-assist-pink justify-start" 
+                  variant="neon"
+                  theme="homemaker"
+                  icon={<Video className="h-4 w-4" />}
+                  onClick={() => handleFeatureClick('video guides')}
+                >
+                  Video Guides
+                </GlassButton>
+                <GlassButton 
+                  className="w-full bg-assist-pink/10 text-assist-pink justify-start"
+                  variant="neon"
+                  theme="homemaker"
+                  icon={<BookOpen className="h-4 w-4" />}
+                  onClick={() => handleFeatureClick('management guides')}
+                >
+                  Home Guides
+                </GlassButton>
+                <GlassButton 
+                  className="w-full bg-assist-pink/10 text-assist-pink justify-start"
+                  variant="neon"
+                  theme="homemaker"
+                  icon={<Sparkles className="h-4 w-4" />}
+                  onClick={() => handleFeatureClick('home knowledge')}
+                >
+                  Home Quiz
                 </GlassButton>
               </div>
             </GlassCard>
@@ -294,10 +339,18 @@ const HomemakerJourney = () => {
             <div className="relative">
               <input 
                 type="text" 
-                placeholder="Ask HomeCompanion..." 
+                placeholder="Ask Sarah..." 
                 className="w-full bg-black/30 border border-assist-pink/30 rounded-full px-6 py-3 pr-12 text-white outline-none focus:ring-2 focus:ring-assist-pink/50 shadow-inner"
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    setShowLiveInteraction(true);
+                  }
+                }}
               />
-              <button className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-assist-pink to-assist-purple rounded-full p-2 shadow-lg hover:shadow-assist-pink/30 transition duration-300">
+              <button 
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-assist-pink to-assist-purple rounded-full p-2 shadow-lg hover:shadow-assist-pink/30 transition duration-300"
+                onClick={() => setShowLiveInteraction(true)}
+              >
                 <div className="h-5 w-5 text-white flex items-center justify-center">
                   🏡
                 </div>
@@ -307,9 +360,21 @@ const HomemakerJourney = () => {
         </div>
       </footer>
 
-      {/* Live Interaction Modal */}
+      {/* Interactive Components */}
       {showLiveInteraction && (
         <LiveInteraction character="homemaker" onClose={() => setShowLiveInteraction(false)} />
+      )}
+      
+      {showQuiz && (
+        <Quiz character="homemaker" onClose={() => setShowQuiz(false)} />
+      )}
+      
+      {showVideo && (
+        <InteractiveVideo character="homemaker" onClose={() => setShowVideo(false)} />
+      )}
+      
+      {showDocuments && (
+        <Documents character="homemaker" onClose={() => setShowDocuments(false)} />
       )}
     </div>
   );
