@@ -1,13 +1,23 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlassCard from '@/components/GlassCard';
 import GlassButton from '@/components/GlassButton';
 import CharacterAvatar from '@/components/CharacterAvatar';
-import { ArrowLeft, Calendar, ShoppingCart, Utensils, Wallet, Clock, Bell, Heart, Check, Plus } from 'lucide-react';
+import LiveInteraction from '@/components/LiveInteraction';
+import { ArrowLeft, Calendar, ShoppingCart, Utensils, Wallet, Clock, Bell, Heart, Check, Plus, Video } from 'lucide-react';
+import { toast } from '@/hooks/use-toast';
 
 const HomemakerJourney = () => {
   const navigate = useNavigate();
+  const [showLiveInteraction, setShowLiveInteraction] = useState(false);
+
+  const handleFeatureClick = (feature: string) => {
+    toast({
+      title: `HomeCompanion says:`,
+      description: `I'll help you manage your ${feature}.`,
+    });
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-assist-pink/10 to-transparent">
@@ -25,7 +35,15 @@ const HomemakerJourney = () => {
             >
               Back
             </GlassButton>
-            <div className="flex items-center">
+            <div className="flex items-center gap-4">
+              <GlassButton 
+                className="bg-pink-500/20 border border-pink-500/30 text-white"
+                variant="neon"
+                onClick={() => setShowLiveInteraction(true)}
+                icon={<Video className="h-4 w-4 mr-2" />}
+              >
+                Video Call
+              </GlassButton>
               <CharacterAvatar character="homemaker" size="sm" />
             </div>
           </div>
@@ -45,16 +63,28 @@ const HomemakerJourney = () => {
             <div className="flex flex-col md:flex-row items-center justify-between">
               <div className="md:w-1/2 mb-6 md:mb-0">
                 <h1 className="text-3xl md:text-4xl font-bold mb-4 text-assist-pink">
-                  Welcome to GharSakhi!
+                  Welcome to HomeCompanion!
                 </h1>
                 <p className="text-gray-300 mb-4">
                   Your personal home management assistant for planning, meals, and household tasks.
                 </p>
+                <GlassButton 
+                  className="bg-pink-500/20 border border-pink-500/30 text-white"
+                  variant="neon"
+                  onClick={() => setShowLiveInteraction(true)}
+                  icon={<Video className="h-4 w-4 mr-2" />}
+                >
+                  Start Video Call
+                </GlassButton>
               </div>
               <div className="md:w-1/2 flex justify-center">
                 <div className="relative">
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-assist-pink/20 to-assist-purple/20 blur-xl animate-pulse-gentle"></div>
-                  <CharacterAvatar character="homemaker" size="xl" />
+                  <img 
+                    src="/lovable-uploads/e6e6ee8f-a56b-41f0-9f84-b710bc57526c.png" 
+                    alt="HomeCompanion" 
+                    className="w-60 h-60 object-contain animate-float"
+                  />
                 </div>
               </div>
             </div>
@@ -65,7 +95,7 @@ const HomemakerJourney = () => {
             <GlassCard className="md:col-span-8 p-6" is3D={true}>
               <h2 className="text-xl font-semibold mb-4 text-assist-pink">Today's Overview</h2>
               <div className="space-y-4">
-                <div className="flex items-center p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer">
+                <div className="flex items-center p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer" onClick={() => handleFeatureClick('school schedule')}>
                   <div className="w-10 h-10 rounded-full bg-assist-pink/20 flex items-center justify-center mr-4">
                     <Clock className="h-5 w-5 text-assist-pink" />
                   </div>
@@ -78,7 +108,7 @@ const HomemakerJourney = () => {
                     </button>
                   </div>
                 </div>
-                <div className="flex items-center p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer">
+                <div className="flex items-center p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer" onClick={() => handleFeatureClick('grocery shopping')}>
                   <div className="w-10 h-10 rounded-full bg-assist-pink/20 flex items-center justify-center mr-4">
                     <ShoppingCart className="h-5 w-5 text-assist-pink" />
                   </div>
@@ -91,7 +121,7 @@ const HomemakerJourney = () => {
                     </button>
                   </div>
                 </div>
-                <div className="flex items-center p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer">
+                <div className="flex items-center p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer" onClick={() => handleFeatureClick('meal preparation')}>
                   <div className="w-10 h-10 rounded-full bg-assist-pink/20 flex items-center justify-center mr-4">
                     <Utensils className="h-5 w-5 text-assist-pink" />
                   </div>
@@ -104,7 +134,7 @@ const HomemakerJourney = () => {
                     </button>
                   </div>
                 </div>
-                <div className="flex items-center p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer">
+                <div className="flex items-center p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer" onClick={() => handleFeatureClick('school pickup')}>
                   <div className="w-10 h-10 rounded-full bg-assist-pink/20 flex items-center justify-center mr-4">
                     <Clock className="h-5 w-5 text-assist-pink" />
                   </div>
@@ -129,6 +159,7 @@ const HomemakerJourney = () => {
                   variant="neon"
                   theme="homemaker"
                   icon={<Calendar className="h-4 w-4" />}
+                  onClick={() => handleFeatureClick('tasks')}
                 >
                   Add Task
                 </GlassButton>
@@ -137,6 +168,7 @@ const HomemakerJourney = () => {
                   variant="neon"
                   theme="homemaker"
                   icon={<ShoppingCart className="h-4 w-4" />}
+                  onClick={() => handleFeatureClick('shopping list')}
                 >
                   Add to Shopping List
                 </GlassButton>
@@ -145,6 +177,7 @@ const HomemakerJourney = () => {
                   variant="neon"
                   theme="homemaker"
                   icon={<Wallet className="h-4 w-4" />}
+                  onClick={() => handleFeatureClick('expenses')}
                 >
                   Track Expense
                 </GlassButton>
@@ -157,7 +190,11 @@ const HomemakerJourney = () => {
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <GlassCard className="hover:scale-105 transition-transform cursor-pointer p-6" is3D={true}>
+            <GlassCard 
+              className="hover:scale-105 transition-transform cursor-pointer p-6" 
+              is3D={true}
+              onClick={() => handleFeatureClick('daily schedule')}
+            >
               <div className="flex flex-col items-center">
                 <div className="w-16 h-16 rounded-full bg-gradient-to-br from-assist-pink/30 to-assist-purple/20 flex items-center justify-center mb-4">
                   <Calendar className="h-8 w-8 text-assist-pink" />
@@ -167,7 +204,11 @@ const HomemakerJourney = () => {
               </div>
             </GlassCard>
             
-            <GlassCard className="hover:scale-105 transition-transform cursor-pointer p-6" is3D={true}>
+            <GlassCard 
+              className="hover:scale-105 transition-transform cursor-pointer p-6" 
+              is3D={true}
+              onClick={() => handleFeatureClick('shopping lists')}
+            >
               <div className="flex flex-col items-center">
                 <div className="w-16 h-16 rounded-full bg-gradient-to-br from-assist-pink/30 to-assist-purple/20 flex items-center justify-center mb-4">
                   <ShoppingCart className="h-8 w-8 text-assist-pink" />
@@ -177,7 +218,11 @@ const HomemakerJourney = () => {
               </div>
             </GlassCard>
             
-            <GlassCard className="hover:scale-105 transition-transform cursor-pointer p-6" is3D={true}>
+            <GlassCard 
+              className="hover:scale-105 transition-transform cursor-pointer p-6" 
+              is3D={true}
+              onClick={() => handleFeatureClick('recipes')}
+            >
               <div className="flex flex-col items-center">
                 <div className="w-16 h-16 rounded-full bg-gradient-to-br from-assist-pink/30 to-assist-purple/20 flex items-center justify-center mb-4">
                   <Utensils className="h-8 w-8 text-assist-pink" />
@@ -187,7 +232,11 @@ const HomemakerJourney = () => {
               </div>
             </GlassCard>
             
-            <GlassCard className="hover:scale-105 transition-transform cursor-pointer p-6" is3D={true}>
+            <GlassCard 
+              className="hover:scale-105 transition-transform cursor-pointer p-6" 
+              is3D={true}
+              onClick={() => handleFeatureClick('budget')}
+            >
               <div className="flex flex-col items-center">
                 <div className="w-16 h-16 rounded-full bg-gradient-to-br from-assist-pink/30 to-assist-purple/20 flex items-center justify-center mb-4">
                   <Wallet className="h-8 w-8 text-assist-pink" />
@@ -228,6 +277,7 @@ const HomemakerJourney = () => {
                   variant="neon"
                   theme="homemaker"
                   icon={<Utensils className="h-4 w-4" />}
+                  onClick={() => handleFeatureClick('recipe details')}
                 >
                   View Recipe
                 </GlassButton>
@@ -244,7 +294,7 @@ const HomemakerJourney = () => {
             <div className="relative">
               <input 
                 type="text" 
-                placeholder="Ask GharSakhi..." 
+                placeholder="Ask HomeCompanion..." 
                 className="w-full bg-black/30 border border-assist-pink/30 rounded-full px-6 py-3 pr-12 text-white outline-none focus:ring-2 focus:ring-assist-pink/50 shadow-inner"
               />
               <button className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-assist-pink to-assist-purple rounded-full p-2 shadow-lg hover:shadow-assist-pink/30 transition duration-300">
@@ -256,6 +306,11 @@ const HomemakerJourney = () => {
           </GlassCard>
         </div>
       </footer>
+
+      {/* Live Interaction Modal */}
+      {showLiveInteraction && (
+        <LiveInteraction character="homemaker" onClose={() => setShowLiveInteraction(false)} />
+      )}
     </div>
   );
 };

@@ -29,27 +29,27 @@ const Index = () => {
                 </div>
               </div>
             </div>
-            <p className="text-gray-400 text-lg">Your personalized assistance companion</p>
+            <p className="text-gray-400 text-lg">Your intelligent digital companion ecosystem</p>
           </div>
           
           <GlassCard className="max-w-4xl mx-auto" is3D={true} metallic={true}>
             <h2 className="text-xl md:text-2xl font-semibold mb-8 text-center">
-              Choose your personalized journey
+              Choose your digital assistant
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Child Journey */}
               <div className="relative group" onClick={() => handlePathSelect('/child')}>
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur opacity-60 group-hover:opacity-90 transition duration-1000 group-hover:duration-200 animate-pulse-gentle"></div>
-                <div className="relative flex flex-col items-center p-6 bg-gradient-to-br from-[#101643]/80 to-[#0F2357]/90 backdrop-blur-md rounded-2xl border border-blue-500/20 shadow-[0_8px_16px_rgba(0,0,0,0.4)] transition-all duration-300 group-hover:translate-y-[-4px] group-hover:shadow-blue-400/20 cursor-pointer">
-                  <div className="p-3 bg-gradient-to-br from-blue-400/20 to-indigo-600/20 rounded-full mb-4">
+                <div className="relative flex flex-col items-center p-6 bg-gradient-to-br from-[#101643]/80 to-[#0F2357]/90 backdrop-blur-md rounded-2xl border border-blue-500/20 shadow-[0_8px_16px_rgba(0,0,0,0.4)] transition-all duration-300 group-hover:translate-y-[-4px] group-hover:shadow-blue-400/20 cursor-pointer h-full">
+                  <div className="p-3 bg-gradient-to-br from-blue-400/20 to-indigo-600/20 rounded-full mb-4 w-40 h-40 flex items-center justify-center">
                     <img 
                       src="/lovable-uploads/6092619e-e957-4c21-b480-20454027a7e2.png" 
                       alt="Child Assistant" 
-                      className="w-24 h-24 object-contain"
+                      className="w-36 h-36 object-contain transform hover:scale-110 transition-transform duration-300"
                     />
                   </div>
-                  <h3 className="text-xl font-medium text-white mb-1">Chhota Dost</h3>
+                  <h3 className="text-2xl font-bold text-white mb-1">KidBot</h3>
                   <p className="text-gray-300 text-sm text-center">Fun learning & interactive stories for kids</p>
                   <div className="mt-4 w-full">
                     <GlassButton 
@@ -67,15 +67,15 @@ const Index = () => {
               {/* Elderly Journey */}
               <div className="relative group" onClick={() => handlePathSelect('/elderly')}>
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-teal-500 to-blue-500 rounded-2xl blur opacity-60 group-hover:opacity-90 transition duration-1000 group-hover:duration-200 animate-pulse-gentle"></div>
-                <div className="relative flex flex-col items-center p-6 bg-gradient-to-br from-[#153346]/80 to-[#0F2357]/90 backdrop-blur-md rounded-2xl border border-teal-500/20 shadow-[0_8px_16px_rgba(0,0,0,0.4)] transition-all duration-300 group-hover:translate-y-[-4px] group-hover:shadow-teal-400/20 cursor-pointer">
-                  <div className="p-3 bg-gradient-to-br from-teal-400/20 to-blue-600/20 rounded-full mb-4">
+                <div className="relative flex flex-col items-center p-6 bg-gradient-to-br from-[#153346]/80 to-[#0F2357]/90 backdrop-blur-md rounded-2xl border border-teal-500/20 shadow-[0_8px_16px_rgba(0,0,0,0.4)] transition-all duration-300 group-hover:translate-y-[-4px] group-hover:shadow-teal-400/20 cursor-pointer h-full">
+                  <div className="p-3 bg-gradient-to-br from-teal-400/20 to-blue-600/20 rounded-full mb-4 w-40 h-40 flex items-center justify-center">
                     <img 
                       src="/lovable-uploads/90dbbc65-0863-4336-be06-5bb181d34086.png" 
                       alt="Elderly Assistant" 
-                      className="w-24 h-24 object-contain"
+                      className="w-36 h-36 object-contain transform hover:scale-110 transition-transform duration-300"
                     />
                   </div>
-                  <h3 className="text-xl font-medium text-white mb-1">Mitraji</h3>
+                  <h3 className="text-2xl font-bold text-white mb-1">ElderAssist</h3>
                   <p className="text-gray-300 text-sm text-center">Simple, accessible support for seniors</p>
                   <div className="mt-4 w-full">
                     <GlassButton 
@@ -93,15 +93,15 @@ const Index = () => {
               {/* Homemaker Journey */}
               <div className="relative group" onClick={() => handlePathSelect('/homemaker')}>
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-purple-500 rounded-2xl blur opacity-60 group-hover:opacity-90 transition duration-1000 group-hover:duration-200 animate-pulse-gentle"></div>
-                <div className="relative flex flex-col items-center p-6 bg-gradient-to-br from-[#2D1434]/80 to-[#1F1346]/90 backdrop-blur-md rounded-2xl border border-pink-500/20 shadow-[0_8px_16px_rgba(0,0,0,0.4)] transition-all duration-300 group-hover:translate-y-[-4px] group-hover:shadow-pink-400/20 cursor-pointer">
-                  <div className="p-3 bg-gradient-to-br from-pink-400/20 to-purple-600/20 rounded-full mb-4">
+                <div className="relative flex flex-col items-center p-6 bg-gradient-to-br from-[#2D1434]/80 to-[#1F1346]/90 backdrop-blur-md rounded-2xl border border-pink-500/20 shadow-[0_8px_16px_rgba(0,0,0,0.4)] transition-all duration-300 group-hover:translate-y-[-4px] group-hover:shadow-pink-400/20 cursor-pointer h-full">
+                  <div className="p-3 bg-gradient-to-br from-pink-400/20 to-purple-600/20 rounded-full mb-4 w-40 h-40 flex items-center justify-center">
                     <img 
                       src="/lovable-uploads/e6e6ee8f-a56b-41f0-9f84-b710bc57526c.png" 
                       alt="Homemaker Assistant" 
-                      className="w-24 h-24 object-contain"
+                      className="w-36 h-36 object-contain transform hover:scale-110 transition-transform duration-300"
                     />
                   </div>
-                  <h3 className="text-xl font-medium text-white mb-1">GharSakhi</h3>
+                  <h3 className="text-2xl font-bold text-white mb-1">HomeCompanion</h3>
                   <p className="text-gray-300 text-sm text-center">Home management & daily task assistance</p>
                   <div className="mt-4 w-full">
                     <GlassButton 

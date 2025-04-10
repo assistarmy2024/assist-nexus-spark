@@ -23,9 +23,9 @@ const characterAlternatives = {
 };
 
 const characterNames = {
-  child: "Chhota Dost",
-  elderly: "Mitraji",
-  homemaker: "GharSakhi"
+  child: "KidBot",
+  elderly: "ElderAssist",
+  homemaker: "HomeCompanion"
 };
 
 const characterGradients = {
@@ -62,7 +62,7 @@ const CharacterAvatar = ({ character, className, size = 'md', showName = true }:
       </div>
       {showName && (
         <span className={cn(
-          'mt-2 font-medium',
+          'mt-2 font-bold text-lg',
           character === 'child' && 'text-blue-400',
           character === 'elderly' && 'text-teal-400',
           character === 'homemaker' && 'text-pink-400'
