@@ -4,23 +4,26 @@ import { useNavigate } from 'react-router-dom';
 import GlassCard from '@/components/GlassCard';
 import GlassButton from '@/components/GlassButton';
 import CharacterAvatar from '@/components/CharacterAvatar';
-import { ArrowLeft, Calendar, ShoppingCart, Utensils, Wallet, Clock } from 'lucide-react';
+import { ArrowLeft, Calendar, ShoppingCart, Utensils, Wallet, Clock, Bell, Heart, Check, Plus } from 'lucide-react';
 
 const HomemakerJourney = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-radial from-assist-pink/10 to-transparent">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-assist-pink/10 to-transparent">
       {/* Header */}
       <header className="w-full py-6 px-6">
         <div className="container mx-auto">
           <div className="flex items-center justify-between">
             <GlassButton 
               variant="ghost" 
-              className="text-white" 
+              className="text-white backdrop-blur-md" 
               onClick={() => navigate('/')}
+              icon={<ArrowLeft className="h-4 w-4" />}
+              iconPosition="left"
+              is3D={true}
             >
-              <ArrowLeft className="mr-2 h-4 w-4" /> Back
+              Back
             </GlassButton>
             <div className="flex items-center">
               <CharacterAvatar character="homemaker" size="sm" />
@@ -36,6 +39,8 @@ const HomemakerJourney = () => {
             theme="homemaker" 
             glowing={true} 
             className="mb-8 text-center"
+            is3D={true}
+            metallic={true}
           >
             <div className="flex flex-col md:flex-row items-center justify-between">
               <div className="md:w-1/2 mb-6 md:mb-0">
@@ -47,63 +52,101 @@ const HomemakerJourney = () => {
                 </p>
               </div>
               <div className="md:w-1/2 flex justify-center">
-                <CharacterAvatar character="homemaker" size="xl" />
+                <div className="relative">
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-assist-pink/20 to-assist-purple/20 blur-xl animate-pulse-gentle"></div>
+                  <CharacterAvatar character="homemaker" size="xl" />
+                </div>
               </div>
             </div>
           </GlassCard>
           
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-8">
             {/* Today's Overview */}
-            <GlassCard className="md:col-span-8 p-6">
+            <GlassCard className="md:col-span-8 p-6" is3D={true}>
               <h2 className="text-xl font-semibold mb-4 text-assist-pink">Today's Overview</h2>
               <div className="space-y-4">
-                <div className="flex items-center">
+                <div className="flex items-center p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer">
                   <div className="w-10 h-10 rounded-full bg-assist-pink/20 flex items-center justify-center mr-4">
                     <Clock className="h-5 w-5 text-assist-pink" />
                   </div>
-                  <div>
+                  <div className="flex-grow">
                     <p className="text-gray-300">9:00 AM - School drop-off</p>
                   </div>
+                  <div>
+                    <button className="p-2 rounded-full hover:bg-assist-pink/10">
+                      <Check className="h-4 w-4 text-assist-pink" />
+                    </button>
+                  </div>
                 </div>
-                <div className="flex items-center">
+                <div className="flex items-center p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer">
                   <div className="w-10 h-10 rounded-full bg-assist-pink/20 flex items-center justify-center mr-4">
                     <ShoppingCart className="h-5 w-5 text-assist-pink" />
                   </div>
-                  <div>
+                  <div className="flex-grow">
                     <p className="text-gray-300">11:00 AM - Grocery shopping</p>
                   </div>
+                  <div>
+                    <button className="p-2 rounded-full hover:bg-assist-pink/10">
+                      <Check className="h-4 w-4 text-assist-pink" />
+                    </button>
+                  </div>
                 </div>
-                <div className="flex items-center">
+                <div className="flex items-center p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer">
                   <div className="w-10 h-10 rounded-full bg-assist-pink/20 flex items-center justify-center mr-4">
                     <Utensils className="h-5 w-5 text-assist-pink" />
                   </div>
-                  <div>
+                  <div className="flex-grow">
                     <p className="text-gray-300">1:00 PM - Prepare lunch</p>
                   </div>
+                  <div>
+                    <button className="p-2 rounded-full hover:bg-assist-pink/10">
+                      <Check className="h-4 w-4 text-assist-pink" />
+                    </button>
+                  </div>
                 </div>
-                <div className="flex items-center">
+                <div className="flex items-center p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer">
                   <div className="w-10 h-10 rounded-full bg-assist-pink/20 flex items-center justify-center mr-4">
                     <Clock className="h-5 w-5 text-assist-pink" />
                   </div>
-                  <div>
+                  <div className="flex-grow">
                     <p className="text-gray-300">3:00 PM - School pickup</p>
+                  </div>
+                  <div>
+                    <button className="p-2 rounded-full hover:bg-assist-pink/10">
+                      <Check className="h-4 w-4 text-assist-pink" />
+                    </button>
                   </div>
                 </div>
               </div>
             </GlassCard>
             
             {/* Quick Actions */}
-            <GlassCard className="md:col-span-4 p-6">
+            <GlassCard className="md:col-span-4 p-6" is3D={true}>
               <h2 className="text-xl font-semibold mb-4 text-assist-pink">Quick Actions</h2>
               <div className="space-y-3">
-                <GlassButton className="w-full bg-assist-pink/10 text-assist-pink justify-start">
-                  <Calendar className="mr-2 h-4 w-4" /> Add Task
+                <GlassButton 
+                  className="w-full bg-assist-pink/10 text-assist-pink justify-start" 
+                  variant="neon"
+                  theme="homemaker"
+                  icon={<Calendar className="h-4 w-4" />}
+                >
+                  Add Task
                 </GlassButton>
-                <GlassButton className="w-full bg-assist-pink/10 text-assist-pink justify-start">
-                  <ShoppingCart className="mr-2 h-4 w-4" /> Add to Shopping List
+                <GlassButton 
+                  className="w-full bg-assist-pink/10 text-assist-pink justify-start"
+                  variant="neon"
+                  theme="homemaker"
+                  icon={<ShoppingCart className="h-4 w-4" />}
+                >
+                  Add to Shopping List
                 </GlassButton>
-                <GlassButton className="w-full bg-assist-pink/10 text-assist-pink justify-start">
-                  <Wallet className="mr-2 h-4 w-4" /> Track Expense
+                <GlassButton 
+                  className="w-full bg-assist-pink/10 text-assist-pink justify-start"
+                  variant="neon"
+                  theme="homemaker"
+                  icon={<Wallet className="h-4 w-4" />}
+                >
+                  Track Expense
                 </GlassButton>
               </div>
             </GlassCard>
@@ -113,10 +156,10 @@ const HomemakerJourney = () => {
             What would you like to manage today?
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <GlassCard className="hover:scale-105 transition-transform cursor-pointer">
-              <div className="flex flex-col items-center p-6">
-                <div className="w-16 h-16 rounded-full bg-assist-pink/20 flex items-center justify-center mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <GlassCard className="hover:scale-105 transition-transform cursor-pointer p-6" is3D={true}>
+              <div className="flex flex-col items-center">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-assist-pink/30 to-assist-purple/20 flex items-center justify-center mb-4">
                   <Calendar className="h-8 w-8 text-assist-pink" />
                 </div>
                 <h3 className="text-lg font-medium mb-2 text-assist-pink">Daily Planner</h3>
@@ -124,9 +167,9 @@ const HomemakerJourney = () => {
               </div>
             </GlassCard>
             
-            <GlassCard className="hover:scale-105 transition-transform cursor-pointer">
-              <div className="flex flex-col items-center p-6">
-                <div className="w-16 h-16 rounded-full bg-assist-pink/20 flex items-center justify-center mb-4">
+            <GlassCard className="hover:scale-105 transition-transform cursor-pointer p-6" is3D={true}>
+              <div className="flex flex-col items-center">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-assist-pink/30 to-assist-purple/20 flex items-center justify-center mb-4">
                   <ShoppingCart className="h-8 w-8 text-assist-pink" />
                 </div>
                 <h3 className="text-lg font-medium mb-2 text-assist-pink">Shopping & Groceries</h3>
@@ -134,9 +177,9 @@ const HomemakerJourney = () => {
               </div>
             </GlassCard>
             
-            <GlassCard className="hover:scale-105 transition-transform cursor-pointer">
-              <div className="flex flex-col items-center p-6">
-                <div className="w-16 h-16 rounded-full bg-assist-pink/20 flex items-center justify-center mb-4">
+            <GlassCard className="hover:scale-105 transition-transform cursor-pointer p-6" is3D={true}>
+              <div className="flex flex-col items-center">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-assist-pink/30 to-assist-purple/20 flex items-center justify-center mb-4">
                   <Utensils className="h-8 w-8 text-assist-pink" />
                 </div>
                 <h3 className="text-lg font-medium mb-2 text-assist-pink">Recipe Manager</h3>
@@ -144,9 +187,9 @@ const HomemakerJourney = () => {
               </div>
             </GlassCard>
             
-            <GlassCard className="hover:scale-105 transition-transform cursor-pointer">
-              <div className="flex flex-col items-center p-6">
-                <div className="w-16 h-16 rounded-full bg-assist-pink/20 flex items-center justify-center mb-4">
+            <GlassCard className="hover:scale-105 transition-transform cursor-pointer p-6" is3D={true}>
+              <div className="flex flex-col items-center">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-assist-pink/30 to-assist-purple/20 flex items-center justify-center mb-4">
                   <Wallet className="h-8 w-8 text-assist-pink" />
                 </div>
                 <h3 className="text-lg font-medium mb-2 text-assist-pink">Budget Tracker</h3>
@@ -156,12 +199,12 @@ const HomemakerJourney = () => {
           </div>
           
           {/* Featured Recipe */}
-          <GlassCard className="p-6 mb-8">
+          <GlassCard className="p-6 mb-8" is3D={true} metallic={true}>
             <h2 className="text-xl font-semibold mb-4 text-assist-pink">Today's Recipe Suggestion</h2>
             <div className="flex flex-col md:flex-row items-center">
               <div className="md:w-1/3 mb-4 md:mb-0 md:mr-6">
-                <div className="rounded-xl overflow-hidden">
-                  <div className="w-full h-48 bg-black/30 flex items-center justify-center">
+                <div className="rounded-xl overflow-hidden shadow-lg">
+                  <div className="w-full h-48 bg-gradient-to-br from-black/50 to-assist-pink/10 flex items-center justify-center">
                     <Utensils className="h-16 w-16 text-assist-pink/50" />
                   </div>
                 </div>
@@ -169,18 +212,23 @@ const HomemakerJourney = () => {
               <div className="md:w-2/3">
                 <h3 className="text-lg font-medium mb-2 text-white">Easy Dinner Pasta</h3>
                 <p className="text-gray-400 mb-4">A quick and nutritious pasta dish perfect for busy weeknights.</p>
-                <div className="flex space-x-4">
-                  <div className="text-gray-400 text-sm">
-                    <span className="font-medium text-assist-pink">Prep Time:</span> 10 mins
+                <div className="flex flex-wrap gap-4">
+                  <div className="text-gray-400 text-sm px-3 py-1 rounded-full bg-white/5">
+                    <span className="font-medium text-assist-pink">Prep:</span> 10 mins
                   </div>
-                  <div className="text-gray-400 text-sm">
-                    <span className="font-medium text-assist-pink">Cook Time:</span> 20 mins
+                  <div className="text-gray-400 text-sm px-3 py-1 rounded-full bg-white/5">
+                    <span className="font-medium text-assist-pink">Cook:</span> 20 mins
                   </div>
-                  <div className="text-gray-400 text-sm">
+                  <div className="text-gray-400 text-sm px-3 py-1 rounded-full bg-white/5">
                     <span className="font-medium text-assist-pink">Servings:</span> 4
                   </div>
                 </div>
-                <GlassButton className="mt-4 bg-assist-pink/10 text-assist-pink">
+                <GlassButton 
+                  className="mt-4 bg-assist-pink/10 text-assist-pink"
+                  variant="neon"
+                  theme="homemaker"
+                  icon={<Utensils className="h-4 w-4" />}
+                >
                   View Recipe
                 </GlassButton>
               </div>
@@ -192,14 +240,14 @@ const HomemakerJourney = () => {
       {/* Footer */}
       <footer className="w-full py-4 px-6">
         <div className="container mx-auto">
-          <GlassCard className="p-4">
+          <GlassCard className="p-4" is3D={true} metallic={true}>
             <div className="relative">
               <input 
                 type="text" 
                 placeholder="Ask GharSakhi..." 
-                className="w-full bg-black/30 border border-assist-pink/30 rounded-full px-6 py-3 pr-12 text-white outline-none focus:ring-2 focus:ring-assist-pink/50"
+                className="w-full bg-black/30 border border-assist-pink/30 rounded-full px-6 py-3 pr-12 text-white outline-none focus:ring-2 focus:ring-assist-pink/50 shadow-inner"
               />
-              <button className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-assist-pink rounded-full p-2">
+              <button className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-assist-pink to-assist-purple rounded-full p-2 shadow-lg hover:shadow-assist-pink/30 transition duration-300">
                 <div className="h-5 w-5 text-white flex items-center justify-center">
                   🏡
                 </div>

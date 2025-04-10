@@ -10,9 +10,15 @@ interface CharacterAvatarProps {
 }
 
 const characterImages = {
-  child: "/child-avatar.png", // This is a placeholder path
-  elderly: "/elderly-avatar.png", // This is a placeholder path
-  homemaker: "/homemaker-avatar.png" // This is a placeholder path
+  child: "/assets/child-avatar.png", // Updated path
+  elderly: "/assets/elderly-avatar.png", // Updated path
+  homemaker: "/assets/homemaker-avatar.png" // Updated path
+};
+
+const characterAlternatives = {
+  child: "👦", // Fallback emoji
+  elderly: "👵", // Fallback emoji
+  homemaker: "👩‍🍳" // Fallback emoji
 };
 
 const characterNames = {
@@ -22,20 +28,20 @@ const characterNames = {
 };
 
 const CharacterAvatar = ({ character, className, size = 'md' }: CharacterAvatarProps) => {
-  // Fallback to a placeholder if image isn't available
-  const imageSrc = characterImages[character] || "https://via.placeholder.com/150";
+  const imageSrc = characterImages[character];
   
   return (
     <div className={cn('flex flex-col items-center', className)}>
       <Avatar 
         src={imageSrc} 
+        fallback={characterAlternatives[character]}
         alt={characterNames[character]} 
         size={size}
         className={cn(
-          'animate-float',
-          character === 'child' && 'border-4 border-assist-yellow',
-          character === 'elderly' && 'border-4 border-assist-teal',
-          character === 'homemaker' && 'border-4 border-assist-pink'
+          'animate-float shadow-lg',
+          character === 'child' && 'border-4 border-assist-yellow shadow-assist-yellow/20',
+          character === 'elderly' && 'border-4 border-assist-teal shadow-assist-teal/20',
+          character === 'homemaker' && 'border-4 border-assist-pink shadow-assist-pink/20'
         )}
       />
       <span className={cn(
