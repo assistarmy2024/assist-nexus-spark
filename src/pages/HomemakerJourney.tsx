@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlassCard from '@/components/GlassCard';
@@ -14,7 +13,7 @@ import {
   EnergyMonitorModule, 
   CalendarReminderModule 
 } from '@/components/HomeCompanionModules';
-import { ArrowRight, MessageCircle, Calendar, Clock, Video, Bell, Search } from 'lucide-react';
+import { ArrowRight, MessageCircle, Calendar, Clock, Video, Bell, Search, Sun, Thermometer } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 
 const HomemakerJourney = () => {

@@ -2,7 +2,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import Avatar from './Avatar';
-import { Brain, Home, Lightbulb, Bot, BookOpen, HeartPulse, ShoppingCart } from 'lucide-react';
+import { Home, BrainCog, Lightbulb, Bot, BookOpen, HeartPulse, ShoppingCart } from 'lucide-react';
 
 interface CharacterAvatarProps {
   character: 'child' | 'elderly' | 'homemaker';
@@ -20,7 +20,7 @@ const characterImages = {
 };
 
 const characterIcons = {
-  child: <Brain className="h-full w-full p-3 text-blue-400" />,
+  child: <BrainCog className="h-full w-full p-3 text-blue-400" />,
   elderly: <Lightbulb className="h-full w-full p-3 text-teal-400" />,
   homemaker: <Home className="h-full w-full p-3 text-indigo-400" />
 };

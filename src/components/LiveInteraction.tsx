@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect, useRef } from 'react';
-import { Mic, MicOff, Video, VideoOff, Users, MessageCircle, ScreenShare, Phone, Smile, Paperclip, Image, Video as VideoIcon, FileText, Loader } from 'lucide-react';
+import { Mic, MicOff, Video, VideoOff, Users, MessageCircle, ScreenShare, Phone, Smile, Paperclip, Image, Video as VideoIcon, FileText, Loader, BookOpen, HeartPulse, ShoppingCart, Calendar, Clock, BrainCog } from 'lucide-react';
 import GlassCard from './GlassCard';
 import GlassButton from './GlassButton';
 import CharacterAvatar from './CharacterAvatar';
@@ -18,7 +17,6 @@ interface Message {
   timestamp: Date;
 }
 
-// Dummy data for different sections
 const dummyQuizData = [
   { question: "What is the capital of France?", options: ["London", "Paris", "Berlin", "Madrid"], answer: "Paris" },
   { question: "How many planets are in our solar system?", options: ["7", "8", "9", "10"], answer: "8" },
@@ -104,7 +102,6 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
   };
   
   useEffect(() => {
-    // Add initial greeting message
     setMessages([
       {
         sender: 'assistant',
@@ -115,7 +112,6 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
   }, [character]);
 
   useEffect(() => {
-    // Scroll to the bottom of the messages container
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
@@ -146,7 +142,6 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
   };
   
   const generateAIResponse = (userText: string): string => {
-    // Simple pattern matching for demo purposes
     if (userText.toLowerCase().includes('hello') || userText.toLowerCase().includes('hi')) {
       return `Hello! How can I help you today?`;
     } else if (userText.toLowerCase().includes('help')) {
@@ -185,7 +180,6 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
   const sendMessage = (text: string = inputValue) => {
     if (!text.trim()) return;
     
-    // Add user message
     const userMessage: Message = {
       sender: 'user',
       text,
@@ -195,10 +189,8 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
     setMessages(prev => [...prev, userMessage]);
     setInputValue('');
     
-    // Simulate assistant typing
     setIsTyping(true);
     
-    // Simulate AI response after a delay
     setTimeout(() => {
       const responseText = generateAIResponse(text);
       
@@ -444,7 +436,6 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
             )}
           </div>
           
-          {/* Video controls overlay */}
           <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-4">
             <GlassButton 
               variant="neon" 
@@ -497,7 +488,7 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
                   className={`w-full p-3 text-left rounded-lg transition-colors flex items-center ${activeTab === 'quiz' ? 'bg-white/20' : 'hover:bg-white/10'}`}
                   onClick={() => setActiveTab('quiz')}
                 >
-                  <Brain className="h-5 w-5 mr-3 text-purple-400" />
+                  <BrainCog className="h-5 w-5 mr-3 text-purple-400" />
                   <span className="text-white">Quiz</span>
                 </button>
                 
@@ -541,7 +532,7 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
                     variant="outline"
                     onClick={() => sendMessage("I'd like to take a quiz")}
                   >
-                    <Brain className="h-4 w-4 mr-1" /> Quiz
+                    <BrainCog className="h-4 w-4 mr-1" /> Quiz
                   </GlassButton>
                   <GlassButton 
                     className="text-sm justify-start"

@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlassButton from './GlassButton';
 import GlassCard from './GlassCard';
-import { Home, ArrowLeft, Video, Bell, Settings, Menu, X, HeartPulse, Refrigerator, ShoppingCart, Clock, Calendar, FileText } from 'lucide-react';
+import { Home, ArrowLeft, Video, Bell, Settings, Menu, X, HeartPulse, RefrigeratorIcon, ShoppingCart, Clock, Calendar, FileText } from 'lucide-react';
 
 interface HomeCompanionNavBarProps {
   onMenuToggle: () => void;
@@ -31,7 +31,7 @@ const HomeCompanionNavBar: React.FC<HomeCompanionNavBarProps> = ({ onMenuToggle,
           <div className="hidden md:flex items-center space-x-2">
             <NavItem icon={<Home className="h-5 w-5" />} label="Dashboard" isActive={true} />
             <NavItem icon={<HeartPulse className="h-5 w-5" />} label="Health" />
-            <NavItem icon={<Refrigerator className="h-5 w-5" />} label="Kitchen" />
+            <NavItem icon={<RefrigeratorIcon className="h-5 w-5" />} label="Kitchen" />
             <NavItem icon={<ShoppingCart className="h-5 w-5" />} label="Shopping" />
             <NavItem icon={<Calendar className="h-5 w-5" />} label="Calendar" />
           </div>
@@ -78,7 +78,7 @@ const HomeCompanionNavBar: React.FC<HomeCompanionNavBarProps> = ({ onMenuToggle,
           <div className="p-4 space-y-2">
             <MobileNavItem icon={<Home className="h-5 w-5" />} label="Dashboard" isActive={true} />
             <MobileNavItem icon={<HeartPulse className="h-5 w-5" />} label="Health" />
-            <MobileNavItem icon={<Refrigerator className="h-5 w-5" />} label="Kitchen" />
+            <MobileNavItem icon={<RefrigeratorIcon className="h-5 w-5" />} label="Kitchen" />
             <MobileNavItem icon={<ShoppingCart className="h-5 w-5" />} label="Shopping" />
             <MobileNavItem icon={<Calendar className="h-5 w-5" />} label="Calendar" />
             <MobileNavItem icon={<FileText className="h-5 w-5" />} label="Notes" />
