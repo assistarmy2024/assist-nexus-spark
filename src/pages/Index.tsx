@@ -1,10 +1,9 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlassCard from '@/components/GlassCard';
 import GlassButton from '@/components/GlassButton';
 import CharacterAvatar from '@/components/CharacterAvatar';
-import { ArrowRight, MessageCircle, Sparkles, Shield, Users, Brain, Home, Lightbulb, Rocket, Robot, Zap, Globe, CircleUser } from 'lucide-react';
+import { ArrowRight, MessageCircle, Sparkles, Shield, Users, Brain, Home, Lightbulb, Rocket, Bot, Zap, Globe, CircleUser } from 'lucide-react';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -156,7 +155,7 @@ const Index = () => {
               </div>
               <div className="flex flex-col items-center group transform transition hover:scale-105">
                 <div className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-400/20 to-indigo-500/20 flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110 group-hover:bg-purple-400/30 shadow-lg shadow-purple-400/10 group-hover:shadow-purple-400/30">
-                  <Robot className="h-10 w-10 text-purple-400" />
+                  <Bot className="h-10 w-10 text-purple-400" />
                 </div>
                 <h3 className="text-lg font-medium mb-2 text-purple-400">Interactive Experience</h3>
                 <p className="text-gray-400 text-center">Immersive 3D virtual companions for real conversations</p>
