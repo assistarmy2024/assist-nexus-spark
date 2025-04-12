@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Mic, MicOff, Video, VideoOff, Users, MessageCircle, ScreenShare, Phone, Smile, Paperclip, Image, Video as VideoIcon } from 'lucide-react';
+import { Mic, MicOff, Video, VideoOff, Users, MessageCircle, ScreenShare, Phone, Smile, Paperclip, Image, Video as VideoIcon, FileText } from 'lucide-react';
 import GlassCard from './GlassCard';
 import GlassButton from './GlassButton';
 import CharacterAvatar from './CharacterAvatar';
