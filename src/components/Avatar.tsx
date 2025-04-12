@@ -30,7 +30,7 @@ const Avatar = ({ src, alt, className, size = 'md', fallback, glow = false, anim
       className
     )}>
       <div className={cn(
-        'rounded-full overflow-hidden shadow-xl', 
+        'rounded-full overflow-hidden shadow-xl bg-transparent', 
         sizeClasses[size],
         glow && 'animate-pulse-gentle'
       )}>
@@ -38,11 +38,15 @@ const Avatar = ({ src, alt, className, size = 'md', fallback, glow = false, anim
           <img 
             src={src} 
             alt={alt} 
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain bg-transparent"
             onError={() => setError(true)}
+            style={{ 
+              objectFit: 'contain',
+              background: 'transparent'
+            }}
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-700 to-slate-900">
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-700/70 to-slate-900/70 backdrop-blur-sm">
             {typeof fallback === 'string' ? (
               <span className="text-4xl">{fallback}</span>
             ) : (
@@ -53,7 +57,7 @@ const Avatar = ({ src, alt, className, size = 'md', fallback, glow = false, anim
       </div>
       {glow && (
         <div className={cn(
-          "absolute inset-0 -z-10 rounded-full blur-xl opacity-60 bg-gradient-to-r",
+          "absolute inset-0 -z-10 rounded-full blur-xl opacity-50 bg-gradient-to-r",
           animated && "animate-pulse-slow"
         )}>
         </div>

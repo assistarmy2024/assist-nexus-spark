@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Mic, MicOff, Video, VideoOff, Users, MessageCircle, ScreenShare, Phone, Smile, Paperclip, Image, Video as VideoIcon, FileText, Loader, BookOpen, HeartPulse, ShoppingCart, Calendar, Clock, BrainCog } from 'lucide-react';
 import GlassCard from './GlassCard';
@@ -102,13 +103,21 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
   };
   
   useEffect(() => {
-    setMessages([
-      {
-        sender: 'assistant',
-        text: getGreeting(character),
-        timestamp: new Date()
+    // Add body class to prevent scrolling when modal is open
+    document.body.classList.add('overflow-hidden');
+    
+    // Set a small timeout to allow for smooth entrance animation
+    const timer = setTimeout(() => {
+      if (messagesEndRef.current) {
+        messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
       }
-    ]);
+    }, 300);
+    
+    return () => {
+      // Remove body class when component unmounts
+      document.body.classList.remove('overflow-hidden');
+      clearTimeout(timer);
+    };
   }, [character]);
 
   useEffect(() => {
@@ -402,12 +411,13 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-md z-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-md z-50 animate-fade-in">
       <GlassCard 
-        className="w-full max-w-5xl p-6" 
+        className="w-full max-w-5xl p-6 animate-scale-in" 
         is3D={true} 
         metallic={true}
         glowing={true}
+        transitionDuration={0.4}
       >
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-white">Live Interaction with {characterNames[character]}</h2>

@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -70,7 +69,7 @@
     @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)];
     position: relative;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
   
   /* Glass Card */
@@ -92,11 +91,12 @@
   
   /* Glass Card Hover Effect */
   .glass-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
     box-shadow: 
-      0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 15px 25px -5px rgba(0, 0, 0, 0.1),
       0 10px 10px -5px rgba(0, 0, 0, 0.04),
       inset 0 0 20px rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
   
   /* Glass Effect - Overlay */
@@ -126,6 +126,7 @@
       0 4px 6px -1px rgba(0, 0, 0, 0.1),
       0 2px 4px -1px rgba(0, 0, 0, 0.06),
       inset 0 0 10px rgba(255, 255, 255, 0.05);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
   
   /* Glass Button Hover Effect */
@@ -218,11 +219,13 @@
   .card-3d {
     transform-style: preserve-3d;
     transform: perspective(1000px);
-    transition: transform 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
   }
   
   .card-3d:hover {
-    transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
+    transform: perspective(1000px) rotateX(3deg) rotateY(3deg);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
   
   /* Metallic Gradient */
@@ -246,7 +249,7 @@
   /* Animations */
   @keyframes float {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-8px); }
   }
   
   @keyframes pulse-gentle {
@@ -259,6 +262,16 @@
     50% { opacity: 0.6; transform: scale(1.05); }
   }
   
+  @keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @keyframes scale-in {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
@@ -269,6 +282,14 @@
   
   .animate-pulse-slow {
     animation: pulse-slow 5s ease-in-out infinite;
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  
+  .animate-scale-in {
+    animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
   
   /* 3D Button Styles */

@@ -2,7 +2,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import Avatar from './Avatar';
-import { Home, BrainCog, Lightbulb, Bot, BookOpen, HeartPulse, ShoppingCart } from 'lucide-react';
+import { Home, BrainCog, Lightbulb } from 'lucide-react';
 
 interface CharacterAvatarProps {
   character: 'child' | 'elderly' | 'homemaker';
@@ -12,7 +12,7 @@ interface CharacterAvatarProps {
   animated?: boolean;
 }
 
-// Updated to use more professional 3D avatar images
+// Updated to use more professional 3D avatar images with transparent backgrounds
 const characterImages = {
   child: "/lovable-uploads/610f4704-240f-4beb-afc6-e84478522871.png", // Updated to use 3D kid-friendly avatar
   elderly: "/lovable-uploads/4f8f135a-6243-488c-92ba-c324f470b2a9.png", // Updated to use 3D elderly avatar
@@ -50,7 +50,7 @@ const CharacterAvatar = ({ character, className, size = 'md', showName = true, a
     <div className={cn('flex flex-col items-center', className)}>
       <div className="relative">
         <div className={cn(
-          "absolute -inset-2 rounded-full blur-md opacity-70 animate-pulse-gentle bg-gradient-to-br",
+          "absolute -inset-2 rounded-full blur-md opacity-50 animate-pulse-gentle bg-gradient-to-br",
           character === 'child' && "from-blue-400 to-indigo-600",
           character === 'elderly' && "from-teal-400 to-blue-600",
           character === 'homemaker' && "from-indigo-400 to-purple-600"
