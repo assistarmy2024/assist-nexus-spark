@@ -11,9 +11,9 @@ interface CharacterAvatarProps {
 }
 
 const characterImages = {
-  child: "/lovable-uploads/610f4704-240f-4beb-afc6-e84478522871.png",
-  homemaker: "/lovable-uploads/7682db02-e18a-405a-937a-7b7f525828eb.png",
-  elderly: "/lovable-uploads/4f8f135a-6243-488c-92ba-c324f470b2a9.png"
+  child: "/lovable-uploads/3d34d2f1-ddca-4ba6-bb29-150fb5c7da44.png",
+  elderly: "/lovable-uploads/891809f3-0ae1-4c17-9847-a48bce549928.png",
+  homemaker: "/lovable-uploads/7ced6851-168e-43ef-afc8-e060cb827371.png"
 };
 
 const characterAlternatives = {
