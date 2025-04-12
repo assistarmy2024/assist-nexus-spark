@@ -6,7 +6,7 @@ import {
   ShoppingCart, Heart, Lightbulb, Clock, Calendar, Bell, 
   Droplet, Thermometer, Home, DollarSign, Utensils, 
   Refrigerator, Sun, Moon, Wind, Trash, Battery, Armchair,
-  Flame, Coffee
+  Flame, Coffee, HeartPulse
 } from 'lucide-react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
