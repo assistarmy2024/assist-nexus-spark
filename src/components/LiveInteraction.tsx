@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Mic, MicOff, Video, VideoOff, Users, MessageCircle, ScreenShare, Phone, Smile, Paperclip, Image, Video as VideoIcon, FileText, Loader, BookOpen, HeartPulse, ShoppingCart, Calendar, Clock, BrainCog } from 'lucide-react';
 import GlassCard from './GlassCard';
@@ -102,19 +101,22 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
     homemaker: 'HomeCompanion'
   };
   
+  const characterGradients = {
+    child: 'from-blue-500 to-indigo-600',
+    elderly: 'from-teal-500 to-blue-600',
+    homemaker: 'from-indigo-500 to-purple-600'
+  };
+  
   useEffect(() => {
-    // Add body class to prevent scrolling when modal is open
     document.body.classList.add('overflow-hidden');
     
-    // Set a small timeout to allow for smooth entrance animation
     const timer = setTimeout(() => {
       if (messagesEndRef.current) {
         messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
       }
-    }, 300);
+    }, 100);
     
     return () => {
-      // Remove body class when component unmounts
       document.body.classList.remove('overflow-hidden');
       clearTimeout(timer);
     };
@@ -411,13 +413,16 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-md z-50 animate-fade-in">
+    <div className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-lg z-50 transition-all duration-300 animate-fade-in">
       <GlassCard 
-        className="w-full max-w-5xl p-6 animate-scale-in" 
+        className="w-full max-w-5xl p-4 md:p-6 overflow-hidden" 
         is3D={true} 
         metallic={true}
         glowing={true}
         transitionDuration={0.4}
+        appear="scale"
+        appearDelay={200}
+        theme={character}
       >
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-white">Live Interaction with {characterNames[character]}</h2>
@@ -430,16 +435,18 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
           </GlassButton>
         </div>
         
-        <div className="relative aspect-video rounded-xl overflow-hidden mb-6 bg-gradient-to-br from-gray-900 to-black">
+        <div className="relative aspect-video rounded-xl overflow-hidden mb-6 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm shadow-inner">
           <div className="absolute inset-0 flex items-center justify-center">
             {!videoOn ? (
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center animate-fade-in">
                 <CharacterAvatar character={character} size="xl" animated={true} />
-                <p className="text-white mt-4 text-lg">Turn on video to see {characterNames[character]}</p>
+                <p className="text-white mt-4 text-lg bg-black/30 px-4 py-2 rounded-full backdrop-blur-sm">
+                  Turn on video to see {characterNames[character]}
+                </p>
               </div>
             ) : (
-              <div className="w-full h-full flex items-center justify-center">
-                <div className={`w-64 h-64 rounded-full bg-gradient-to-r ${characterColors[character]} animate-pulse-gentle flex items-center justify-center`}>
+              <div className="w-full h-full flex items-center justify-center animate-scale-in">
+                <div className={`w-64 h-64 rounded-full bg-gradient-to-r ${characterGradients[character]} animate-pulse-gentle flex items-center justify-center backdrop-blur-md`}>
                   <CharacterAvatar character={character} size="lg" animated={true} />
                 </div>
               </div>
@@ -482,93 +489,101 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="md:col-span-1">
-            <GlassCard className="p-4 h-full flex flex-col">
-              <h3 className="text-lg font-semibold mb-4 text-white">Features</h3>
-              <div className="space-y-2 flex-grow">
-                <button 
-                  className={`w-full p-3 text-left rounded-lg transition-colors flex items-center ${activeTab === 'chat' ? 'bg-white/20' : 'hover:bg-white/10'}`}
-                  onClick={() => setActiveTab('chat')}
-                >
-                  <MessageCircle className="h-5 w-5 mr-3 text-blue-400" />
-                  <span className="text-white">Chat</span>
-                </button>
-                
-                <button 
-                  className={`w-full p-3 text-left rounded-lg transition-colors flex items-center ${activeTab === 'quiz' ? 'bg-white/20' : 'hover:bg-white/10'}`}
-                  onClick={() => setActiveTab('quiz')}
-                >
-                  <BrainCog className="h-5 w-5 mr-3 text-purple-400" />
-                  <span className="text-white">Quiz</span>
-                </button>
-                
-                <button 
-                  className={`w-full p-3 text-left rounded-lg transition-colors flex items-center ${activeTab === 'health' ? 'bg-white/20' : 'hover:bg-white/10'}`}
-                  onClick={() => setActiveTab('health')}
-                >
-                  <FileText className="h-5 w-5 mr-3 text-teal-400" />
-                  <span className="text-white">Health Tips</span>
-                </button>
-                
-                <button 
-                  className={`w-full p-3 text-left rounded-lg transition-colors flex items-center ${activeTab === 'grocery' ? 'bg-white/20' : 'hover:bg-white/10'}`}
-                  onClick={() => setActiveTab('grocery')}
-                >
-                  <Image className="h-5 w-5 mr-3 text-green-400" />
-                  <span className="text-white">Grocery List</span>
-                </button>
-                
-                <button 
-                  className={`w-full p-3 text-left rounded-lg transition-colors flex items-center ${activeTab === 'stories' ? 'bg-white/20' : 'hover:bg-white/10'}`}
-                  onClick={() => setActiveTab('stories')}
-                >
-                  <VideoIcon className="h-5 w-5 mr-3 text-amber-400" />
-                  <span className="text-white">Stories</span>
-                </button>
-              </div>
+          <GlassCard 
+            className="md:col-span-1 p-4 h-full flex flex-col"
+            appear="fade"
+            appearDelay={300}
+            theme={character}
+          >
+            <h3 className="text-lg font-semibold mb-4 text-white">Features</h3>
+            <div className="space-y-2 flex-grow">
+              <button 
+                className={`w-full p-3 text-left rounded-lg transition-colors flex items-center ${activeTab === 'chat' ? 'bg-white/20' : 'hover:bg-white/10'}`}
+                onClick={() => setActiveTab('chat')}
+              >
+                <MessageCircle className="h-5 w-5 mr-3 text-blue-400" />
+                <span className="text-white">Chat</span>
+              </button>
               
-              <div className="mt-4">
-                <h3 className="text-lg font-semibold mb-2 text-white">Quick Actions</h3>
-                <div className="grid grid-cols-2 gap-2">
-                  <GlassButton 
-                    className="text-sm justify-start"
-                    variant="outline"
-                    onClick={() => sendMessage("Can you show me some videos?")}
-                  >
-                    <VideoIcon className="h-4 w-4 mr-1" /> Videos
-                  </GlassButton>
-                  <GlassButton 
-                    className="text-sm justify-start"
-                    variant="outline"
-                    onClick={() => sendMessage("I'd like to take a quiz")}
-                  >
-                    <BrainCog className="h-4 w-4 mr-1" /> Quiz
-                  </GlassButton>
-                  <GlassButton 
-                    className="text-sm justify-start"
-                    variant="outline"
-                    onClick={() => sendMessage("Do you have any health tips?")}
-                  >
-                    <FileText className="h-4 w-4 mr-1" /> Health
-                  </GlassButton>
-                  <GlassButton 
-                    className="text-sm justify-start"
-                    variant="outline"
-                    onClick={() => {
-                      toast({
-                        title: "Request Sent",
-                        description: "Your assistance request has been sent",
-                      });
-                    }}
-                  >
-                    <Users className="h-4 w-4 mr-1" /> Help
-                  </GlassButton>
-                </div>
+              <button 
+                className={`w-full p-3 text-left rounded-lg transition-colors flex items-center ${activeTab === 'quiz' ? 'bg-white/20' : 'hover:bg-white/10'}`}
+                onClick={() => setActiveTab('quiz')}
+              >
+                <BrainCog className="h-5 w-5 mr-3 text-purple-400" />
+                <span className="text-white">Quiz</span>
+              </button>
+              
+              <button 
+                className={`w-full p-3 text-left rounded-lg transition-colors flex items-center ${activeTab === 'health' ? 'bg-white/20' : 'hover:bg-white/10'}`}
+                onClick={() => setActiveTab('health')}
+              >
+                <FileText className="h-5 w-5 mr-3 text-teal-400" />
+                <span className="text-white">Health Tips</span>
+              </button>
+              
+              <button 
+                className={`w-full p-3 text-left rounded-lg transition-colors flex items-center ${activeTab === 'grocery' ? 'bg-white/20' : 'hover:bg-white/10'}`}
+                onClick={() => setActiveTab('grocery')}
+              >
+                <Image className="h-5 w-5 mr-3 text-green-400" />
+                <span className="text-white">Grocery List</span>
+              </button>
+              
+              <button 
+                className={`w-full p-3 text-left rounded-lg transition-colors flex items-center ${activeTab === 'stories' ? 'bg-white/20' : 'hover:bg-white/10'}`}
+                onClick={() => setActiveTab('stories')}
+              >
+                <VideoIcon className="h-5 w-5 mr-3 text-amber-400" />
+                <span className="text-white">Stories</span>
+              </button>
+            </div>
+            
+            <div className="mt-4">
+              <h3 className="text-lg font-semibold mb-2 text-white">Quick Actions</h3>
+              <div className="grid grid-cols-2 gap-2">
+                <GlassButton 
+                  className="text-sm justify-start"
+                  variant="outline"
+                  onClick={() => sendMessage("Can you show me some videos?")}
+                >
+                  <VideoIcon className="h-4 w-4 mr-1" /> Videos
+                </GlassButton>
+                <GlassButton 
+                  className="text-sm justify-start"
+                  variant="outline"
+                  onClick={() => sendMessage("I'd like to take a quiz")}
+                >
+                  <BrainCog className="h-4 w-4 mr-1" /> Quiz
+                </GlassButton>
+                <GlassButton 
+                  className="text-sm justify-start"
+                  variant="outline"
+                  onClick={() => sendMessage("Do you have any health tips?")}
+                >
+                  <FileText className="h-4 w-4 mr-1" /> Health
+                </GlassButton>
+                <GlassButton 
+                  className="text-sm justify-start"
+                  variant="outline"
+                  onClick={() => {
+                    toast({
+                      title: "Request Sent",
+                      description: "Your assistance request has been sent",
+                    });
+                  }}
+                >
+                  <Users className="h-4 w-4 mr-1" /> Help
+                </GlassButton>
               </div>
-            </GlassCard>
-          </div>
+            </div>
+          </GlassCard>
           
-          <GlassCard className="p-4 flex flex-col md:col-span-2">
+          <GlassCard 
+            className="p-4 flex flex-col md:col-span-2"
+            appear="fade"
+            appearDelay={400}
+            theme={character}
+          >
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-white">
                 {activeTab === 'chat' ? 'Chat' : 
@@ -598,12 +613,12 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
                       <button
                         key={index}
                         onClick={() => sendMessage(response)}
-                        className={`px-3 py-1 text-sm bg-white/10 hover:bg-white/20 rounded-full text-gray-300 transition-colors hover:scale-105 transform ${
+                        className={`px-3 py-1 text-sm bg-white/10 hover:bg-white/20 rounded-full text-gray-300 transition-all duration-300 hover:scale-105 transform ${
                           character === 'homemaker' 
-                            ? 'hover:bg-indigo-500/20' 
+                            ? 'hover:bg-indigo-500/20 hover:text-indigo-300' 
                             : character === 'elderly' 
-                              ? 'hover:bg-teal-500/20' 
-                              : 'hover:bg-blue-500/20'
+                              ? 'hover:bg-teal-500/20 hover:text-teal-300' 
+                              : 'hover:bg-blue-500/20 hover:text-blue-300'
                         }`}
                       >
                         {response}
@@ -617,31 +632,31 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
                     <input 
                       type="text" 
                       placeholder="Type your message..." 
-                      className="w-full bg-black/30 border border-white/20 rounded-lg px-3 py-2 pr-24 text-white outline-none focus:ring-2 focus:ring-blue-500/50"
+                      className="w-full bg-black/30 border border-white/20 rounded-lg px-3 py-2 pr-24 text-white outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300"
                       value={inputValue}
                       onChange={(e) => setInputValue(e.target.value)}
                       onKeyPress={handleKeyPress}
                     />
                     <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex space-x-1">
-                      <button className="p-1 rounded-full hover:bg-white/10">
+                      <button className="p-1 rounded-full hover:bg-white/10 transition-colors">
                         <Smile className="h-5 w-5 text-gray-400" />
                       </button>
-                      <button className="p-1 rounded-full hover:bg-white/10">
+                      <button className="p-1 rounded-full hover:bg-white/10 transition-colors">
                         <Paperclip className="h-5 w-5 text-gray-400" />
                       </button>
                     </div>
                   </div>
                   <GlassButton 
-                    variant="neon"
+                    variant={character === 'homemaker' ? 'primary' : character === 'elderly' ? 'secondary' : 'default'}
                     onClick={() => sendMessage()}
                     disabled={!inputValue.trim()}
-                    className={`${
-                      character === 'homemaker' 
-                        ? 'bg-indigo-500/20' 
-                        : character === 'elderly' 
-                          ? 'bg-teal-500/20' 
-                          : 'bg-blue-500/20'
-                    } ${!inputValue.trim() ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    className={`
+                      ${character === 'homemaker' ? 'bg-indigo-500/20' : character === 'elderly' ? 'bg-teal-500/20' : 'bg-blue-500/20'}
+                      ${!inputValue.trim() ? 'opacity-50 cursor-not-allowed' : ''}
+                      shadow-lg hover:shadow-xl
+                    `}
+                    is3D={true}
+                    glow={true}
                   >
                     <MessageCircle className="h-5 w-5" />
                   </GlassButton>

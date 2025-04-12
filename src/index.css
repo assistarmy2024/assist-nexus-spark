@@ -1,10 +1,12 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 215 100% 4%;
+    /* Updated colors with more vibrant, futuristic palette */
+    --background: 222 100% 3%;
     --foreground: 210 40% 98%;
 
     --card: 222.2 84% 4.9%;
@@ -13,7 +15,7 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 192 79% 48%;
+    --primary: 213 70% 50%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 217.2 32.6% 17.5%;
@@ -43,12 +45,14 @@
     
     --radius: 1rem;
     
-    /* Custom color variables */
-    --assist-blue: 222 79% 48%;
+    /* Updated custom color variables for more futuristic feel */
+    --assist-blue: 213 70% 50%;
     --assist-purple: 265 89% 70%;
     --assist-pink: 320 70% 60%;
     --assist-orange: 30 95% 60%;
     --assist-indigo: 240 70% 60%;
+    --assist-teal: 180 70% 45%;
+    --assist-cyan: 190 80% 50%;
   }
 }
 
@@ -59,12 +63,14 @@
 
   body {
     @apply bg-background text-foreground;
-    background-image: radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.15), rgba(14, 165, 233, 0) 50%);
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(56, 189, 248, 0.15), transparent 25%),
+      radial-gradient(circle at 75% 75%, rgba(168, 85, 247, 0.15), transparent 25%);
   }
 }
 
 @layer components {
-  /* Glass Base */
+  /* Improved Glass Base with smoother transitions */
   .glass {
     @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)];
     position: relative;
@@ -72,24 +78,25 @@
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
   
-  /* Glass Card */
+  /* Improved Glass Card with better performance */
   .glass-card {
     @apply glass rounded-2xl p-6;
     box-shadow: 
       0 10px 15px -3px rgba(0, 0, 0, 0.1),
       0 4px 6px -2px rgba(0, 0, 0, 0.05),
       inset 0 0 15px rgba(255, 255, 255, 0.05);
+    will-change: transform, opacity;
   }
   
-  /* Neo-Morphism Effect */
+  /* Improved Neo-Morphism Effect */
   .neo-morphism {
     box-shadow:
-      12px 12px 24px rgba(0, 0, 0, 0.4),
-      -12px -12px 24px rgba(255, 255, 255, 0.05),
+      8px 8px 16px rgba(0, 0, 0, 0.3),
+      -8px -8px 16px rgba(255, 255, 255, 0.05),
       inset 1px 1px 1px rgba(255, 255, 255, 0.1);
   }
   
-  /* Glass Card Hover Effect */
+  /* Improved Glass Card Hover Effect */
   .glass-card:hover {
     transform: translateY(-3px);
     box-shadow: 
@@ -99,25 +106,26 @@
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
   
-  /* Glass Effect - Overlay */
+  /* Improved Glass Effect - Overlay with better performance */
   .glass-card::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 60%;
+    height: 50%;
     background: linear-gradient(
       to bottom,
-      rgba(255, 255, 255, 0.1),
-      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.03) 50%,
       transparent
     );
     pointer-events: none;
     border-radius: 1.5rem 1.5rem 0 0;
+    will-change: opacity;
   }
   
-  /* Glass Button */
+  /* Improved Glass Button */
   .glass-button {
     @apply glass rounded-xl px-6 py-3 transition-all duration-300 hover:bg-white/10 active:bg-white/15;
     position: relative;
@@ -127,9 +135,10 @@
       0 2px 4px -1px rgba(0, 0, 0, 0.06),
       inset 0 0 10px rgba(255, 255, 255, 0.05);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, box-shadow;
   }
   
-  /* Glass Button Hover Effect */
+  /* Improved Glass Button Hover Effect */
   .glass-button:hover {
     transform: translateY(-2px);
     box-shadow: 
@@ -138,12 +147,12 @@
       inset 0 0 10px rgba(255, 255, 255, 0.1);
   }
   
-  /* Glass Button Active Effect */
+  /* Improved Glass Button Active Effect */
   .glass-button:active {
     transform: translateY(0px);
   }
   
-  /* Avatar Glow Effect */
+  /* Improved Avatar Glow Effect */
   .avatar-glow {
     position: relative;
   }
@@ -158,14 +167,15 @@
     border-radius: 50%;
     background: radial-gradient(
       ellipse at center,
-      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.15) 0%,
       transparent 70%
     );
     z-index: -1;
     opacity: 0.7;
+    will-change: opacity;
   }
   
-  /* Theme Variations */
+  /* Theme Variations with improved gradients */
   .children-theme {
     --card-glow: rgba(59, 130, 246, 0.5);
     --card-accent: #3B82F6;
@@ -190,7 +200,7 @@
     border-color: rgba(99, 102, 241, 0.2);
   }
   
-  /* Glowing Card Effect */
+  /* Improved Glowing Card Effect */
   .glowing-card {
     @apply relative overflow-hidden;
     box-shadow: 
@@ -210,12 +220,13 @@
       var(--card-accent) 0%,
       transparent 70%
     );
-    opacity: 0.1;
+    opacity: 0.05;
     transform: translateY(50%);
-    animation: pulse-gentle 3s ease-in-out infinite;
+    animation: pulse-gentle 4s ease-in-out infinite;
+    will-change: opacity, transform;
   }
   
-  /* 3D Card Effect */
+  /* Improved 3D Card Effect with better performance */
   .card-3d {
     transform-style: preserve-3d;
     transform: perspective(1000px);
@@ -224,42 +235,42 @@
   }
   
   .card-3d:hover {
-    transform: perspective(1000px) rotateX(3deg) rotateY(3deg);
+    transform: perspective(1000px) rotateX(2deg) rotateY(2deg);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
   
-  /* Metallic Gradient */
+  /* Improved Metallic Gradient */
   .metallic-gradient {
     background: linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(255, 255, 255, 0.05) 50%,
-      rgba(255, 255, 255, 0.1) 100%
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.03) 50%,
+      rgba(255, 255, 255, 0.08) 100%
     );
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.12);
   }
   
-  /* Neomorphic Shadow */
+  /* Improved Neomorphic Shadow */
   .neo-shadow {
     box-shadow:
       8px 8px 16px rgba(0, 0, 0, 0.25),
       -8px -8px 16px rgba(255, 255, 255, 0.03);
   }
   
-  /* Animations */
+  /* Improved Animations */
   @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-8px); }
   }
   
   @keyframes pulse-gentle {
-    0%, 100% { opacity: 0.1; }
-    50% { opacity: 0.2; }
+    0%, 100% { opacity: 0.05; }
+    50% { opacity: 0.1; }
   }
   
   @keyframes pulse-slow {
     0%, 100% { opacity: 0.3; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(1.05); }
+    50% { opacity: 0.5; transform: scale(1.03); }
   }
   
   @keyframes fade-in {
@@ -268,10 +279,16 @@
   }
   
   @keyframes scale-in {
-    0% { opacity: 0; transform: scale(0.95); }
+    0% { opacity: 0; transform: scale(0.97); }
     100% { opacity: 1; transform: scale(1); }
   }
   
+  @keyframes slide-in {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Improved Animation Classes */
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
@@ -292,19 +309,14 @@
     animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
   
-  /* 3D Button Styles */
-  .btn-3d {
-    transform: translateZ(0);
-    transition: transform 0.3s, box-shadow 0.3s;
+  .animate-slide-in {
+    animation: slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
-  
-  .btn-3d:hover {
-    transform: translateY(-3px) translateZ(5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  }
-  
-  .btn-3d:active {
-    transform: translateY(0) translateZ(0);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  }
+
+  /* Reveal animations with delays */
+  .reveal-1 { animation-delay: 0.1s; }
+  .reveal-2 { animation-delay: 0.2s; }
+  .reveal-3 { animation-delay: 0.3s; }
+  .reveal-4 { animation-delay: 0.4s; }
+  .reveal-5 { animation-delay: 0.5s; }
 }

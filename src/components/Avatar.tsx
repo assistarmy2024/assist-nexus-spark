@@ -21,6 +21,7 @@ const sizeClasses = {
 
 const Avatar = ({ src, alt, className, size = 'md', fallback, glow = false, animated = false }: AvatarProps) => {
   const [error, setError] = React.useState(false);
+  const [loaded, setLoaded] = React.useState(false);
   
   return (
     <div className={cn(
@@ -30,21 +31,26 @@ const Avatar = ({ src, alt, className, size = 'md', fallback, glow = false, anim
       className
     )}>
       <div className={cn(
-        'rounded-full overflow-hidden shadow-xl bg-transparent', 
+        'rounded-full overflow-hidden shadow-xl', 
         sizeClasses[size],
         glow && 'animate-pulse-gentle'
       )}>
         {!error ? (
-          <img 
-            src={src} 
-            alt={alt} 
-            className="w-full h-full object-contain bg-transparent"
-            onError={() => setError(true)}
-            style={{ 
-              objectFit: 'contain',
-              background: 'transparent'
-            }}
-          />
+          <div className="w-full h-full flex items-center justify-center">
+            <img 
+              src={src} 
+              alt={alt} 
+              className={cn(
+                "w-full h-full object-contain transition-opacity duration-300",
+                loaded ? "opacity-100" : "opacity-0"
+              )}
+              onError={() => setError(true)}
+              onLoad={() => setLoaded(true)}
+              style={{ 
+                objectFit: 'contain',
+              }}
+            />
+          </div>
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-700/70 to-slate-900/70 backdrop-blur-sm">
             {typeof fallback === 'string' ? (
