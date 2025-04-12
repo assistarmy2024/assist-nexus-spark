@@ -7,8 +7,9 @@ interface AvatarProps {
   alt: string;
   className?: string;
   size?: 'sm' | 'md' | 'lg' | 'xl';
-  fallback?: string; // Fallback prop for when image fails to load
+  fallback?: string | React.ReactNode; // Fallback can be a string or a React node
   glow?: boolean;
+  animated?: boolean;
 }
 
 const sizeClasses = {
@@ -18,11 +19,16 @@ const sizeClasses = {
   xl: 'w-40 h-40'
 };
 
-const Avatar = ({ src, alt, className, size = 'md', fallback, glow = false }: AvatarProps) => {
+const Avatar = ({ src, alt, className, size = 'md', fallback, glow = false, animated = false }: AvatarProps) => {
   const [error, setError] = React.useState(false);
   
   return (
-    <div className={cn('relative', glow && 'avatar-glow', className)}>
+    <div className={cn(
+      'relative', 
+      glow && 'avatar-glow', 
+      animated && 'animate-float',
+      className
+    )}>
       <div className={cn(
         'rounded-full overflow-hidden shadow-xl', 
         sizeClasses[size],
@@ -36,13 +42,21 @@ const Avatar = ({ src, alt, className, size = 'md', fallback, glow = false }: Av
             onError={() => setError(true)}
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-700 to-slate-900 text-4xl">
-            {fallback || '👤'}
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-700 to-slate-900">
+            {typeof fallback === 'string' ? (
+              <span className="text-4xl">{fallback}</span>
+            ) : (
+              fallback || '👤'
+            )}
           </div>
         )}
       </div>
       {glow && (
-        <div className="absolute inset-0 -z-10 rounded-full blur-xl opacity-60 bg-gradient-to-r from-blue-400 to-blue-600"></div>
+        <div className={cn(
+          "absolute inset-0 -z-10 rounded-full blur-xl opacity-60 bg-gradient-to-r",
+          animated && "animate-pulse-slow"
+        )}>
+        </div>
       )}
     </div>
   );

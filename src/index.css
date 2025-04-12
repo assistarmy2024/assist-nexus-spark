@@ -43,6 +43,13 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
     
     --radius: 1rem;
+    
+    /* Custom color variables */
+    --assist-blue: 222 79% 48%;
+    --assist-purple: 265 89% 70%;
+    --assist-pink: 320 70% 60%;
+    --assist-orange: 30 95% 60%;
+    --assist-indigo: 240 70% 60%;
   }
 }
 
@@ -175,11 +182,11 @@
   }
   
   .homemaker-theme {
-    --card-glow: rgba(217, 70, 239, 0.5);
-    --card-accent: #D946EF;
-    @apply text-pink-400;
-    background: linear-gradient(135deg, rgba(217, 70, 239, 0.1), rgba(139, 92, 246, 0.05));
-    border-color: rgba(217, 70, 239, 0.2);
+    --card-glow: rgba(99, 102, 241, 0.5);
+    --card-accent: #6366F1;
+    @apply text-indigo-400;
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(139, 92, 246, 0.05));
+    border-color: rgba(99, 102, 241, 0.2);
   }
   
   /* Glowing Card Effect */
@@ -247,11 +254,36 @@
     50% { opacity: 0.2; }
   }
   
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.05); }
+  }
+  
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
   
   .animate-pulse-gentle {
     animation: pulse-gentle 3s ease-in-out infinite;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse-slow 5s ease-in-out infinite;
+  }
+  
+  /* 3D Button Styles */
+  .btn-3d {
+    transform: translateZ(0);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .btn-3d:hover {
+    transform: translateY(-3px) translateZ(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .btn-3d:active {
+    transform: translateY(0) translateZ(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
 }

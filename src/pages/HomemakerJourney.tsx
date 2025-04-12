@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlassCard from '@/components/GlassCard';
 import GlassButton from '@/components/GlassButton';
@@ -8,8 +8,44 @@ import LiveInteraction from '@/components/LiveInteraction';
 import Quiz from '@/components/Quiz';
 import InteractiveVideo from '@/components/InteractiveVideo';
 import Documents from '@/components/Documents';
-import { ArrowLeft, Calendar, ShoppingCart, Utensils, Wallet, Clock, Bell, Heart, Check, Plus, Video, BookOpen, ImageIcon, Sparkles } from 'lucide-react';
+import { 
+  ArrowLeft, Calendar, ShoppingCart, Utensils, Wallet, Clock, 
+  Bell, Heart, Check, Plus, Video, BookOpen, ImageIcon, 
+  Sparkles, Briefcase, Home, Settings, LayoutDashboard,
+  Moon, Sun, Star, Zap, FileText, Users, ListChecks, LineChart
+} from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+
+// Dummy data for the home management system
+const dummyTasks = [
+  { id: 1, title: "School drop-off", time: "9:00 AM", icon: "Clock", category: "daily", completed: false },
+  { id: 2, title: "Grocery shopping", time: "11:00 AM", icon: "ShoppingCart", category: "shopping", completed: false },
+  { id: 3, title: "Prepare lunch", time: "1:00 PM", icon: "Utensils", category: "meals", completed: false },
+  { id: 4, title: "School pickup", time: "3:00 PM", icon: "Clock", category: "daily", completed: false },
+  { id: 5, title: "Home maintenance", time: "5:00 PM", icon: "Home", category: "home", completed: true },
+  { id: 6, title: "Family dinner", time: "7:00 PM", icon: "Utensils", category: "meals", completed: true },
+];
+
+const dummyRecipes = [
+  {
+    id: 1,
+    title: "Easy Dinner Pasta",
+    description: "A quick and nutritious pasta dish perfect for busy weeknights.",
+    prepTime: "10 mins",
+    cookTime: "20 mins",
+    servings: 4,
+    image: "/lovable-uploads/6092619e-e957-4c21-b480-20454027a7e2.png"
+  },
+  {
+    id: 2,
+    title: "One-Pot Quinoa Bowl",
+    description: "Healthy, protein-rich meal that's easy to prepare and customize.",
+    prepTime: "5 mins",
+    cookTime: "15 mins",
+    servings: 2,
+    image: "/lovable-uploads/4f8f135a-6243-488c-92ba-c324f470b2a9.png"
+  }
+];
 
 const HomemakerJourney = () => {
   const navigate = useNavigate();
@@ -17,10 +53,31 @@ const HomemakerJourney = () => {
   const [showQuiz, setShowQuiz] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
   const [showDocuments, setShowDocuments] = useState(false);
+  const [tasks, setTasks] = useState(dummyTasks);
+  const [currentRecipe, setCurrentRecipe] = useState(dummyRecipes[0]);
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+  const [timeOfDay, setTimeOfDay] = useState<string>('');
+
+  useEffect(() => {
+    // Set time of day greeting
+    const hours = new Date().getHours();
+    if (hours < 12) setTimeOfDay('Good morning');
+    else if (hours < 18) setTimeOfDay('Good afternoon');
+    else setTimeOfDay('Good evening');
+    
+    // Cycle between recipes
+    const interval = setInterval(() => {
+      setCurrentRecipe(prev => 
+        prev.id === dummyRecipes[0].id ? dummyRecipes[1] : dummyRecipes[0]
+      );
+    }, 10000);
+    
+    return () => clearInterval(interval);
+  }, []);
 
   const handleFeatureClick = (feature: string) => {
     toast({
-      title: `Sarah says:`,
+      title: `HomeAssist AI says:`,
       description: `I'll help you manage your ${feature}.`,
     });
     
@@ -33,8 +90,20 @@ const HomemakerJourney = () => {
     }
   };
 
+  const toggleTaskCompletion = (id: number) => {
+    setTasks(tasks.map(task => 
+      task.id === id ? { ...task, completed: !task.completed } : task
+    ));
+    
+    toast({
+      title: "Task Updated",
+      description: `Task status has been updated`,
+      variant: "default",
+    });
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-assist-pink/10 to-transparent">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#0F172A]/80 to-[#1E293B]/60">
       {/* Header */}
       <header className="w-full py-6 px-6">
         <div className="container mx-auto">
@@ -51,7 +120,7 @@ const HomemakerJourney = () => {
             </GlassButton>
             <div className="flex items-center gap-4">
               <GlassButton 
-                className="bg-pink-500/20 border border-pink-500/30 text-white"
+                className="bg-indigo-500/20 border border-indigo-500/30 text-white"
                 variant="neon"
                 onClick={() => setShowLiveInteraction(true)}
                 icon={<Video className="h-4 w-4 mr-2" />}
@@ -68,7 +137,6 @@ const HomemakerJourney = () => {
       <main className="flex-grow w-full py-6 px-6">
         <div className="container mx-auto">
           <GlassCard 
-            theme="homemaker" 
             glowing={true} 
             className="mb-8 text-center"
             is3D={true}
@@ -76,14 +144,14 @@ const HomemakerJourney = () => {
           >
             <div className="flex flex-col md:flex-row items-center justify-between">
               <div className="md:w-1/2 mb-6 md:mb-0">
-                <h1 className="text-3xl md:text-4xl font-bold mb-4 text-assist-pink">
-                  Welcome to Home with Sarah!
+                <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-indigo-400 to-purple-500 text-transparent bg-clip-text">
+                  {timeOfDay}, Welcome to HomeAssist!
                 </h1>
                 <p className="text-gray-300 mb-4">
-                  Your personal home management assistant for planning, meals, and household tasks.
+                  Your intelligent home management assistant for planning, organization, and household tasks.
                 </p>
                 <GlassButton 
-                  className="bg-pink-500/20 border border-pink-500/30 text-white"
+                  className="bg-indigo-500/20 border border-indigo-500/30 text-white"
                   variant="neon"
                   onClick={() => setShowLiveInteraction(true)}
                   icon={<Video className="h-4 w-4 mr-2" />}
@@ -93,11 +161,11 @@ const HomemakerJourney = () => {
               </div>
               <div className="md:w-1/2 flex justify-center">
                 <div className="relative">
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-assist-pink/20 to-assist-purple/20 blur-xl animate-pulse-gentle"></div>
-                  <img 
-                    src="/lovable-uploads/7682db02-e18a-405a-937a-7b7f525828eb.png" 
-                    alt="HomeMaker Assistant" 
-                    className="w-60 h-60 object-contain animate-float"
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/20 blur-xl animate-pulse-gentle"></div>
+                  <CharacterAvatar 
+                    character="homemaker" 
+                    size="xl" 
+                    animated={true}
                   />
                 </div>
               </div>
@@ -107,89 +175,73 @@ const HomemakerJourney = () => {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-8">
             {/* Today's Overview */}
             <GlassCard className="md:col-span-8 p-6" is3D={true}>
-              <h2 className="text-xl font-semibold mb-4 text-assist-pink">Today's Overview</h2>
+              <h2 className="text-xl font-semibold mb-4 text-indigo-400 flex items-center">
+                <LayoutDashboard className="mr-2 h-5 w-5" /> Today's Overview
+              </h2>
               <div className="space-y-4">
-                <div className="flex items-center p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer" onClick={() => handleFeatureClick('school schedule')}>
-                  <div className="w-10 h-10 rounded-full bg-assist-pink/20 flex items-center justify-center mr-4">
-                    <Clock className="h-5 w-5 text-assist-pink" />
+                {tasks.map(task => (
+                  <div 
+                    key={task.id}
+                    className={cn(
+                      "flex items-center p-3 rounded-lg transition-all duration-300 cursor-pointer",
+                      task.completed ? "bg-indigo-900/20" : "bg-white/5 hover:bg-white/10"
+                    )} 
+                    onClick={() => toggleTaskCompletion(task.id)}
+                  >
+                    <div className="w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center mr-4">
+                      {task.icon === "Clock" && <Clock className="h-5 w-5 text-indigo-400" />}
+                      {task.icon === "ShoppingCart" && <ShoppingCart className="h-5 w-5 text-indigo-400" />}
+                      {task.icon === "Utensils" && <Utensils className="h-5 w-5 text-indigo-400" />}
+                      {task.icon === "Home" && <Home className="h-5 w-5 text-indigo-400" />}
+                    </div>
+                    <div className="flex-grow">
+                      <p className={cn(
+                        "text-gray-300",
+                        task.completed && "line-through text-gray-500"
+                      )}>{task.title}</p>
+                      <p className="text-gray-500 text-sm">{task.time}</p>
+                    </div>
+                    <div>
+                      <button className={cn(
+                        "p-2 rounded-full", 
+                        task.completed ? "bg-indigo-500/30" : "hover:bg-indigo-500/10"
+                      )}>
+                        <Check className={cn(
+                          "h-4 w-4", 
+                          task.completed ? "text-indigo-300" : "text-indigo-500/50"
+                        )} />
+                      </button>
+                    </div>
                   </div>
-                  <div className="flex-grow">
-                    <p className="text-gray-300">9:00 AM - School drop-off</p>
-                  </div>
-                  <div>
-                    <button className="p-2 rounded-full hover:bg-assist-pink/10">
-                      <Check className="h-4 w-4 text-assist-pink" />
-                    </button>
-                  </div>
-                </div>
-                <div className="flex items-center p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer" onClick={() => handleFeatureClick('grocery shopping')}>
-                  <div className="w-10 h-10 rounded-full bg-assist-pink/20 flex items-center justify-center mr-4">
-                    <ShoppingCart className="h-5 w-5 text-assist-pink" />
-                  </div>
-                  <div className="flex-grow">
-                    <p className="text-gray-300">11:00 AM - Grocery shopping</p>
-                  </div>
-                  <div>
-                    <button className="p-2 rounded-full hover:bg-assist-pink/10">
-                      <Check className="h-4 w-4 text-assist-pink" />
-                    </button>
-                  </div>
-                </div>
-                <div className="flex items-center p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer" onClick={() => handleFeatureClick('meal preparation')}>
-                  <div className="w-10 h-10 rounded-full bg-assist-pink/20 flex items-center justify-center mr-4">
-                    <Utensils className="h-5 w-5 text-assist-pink" />
-                  </div>
-                  <div className="flex-grow">
-                    <p className="text-gray-300">1:00 PM - Prepare lunch</p>
-                  </div>
-                  <div>
-                    <button className="p-2 rounded-full hover:bg-assist-pink/10">
-                      <Check className="h-4 w-4 text-assist-pink" />
-                    </button>
-                  </div>
-                </div>
-                <div className="flex items-center p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer" onClick={() => handleFeatureClick('school pickup')}>
-                  <div className="w-10 h-10 rounded-full bg-assist-pink/20 flex items-center justify-center mr-4">
-                    <Clock className="h-5 w-5 text-assist-pink" />
-                  </div>
-                  <div className="flex-grow">
-                    <p className="text-gray-300">3:00 PM - School pickup</p>
-                  </div>
-                  <div>
-                    <button className="p-2 rounded-full hover:bg-assist-pink/10">
-                      <Check className="h-4 w-4 text-assist-pink" />
-                    </button>
-                  </div>
-                </div>
+                ))}
               </div>
             </GlassCard>
             
             {/* Quick Actions */}
             <GlassCard className="md:col-span-4 p-6" is3D={true}>
-              <h2 className="text-xl font-semibold mb-4 text-assist-pink">Quick Actions</h2>
+              <h2 className="text-xl font-semibold mb-4 text-indigo-400 flex items-center">
+                <Zap className="mr-2 h-5 w-5" /> Quick Actions
+              </h2>
               <div className="space-y-3">
                 <GlassButton 
-                  className="w-full bg-assist-pink/10 text-assist-pink justify-start" 
+                  className="w-full bg-indigo-500/10 text-indigo-300 justify-start" 
                   variant="neon"
-                  theme="homemaker"
                   icon={<Calendar className="h-4 w-4" />}
                   onClick={() => handleFeatureClick('tasks')}
                 >
                   Add Task
                 </GlassButton>
                 <GlassButton 
-                  className="w-full bg-assist-pink/10 text-assist-pink justify-start"
+                  className="w-full bg-indigo-500/10 text-indigo-300 justify-start"
                   variant="neon"
-                  theme="homemaker"
                   icon={<ShoppingCart className="h-4 w-4" />}
                   onClick={() => handleFeatureClick('shopping list')}
                 >
                   Add to Shopping List
                 </GlassButton>
                 <GlassButton 
-                  className="w-full bg-assist-pink/10 text-assist-pink justify-start"
+                  className="w-full bg-indigo-500/10 text-indigo-300 justify-start"
                   variant="neon"
-                  theme="homemaker"
                   icon={<Wallet className="h-4 w-4" />}
                   onClick={() => handleFeatureClick('expenses')}
                 >
@@ -197,30 +249,29 @@ const HomemakerJourney = () => {
                 </GlassButton>
               </div>
               
-              <h3 className="text-lg font-semibold mt-6 mb-3 text-assist-pink">Learning & Tools</h3>
+              <h3 className="text-lg font-semibold mt-6 mb-3 text-indigo-400 flex items-center">
+                <Sparkles className="mr-2 h-5 w-5" /> Learning & Tools
+              </h3>
               <div className="space-y-3">
                 <GlassButton 
-                  className="w-full bg-assist-pink/10 text-assist-pink justify-start" 
+                  className="w-full bg-indigo-500/10 text-indigo-300 justify-start" 
                   variant="neon"
-                  theme="homemaker"
                   icon={<Video className="h-4 w-4" />}
                   onClick={() => handleFeatureClick('video guides')}
                 >
                   Video Guides
                 </GlassButton>
                 <GlassButton 
-                  className="w-full bg-assist-pink/10 text-assist-pink justify-start"
+                  className="w-full bg-indigo-500/10 text-indigo-300 justify-start"
                   variant="neon"
-                  theme="homemaker"
                   icon={<BookOpen className="h-4 w-4" />}
                   onClick={() => handleFeatureClick('management guides')}
                 >
                   Home Guides
                 </GlassButton>
                 <GlassButton 
-                  className="w-full bg-assist-pink/10 text-assist-pink justify-start"
+                  className="w-full bg-indigo-500/10 text-indigo-300 justify-start"
                   variant="neon"
-                  theme="homemaker"
                   icon={<Sparkles className="h-4 w-4" />}
                   onClick={() => handleFeatureClick('home knowledge')}
                 >
@@ -230,8 +281,8 @@ const HomemakerJourney = () => {
             </GlassCard>
           </div>
           
-          <h2 className="text-2xl font-semibold mb-6 text-center text-assist-pink">
-            What would you like to manage today?
+          <h2 className="text-2xl font-semibold mb-6 text-center bg-gradient-to-r from-indigo-400 to-purple-500 text-transparent bg-clip-text flex items-center justify-center">
+            <Star className="mr-2 h-6 w-6 text-indigo-400" /> Home Management Hub
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
@@ -241,11 +292,11 @@ const HomemakerJourney = () => {
               onClick={() => handleFeatureClick('daily schedule')}
             >
               <div className="flex flex-col items-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-assist-pink/30 to-assist-purple/20 flex items-center justify-center mb-4">
-                  <Calendar className="h-8 w-8 text-assist-pink" />
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-500/30 to-purple-500/20 flex items-center justify-center mb-4">
+                  <Calendar className="h-8 w-8 text-indigo-400" />
                 </div>
-                <h3 className="text-lg font-medium mb-2 text-assist-pink">Daily Planner</h3>
-                <p className="text-gray-400 text-center">Organize your schedule and tasks</p>
+                <h3 className="text-lg font-medium mb-2 text-indigo-400">Smart Scheduler</h3>
+                <p className="text-gray-400 text-center">Organize your time and tasks efficiently</p>
               </div>
             </GlassCard>
             
@@ -255,11 +306,11 @@ const HomemakerJourney = () => {
               onClick={() => handleFeatureClick('shopping lists')}
             >
               <div className="flex flex-col items-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-assist-pink/30 to-assist-purple/20 flex items-center justify-center mb-4">
-                  <ShoppingCart className="h-8 w-8 text-assist-pink" />
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-500/30 to-purple-500/20 flex items-center justify-center mb-4">
+                  <ShoppingCart className="h-8 w-8 text-indigo-400" />
                 </div>
-                <h3 className="text-lg font-medium mb-2 text-assist-pink">Shopping & Groceries</h3>
-                <p className="text-gray-400 text-center">Manage shopping lists and deliveries</p>
+                <h3 className="text-lg font-medium mb-2 text-indigo-400">Inventory Manager</h3>
+                <p className="text-gray-400 text-center">Track supplies and create smart shopping lists</p>
               </div>
             </GlassCard>
             
@@ -269,11 +320,11 @@ const HomemakerJourney = () => {
               onClick={() => handleFeatureClick('recipes')}
             >
               <div className="flex flex-col items-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-assist-pink/30 to-assist-purple/20 flex items-center justify-center mb-4">
-                  <Utensils className="h-8 w-8 text-assist-pink" />
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-500/30 to-purple-500/20 flex items-center justify-center mb-4">
+                  <Utensils className="h-8 w-8 text-indigo-400" />
                 </div>
-                <h3 className="text-lg font-medium mb-2 text-assist-pink">Recipe Manager</h3>
-                <p className="text-gray-400 text-center">Discover and save your favorite recipes</p>
+                <h3 className="text-lg font-medium mb-2 text-indigo-400">Meal Planner</h3>
+                <p className="text-gray-400 text-center">Discover and organize recipes for the week</p>
               </div>
             </GlassCard>
             
@@ -283,44 +334,53 @@ const HomemakerJourney = () => {
               onClick={() => handleFeatureClick('budget')}
             >
               <div className="flex flex-col items-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-assist-pink/30 to-assist-purple/20 flex items-center justify-center mb-4">
-                  <Wallet className="h-8 w-8 text-assist-pink" />
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-500/30 to-purple-500/20 flex items-center justify-center mb-4">
+                  <LineChart className="h-8 w-8 text-indigo-400" />
                 </div>
-                <h3 className="text-lg font-medium mb-2 text-assist-pink">Budget Tracker</h3>
-                <p className="text-gray-400 text-center">Track household expenses and budgets</p>
+                <h3 className="text-lg font-medium mb-2 text-indigo-400">Finance Tracker</h3>
+                <p className="text-gray-400 text-center">Monitor expenses and optimize your budget</p>
               </div>
             </GlassCard>
           </div>
           
           {/* Featured Recipe */}
           <GlassCard className="p-6 mb-8" is3D={true} metallic={true}>
-            <h2 className="text-xl font-semibold mb-4 text-assist-pink">Today's Recipe Suggestion</h2>
+            <h2 className="text-xl font-semibold mb-4 text-indigo-400 flex items-center">
+              <Utensils className="mr-2 h-5 w-5" /> Today's Recipe Suggestion
+            </h2>
             <div className="flex flex-col md:flex-row items-center">
               <div className="md:w-1/3 mb-4 md:mb-0 md:mr-6">
                 <div className="rounded-xl overflow-hidden shadow-lg">
-                  <div className="w-full h-48 bg-gradient-to-br from-black/50 to-assist-pink/10 flex items-center justify-center">
-                    <Utensils className="h-16 w-16 text-assist-pink/50" />
-                  </div>
+                  {currentRecipe.image ? (
+                    <img 
+                      src={currentRecipe.image} 
+                      alt={currentRecipe.title} 
+                      className="w-full h-48 object-cover transform transition-transform hover:scale-105"
+                    />
+                  ) : (
+                    <div className="w-full h-48 bg-gradient-to-br from-black/50 to-indigo-500/10 flex items-center justify-center">
+                      <Utensils className="h-16 w-16 text-indigo-500/50" />
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="md:w-2/3">
-                <h3 className="text-lg font-medium mb-2 text-white">Easy Dinner Pasta</h3>
-                <p className="text-gray-400 mb-4">A quick and nutritious pasta dish perfect for busy weeknights.</p>
+                <h3 className="text-lg font-medium mb-2 text-white">{currentRecipe.title}</h3>
+                <p className="text-gray-400 mb-4">{currentRecipe.description}</p>
                 <div className="flex flex-wrap gap-4">
                   <div className="text-gray-400 text-sm px-3 py-1 rounded-full bg-white/5">
-                    <span className="font-medium text-assist-pink">Prep:</span> 10 mins
+                    <span className="font-medium text-indigo-400">Prep:</span> {currentRecipe.prepTime}
                   </div>
                   <div className="text-gray-400 text-sm px-3 py-1 rounded-full bg-white/5">
-                    <span className="font-medium text-assist-pink">Cook:</span> 20 mins
+                    <span className="font-medium text-indigo-400">Cook:</span> {currentRecipe.cookTime}
                   </div>
                   <div className="text-gray-400 text-sm px-3 py-1 rounded-full bg-white/5">
-                    <span className="font-medium text-assist-pink">Servings:</span> 4
+                    <span className="font-medium text-indigo-400">Servings:</span> {currentRecipe.servings}
                   </div>
                 </div>
                 <GlassButton 
-                  className="mt-4 bg-assist-pink/10 text-assist-pink"
+                  className="mt-4 bg-indigo-500/10 text-indigo-300"
                   variant="neon"
-                  theme="homemaker"
                   icon={<Utensils className="h-4 w-4" />}
                   onClick={() => handleFeatureClick('recipe details')}
                 >
@@ -339,8 +399,8 @@ const HomemakerJourney = () => {
             <div className="relative">
               <input 
                 type="text" 
-                placeholder="Ask Sarah..." 
-                className="w-full bg-black/30 border border-assist-pink/30 rounded-full px-6 py-3 pr-12 text-white outline-none focus:ring-2 focus:ring-assist-pink/50 shadow-inner"
+                placeholder="Ask HomeAssist AI..." 
+                className="w-full bg-black/30 border border-indigo-500/30 rounded-full px-6 py-3 pr-12 text-white outline-none focus:ring-2 focus:ring-indigo-500/50 shadow-inner"
                 onKeyPress={(e) => {
                   if (e.key === 'Enter') {
                     setShowLiveInteraction(true);
@@ -348,12 +408,10 @@ const HomemakerJourney = () => {
                 }}
               />
               <button 
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-assist-pink to-assist-purple rounded-full p-2 shadow-lg hover:shadow-assist-pink/30 transition duration-300"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full p-2 shadow-lg hover:shadow-indigo-500/30 transition duration-300"
                 onClick={() => setShowLiveInteraction(true)}
               >
-                <div className="h-5 w-5 text-white flex items-center justify-center">
-                  🏡
-                </div>
+                <Sparkles className="h-5 w-5 text-white" />
               </button>
             </div>
           </GlassCard>
@@ -379,5 +437,8 @@ const HomemakerJourney = () => {
     </div>
   );
 };
+
+// Helper function
+const cn = (...classes: any[]) => classes.filter(Boolean).join(' ');
 
 export default HomemakerJourney;

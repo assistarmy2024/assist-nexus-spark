@@ -24,7 +24,7 @@ const getGreeting = (character: 'child' | 'elderly' | 'homemaker'): string => {
     case 'elderly':
       return "Hello! I'm Professor Wilson. How may I assist you today?";
     case 'homemaker':
-      return "Hello! I'm Sarah. How can I help you with your household management today?";
+      return "Hello! I'm HomeAssist AI. How can I help you manage your home today?";
   }
 };
 
@@ -63,13 +63,13 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
   const characterColors = {
     child: 'from-blue-500 to-indigo-600',
     elderly: 'from-teal-500 to-blue-600',
-    homemaker: 'from-pink-500 to-purple-600'
+    homemaker: 'from-indigo-500 to-purple-600'
   };
   
   const characterNames = {
     child: 'Alex',
     elderly: 'Professor Wilson',
-    homemaker: 'Sarah'
+    homemaker: 'HomeAssist AI'
   };
   
   useEffect(() => {
@@ -141,6 +141,12 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
         responseText = `I can show you some educational videos. Simply say "show videos" to see what's available.`;
       } else if (text.toLowerCase().includes('thank')) {
         responseText = `You're very welcome! I'm always here to help.`;
+      } else if (text.toLowerCase().includes('meal') || text.toLowerCase().includes('food') || text.toLowerCase().includes('recipe')) {
+        responseText = `I can suggest recipes based on ingredients you have or dietary preferences. Would you like some meal planning help?`;
+      } else if (text.toLowerCase().includes('organize') || text.toLowerCase().includes('clean')) {
+        responseText = `Here's a quick tip: Try the "one in, one out" rule to maintain organized spaces. For every new item you bring into your home, remove one item. Would you like more detailed organizing advice?`;
+      } else if (text.toLowerCase().includes('budget') || text.toLowerCase().includes('expense') || text.toLowerCase().includes('money')) {
+        responseText = `Creating a household budget starts with tracking your spending. I can help you set up a simple tracking system or suggest apps that make this easier. What specific aspect of financial management are you interested in?`;
       } else {
         responseText = `That's an interesting question! I'm here to help with learning, organizing, and daily activities. What specific area would you like to know more about?`;
       }
@@ -190,13 +196,13 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
           <div className="absolute inset-0 flex items-center justify-center">
             {!videoOn ? (
               <div className="flex flex-col items-center">
-                <CharacterAvatar character={character} size="xl" />
+                <CharacterAvatar character={character} size="xl" animated={true} />
                 <p className="text-white mt-4 text-lg">Turn on video to see {characterNames[character]}</p>
               </div>
             ) : (
               <div className="w-full h-full flex items-center justify-center">
                 <div className={`w-64 h-64 rounded-full bg-gradient-to-r ${characterColors[character]} animate-pulse-gentle flex items-center justify-center`}>
-                  <CharacterAvatar character={character} size="lg" />
+                  <CharacterAvatar character={character} size="lg" animated={true} />
                 </div>
               </div>
             )}
@@ -306,7 +312,13 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
                     }`}
                   >
                     <p className={`font-medium ${
-                      message.sender === 'assistant' ? 'text-blue-400' : 'text-green-400'
+                      message.sender === 'assistant' 
+                      ? character === 'homemaker' 
+                        ? 'text-indigo-400' 
+                        : character === 'elderly' 
+                          ? 'text-teal-400' 
+                          : 'text-blue-400'
+                      : 'text-green-400'
                     }`}>
                       {message.sender === 'assistant' ? characterNames[character] : 'You'}
                     </p>
@@ -318,11 +330,37 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
                 ))}
                 {isTyping && (
                   <div className="bg-blue-500/10 self-start p-2 rounded-lg">
-                    <p className="font-medium text-blue-400">{characterNames[character]}</p>
+                    <p className={`font-medium ${
+                      character === 'homemaker' 
+                        ? 'text-indigo-400' 
+                        : character === 'elderly' 
+                          ? 'text-teal-400' 
+                          : 'text-blue-400'
+                    }`}>
+                      {characterNames[character]}
+                    </p>
                     <div className="flex space-x-1">
-                      <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"></div>
-                      <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                      <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+                      <div className={`w-2 h-2 rounded-full animate-bounce ${
+                        character === 'homemaker' 
+                          ? 'bg-indigo-400' 
+                          : character === 'elderly' 
+                            ? 'bg-teal-400' 
+                            : 'bg-blue-400'
+                      }`}></div>
+                      <div className={`w-2 h-2 rounded-full animate-bounce ${
+                        character === 'homemaker' 
+                          ? 'bg-indigo-400' 
+                          : character === 'elderly' 
+                            ? 'bg-teal-400' 
+                            : 'bg-blue-400'
+                      }`} style={{ animationDelay: '0.2s' }}></div>
+                      <div className={`w-2 h-2 rounded-full animate-bounce ${
+                        character === 'homemaker' 
+                          ? 'bg-indigo-400' 
+                          : character === 'elderly' 
+                            ? 'bg-teal-400' 
+                            : 'bg-blue-400'
+                      }`} style={{ animationDelay: '0.4s' }}></div>
                     </div>
                   </div>
                 )}
@@ -335,7 +373,13 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
                   <button
                     key={index}
                     onClick={() => sendMessage(response)}
-                    className="px-3 py-1 text-sm bg-white/10 hover:bg-white/20 rounded-full text-gray-300 transition-colors"
+                    className={`px-3 py-1 text-sm bg-white/10 hover:bg-white/20 rounded-full text-gray-300 transition-colors hover:scale-105 transform ${
+                      character === 'homemaker' 
+                        ? 'hover:bg-indigo-500/20' 
+                        : character === 'elderly' 
+                          ? 'hover:bg-teal-500/20' 
+                          : 'hover:bg-blue-500/20'
+                    }`}
                   >
                     {response}
                   </button>
@@ -366,7 +410,13 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
                 variant="neon"
                 onClick={() => sendMessage()}
                 disabled={!inputValue.trim()}
-                className={`${!inputValue.trim() ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`${
+                  character === 'homemaker' 
+                    ? 'bg-indigo-500/20' 
+                    : character === 'elderly' 
+                      ? 'bg-teal-500/20' 
+                      : 'bg-blue-500/20'
+                } ${!inputValue.trim() ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 <MessageCircle className="h-5 w-5" />
               </GlassButton>

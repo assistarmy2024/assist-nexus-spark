@@ -2,12 +2,14 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import Avatar from './Avatar';
+import { Brain, Home, Lightbulb } from 'lucide-react';
 
 interface CharacterAvatarProps {
   character: 'child' | 'elderly' | 'homemaker';
   className?: string;
   size?: 'sm' | 'md' | 'lg' | 'xl';
   showName?: boolean;
+  animated?: boolean;
 }
 
 const characterImages = {
@@ -16,25 +18,31 @@ const characterImages = {
   homemaker: "/lovable-uploads/7ced6851-168e-43ef-afc8-e060cb827371.png"
 };
 
+const characterIcons = {
+  child: <Brain className="h-full w-full p-3 text-blue-400" />,
+  elderly: <Lightbulb className="h-full w-full p-3 text-teal-400" />,
+  homemaker: <Home className="h-full w-full p-3 text-indigo-400" />
+};
+
 const characterAlternatives = {
   child: "👦",
   elderly: "👴",
-  homemaker: "👩"
+  homemaker: "🏠"
 };
 
 const characterNames = {
   child: "Alex",
   elderly: "Professor Wilson",
-  homemaker: "Sarah"
+  homemaker: "HomeAssist AI"
 };
 
 const characterGradients = {
   child: "from-blue-400 to-indigo-600",
   elderly: "from-teal-400 to-blue-600",
-  homemaker: "from-pink-400 to-purple-600"
+  homemaker: "from-indigo-400 to-purple-600"
 };
 
-const CharacterAvatar = ({ character, className, size = 'md', showName = true }: CharacterAvatarProps) => {
+const CharacterAvatar = ({ character, className, size = 'md', showName = true, animated = false }: CharacterAvatarProps) => {
   const imageSrc = characterImages[character];
   
   return (
@@ -44,19 +52,20 @@ const CharacterAvatar = ({ character, className, size = 'md', showName = true }:
           "absolute -inset-2 rounded-full blur-md opacity-70 animate-pulse-gentle bg-gradient-to-br",
           character === 'child' && "from-blue-400 to-indigo-600",
           character === 'elderly' && "from-teal-400 to-blue-600",
-          character === 'homemaker' && "from-pink-400 to-purple-600"
+          character === 'homemaker' && "from-indigo-400 to-purple-600"
         )}></div>
         <Avatar 
           src={imageSrc} 
-          fallback={characterAlternatives[character]}
+          fallback={characterIcons[character] || characterAlternatives[character]}
           alt={characterNames[character]} 
           size={size}
           glow={true}
+          animated={animated}
           className={cn(
             'border-2 shadow-xl',
             character === 'child' && 'border-blue-500 shadow-blue-500/30',
             character === 'elderly' && 'border-teal-500 shadow-teal-500/30',
-            character === 'homemaker' && 'border-pink-500 shadow-pink-500/30'
+            character === 'homemaker' && 'border-indigo-500 shadow-indigo-500/30'
           )}
         />
       </div>
@@ -65,7 +74,7 @@ const CharacterAvatar = ({ character, className, size = 'md', showName = true }:
           'mt-2 font-bold text-lg',
           character === 'child' && 'text-blue-400',
           character === 'elderly' && 'text-teal-400',
-          character === 'homemaker' && 'text-pink-400'
+          character === 'homemaker' && 'text-indigo-400'
         )}>
           {characterNames[character]}
         </span>
