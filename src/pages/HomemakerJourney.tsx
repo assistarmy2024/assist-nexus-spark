@@ -1,444 +1,229 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlassCard from '@/components/GlassCard';
 import GlassButton from '@/components/GlassButton';
 import CharacterAvatar from '@/components/CharacterAvatar';
 import LiveInteraction from '@/components/LiveInteraction';
-import Quiz from '@/components/Quiz';
-import InteractiveVideo from '@/components/InteractiveVideo';
-import Documents from '@/components/Documents';
+import HomeCompanionNavBar from '@/components/HomeCompanionNavBar';
 import { 
-  ArrowLeft, Calendar, ShoppingCart, Utensils, Wallet, Clock, 
-  Bell, Heart, Check, Plus, Video, BookOpen, ImageIcon, 
-  Sparkles, Briefcase, Home, Settings, LayoutDashboard,
-  Moon, Sun, Star, Zap, FileText, Users, ListChecks, LineChart
-} from 'lucide-react';
+  SmartKitchenModule, 
+  FamilyHealthModule, 
+  AutoGroceryModule, 
+  SmartHomeModule, 
+  EnergyMonitorModule, 
+  CalendarReminderModule 
+} from '@/components/HomeCompanionModules';
+import { ArrowRight, MessageCircle, Calendar, Clock, Video, Bell, Search } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
-
-// Dummy data for the home management system
-const dummyTasks = [
-  { id: 1, title: "School drop-off", time: "9:00 AM", icon: "Clock", category: "daily", completed: false },
-  { id: 2, title: "Grocery shopping", time: "11:00 AM", icon: "ShoppingCart", category: "shopping", completed: false },
-  { id: 3, title: "Prepare lunch", time: "1:00 PM", icon: "Utensils", category: "meals", completed: false },
-  { id: 4, title: "School pickup", time: "3:00 PM", icon: "Clock", category: "daily", completed: false },
-  { id: 5, title: "Home maintenance", time: "5:00 PM", icon: "Home", category: "home", completed: true },
-  { id: 6, title: "Family dinner", time: "7:00 PM", icon: "Utensils", category: "meals", completed: true },
-];
-
-const dummyRecipes = [
-  {
-    id: 1,
-    title: "Easy Dinner Pasta",
-    description: "A quick and nutritious pasta dish perfect for busy weeknights.",
-    prepTime: "10 mins",
-    cookTime: "20 mins",
-    servings: 4,
-    image: "/lovable-uploads/6092619e-e957-4c21-b480-20454027a7e2.png"
-  },
-  {
-    id: 2,
-    title: "One-Pot Quinoa Bowl",
-    description: "Healthy, protein-rich meal that's easy to prepare and customize.",
-    prepTime: "5 mins",
-    cookTime: "15 mins",
-    servings: 2,
-    image: "/lovable-uploads/4f8f135a-6243-488c-92ba-c324f470b2a9.png"
-  }
-];
 
 const HomemakerJourney = () => {
   const navigate = useNavigate();
   const [showLiveInteraction, setShowLiveInteraction] = useState(false);
-  const [showQuiz, setShowQuiz] = useState(false);
-  const [showVideo, setShowVideo] = useState(false);
-  const [showDocuments, setShowDocuments] = useState(false);
-  const [tasks, setTasks] = useState(dummyTasks);
-  const [currentRecipe, setCurrentRecipe] = useState(dummyRecipes[0]);
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
-  const [timeOfDay, setTimeOfDay] = useState<string>('');
-
-  useEffect(() => {
-    // Set time of day greeting
-    const hours = new Date().getHours();
-    if (hours < 12) setTimeOfDay('Good morning');
-    else if (hours < 18) setTimeOfDay('Good afternoon');
-    else setTimeOfDay('Good evening');
-    
-    // Cycle between recipes
-    const interval = setInterval(() => {
-      setCurrentRecipe(prev => 
-        prev.id === dummyRecipes[0].id ? dummyRecipes[1] : dummyRecipes[0]
-      );
-    }, 10000);
-    
-    return () => clearInterval(interval);
-  }, []);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [inputValue, setInputValue] = useState('');
 
   const handleFeatureClick = (feature: string) => {
     toast({
-      title: `HomeAssist AI says:`,
-      description: `I'll help you manage your ${feature}.`,
+      title: `HomeCompanion says:`,
+      description: `I'll help you with ${feature}.`,
     });
-    
-    if (feature === 'home knowledge') {
-      setShowQuiz(true);
-    } else if (feature === 'video guides') {
-      setShowVideo(true);
-    } else if (feature === 'management guides') {
-      setShowDocuments(true);
+    setShowLiveInteraction(true);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      setShowLiveInteraction(true);
     }
   };
 
-  const toggleTaskCompletion = (id: number) => {
-    setTasks(tasks.map(task => 
-      task.id === id ? { ...task, completed: !task.completed } : task
-    ));
-    
-    toast({
-      title: "Task Updated",
-      description: `Task status has been updated`,
-      variant: "default",
-    });
+  const handleMenuToggle = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#0F172A]/80 to-[#1E293B]/60">
-      {/* Header */}
-      <header className="w-full py-6 px-6">
-        <div className="container mx-auto">
-          <div className="flex items-center justify-between">
-            <GlassButton 
-              variant="ghost" 
-              className="text-white backdrop-blur-md" 
-              onClick={() => navigate('/')}
-              icon={<ArrowLeft className="h-4 w-4" />}
-              iconPosition="left"
-              is3D={true}
-            >
-              Back
-            </GlassButton>
-            <div className="flex items-center gap-4">
-              <GlassButton 
-                className="bg-indigo-500/20 border border-indigo-500/30 text-white"
-                variant="neon"
-                onClick={() => setShowLiveInteraction(true)}
-                icon={<Video className="h-4 w-4 mr-2" />}
-              >
-                Video Call
-              </GlassButton>
-              <CharacterAvatar character="homemaker" size="sm" />
-            </div>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#141436] to-[#22143B]">
+      <HomeCompanionNavBar onMenuToggle={handleMenuToggle} isMenuOpen={isMenuOpen} />
       
       {/* Main content */}
-      <main className="flex-grow w-full py-6 px-6">
+      <main className="flex-grow w-full py-20 px-6">
         <div className="container mx-auto">
-          <GlassCard 
-            glowing={true} 
-            className="mb-8 text-center"
-            is3D={true}
-            metallic={true}
-          >
-            <div className="flex flex-col md:flex-row items-center justify-between">
-              <div className="md:w-1/2 mb-6 md:mb-0">
-                <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-indigo-400 to-purple-500 text-transparent bg-clip-text">
-                  {timeOfDay}, Welcome to HomeAssist!
-                </h1>
-                <p className="text-gray-300 mb-4">
-                  Your intelligent home management assistant for planning, organization, and household tasks.
-                </p>
-                <GlassButton 
-                  className="bg-indigo-500/20 border border-indigo-500/30 text-white"
-                  variant="neon"
-                  onClick={() => setShowLiveInteraction(true)}
-                  icon={<Video className="h-4 w-4 mr-2" />}
-                >
-                  Start Video Call
-                </GlassButton>
-              </div>
-              <div className="md:w-1/2 flex justify-center">
-                <div className="relative">
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/20 blur-xl animate-pulse-gentle"></div>
-                  <CharacterAvatar 
-                    character="homemaker" 
-                    size="xl" 
-                    animated={true}
-                  />
+          {/* Welcome Section */}
+          <div className="relative mb-8">
+            <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl blur opacity-70"></div>
+            <GlassCard className="relative p-8 bg-gradient-to-br from-[#1F1346]/90 to-[#22143B]/90 border border-indigo-500/30 shadow-[0_8px_32px_rgba(31,41,55,0.4)]">
+              <div className="flex flex-col md:flex-row items-center justify-between">
+                <div className="md:w-1/2 mb-6 md:mb-0">
+                  <h1 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+                    Welcome to HomeCompanion
+                  </h1>
+                  <p className="text-gray-300 mb-4 text-lg">
+                    Your intelligent home management assistant
+                  </p>
+                  <div className="flex space-x-3">
+                    <GlassButton 
+                      className="bg-indigo-500/20 border border-indigo-500/30 text-white"
+                      variant="neon"
+                      onClick={() => setShowLiveInteraction(true)}
+                      icon={<Video className="h-4 w-4 mr-2" />}
+                    >
+                      Start Interaction
+                    </GlassButton>
+                    <GlassButton 
+                      className="border border-white/10 text-white"
+                      variant="ghost"
+                      onClick={() => handleFeatureClick('control panel')}
+                    >
+                      Control Panel
+                    </GlassButton>
+                  </div>
+                </div>
+                <div className="md:w-1/2 flex justify-center">
+                  <div className="relative">
+                    <div className="absolute -inset-4 rounded-full bg-indigo-500/30 blur-xl animate-pulse-gentle"></div>
+                    <CharacterAvatar character="homemaker" size="xl" animated={true} />
+                  </div>
                 </div>
               </div>
-            </div>
-          </GlassCard>
-          
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-8">
-            {/* Today's Overview */}
-            <GlassCard className="md:col-span-8 p-6" is3D={true}>
-              <h2 className="text-xl font-semibold mb-4 text-indigo-400 flex items-center">
-                <LayoutDashboard className="mr-2 h-5 w-5" /> Today's Overview
-              </h2>
-              <div className="space-y-4">
-                {tasks.map(task => (
-                  <div 
-                    key={task.id}
-                    className={cn(
-                      "flex items-center p-3 rounded-lg transition-all duration-300 cursor-pointer",
-                      task.completed ? "bg-indigo-900/20" : "bg-white/5 hover:bg-white/10"
-                    )} 
-                    onClick={() => toggleTaskCompletion(task.id)}
-                  >
-                    <div className="w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center mr-4">
-                      {task.icon === "Clock" && <Clock className="h-5 w-5 text-indigo-400" />}
-                      {task.icon === "ShoppingCart" && <ShoppingCart className="h-5 w-5 text-indigo-400" />}
-                      {task.icon === "Utensils" && <Utensils className="h-5 w-5 text-indigo-400" />}
-                      {task.icon === "Home" && <Home className="h-5 w-5 text-indigo-400" />}
-                    </div>
-                    <div className="flex-grow">
-                      <p className={cn(
-                        "text-gray-300",
-                        task.completed && "line-through text-gray-500"
-                      )}>{task.title}</p>
-                      <p className="text-gray-500 text-sm">{task.time}</p>
-                    </div>
-                    <div>
-                      <button className={cn(
-                        "p-2 rounded-full", 
-                        task.completed ? "bg-indigo-500/30" : "hover:bg-indigo-500/10"
-                      )}>
-                        <Check className={cn(
-                          "h-4 w-4", 
-                          task.completed ? "text-indigo-300" : "text-indigo-500/50"
-                        )} />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
             </GlassCard>
-            
-            {/* Quick Actions */}
-            <GlassCard className="md:col-span-4 p-6" is3D={true}>
-              <h2 className="text-xl font-semibold mb-4 text-indigo-400 flex items-center">
-                <Zap className="mr-2 h-5 w-5" /> Quick Actions
-              </h2>
-              <div className="space-y-3">
-                <GlassButton 
-                  className="w-full bg-indigo-500/10 text-indigo-300 justify-start" 
-                  variant="neon"
-                  icon={<Calendar className="h-4 w-4" />}
-                  onClick={() => handleFeatureClick('tasks')}
-                >
-                  Add Task
-                </GlassButton>
-                <GlassButton 
-                  className="w-full bg-indigo-500/10 text-indigo-300 justify-start"
-                  variant="neon"
-                  icon={<ShoppingCart className="h-4 w-4" />}
-                  onClick={() => handleFeatureClick('shopping list')}
-                >
-                  Add to Shopping List
-                </GlassButton>
-                <GlassButton 
-                  className="w-full bg-indigo-500/10 text-indigo-300 justify-start"
-                  variant="neon"
-                  icon={<Wallet className="h-4 w-4" />}
-                  onClick={() => handleFeatureClick('expenses')}
-                >
-                  Track Expense
-                </GlassButton>
-              </div>
+          </div>
+          
+          {/* Search Bar */}
+          <div className="mb-8">
+            <div className="relative">
+              <input 
+                type="text" 
+                placeholder="Search for automation, tips, or ask a question..." 
+                className="w-full bg-white/5 border border-indigo-500/20 rounded-full px-6 py-4 pr-12 text-white outline-none focus:ring-2 focus:ring-indigo-500/50 shadow-inner"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyPress={handleKeyPress}
+              />
+              <button 
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                onClick={() => setShowLiveInteraction(true)}
+              >
+                <Search className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+          
+          {/* Modules Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <SmartKitchenModule onViewMore={() => handleFeatureClick('smart kitchen')} />
+            <FamilyHealthModule onViewMore={() => handleFeatureClick('family health')} />
+            <AutoGroceryModule onViewMore={() => handleFeatureClick('grocery assistant')} />
+            <SmartHomeModule onViewMore={() => handleFeatureClick('smart home')} />
+            <EnergyMonitorModule onViewMore={() => handleFeatureClick('energy usage')} />
+            <CalendarReminderModule onViewMore={() => handleFeatureClick('calendar')} />
+          </div>
+          
+          {/* Tips and Insights */}
+          <div className="relative mb-8">
+            <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-xl blur opacity-60"></div>
+            <GlassCard className="relative p-6 bg-gradient-to-br from-[#1F1346]/90 to-[#22143B]/90 border border-indigo-500/20">
+              <h2 className="text-xl font-bold mb-4 text-white">Tips & Insights</h2>
               
-              <h3 className="text-lg font-semibold mt-6 mb-3 text-indigo-400 flex items-center">
-                <Sparkles className="mr-2 h-5 w-5" /> Learning & Tools
-              </h3>
-              <div className="space-y-3">
-                <GlassButton 
-                  className="w-full bg-indigo-500/10 text-indigo-300 justify-start" 
-                  variant="neon"
-                  icon={<Video className="h-4 w-4" />}
-                  onClick={() => handleFeatureClick('video guides')}
-                >
-                  Video Guides
-                </GlassButton>
-                <GlassButton 
-                  className="w-full bg-indigo-500/10 text-indigo-300 justify-start"
-                  variant="neon"
-                  icon={<BookOpen className="h-4 w-4" />}
-                  onClick={() => handleFeatureClick('management guides')}
-                >
-                  Home Guides
-                </GlassButton>
-                <GlassButton 
-                  className="w-full bg-indigo-500/10 text-indigo-300 justify-start"
-                  variant="neon"
-                  icon={<Sparkles className="h-4 w-4" />}
-                  onClick={() => handleFeatureClick('home knowledge')}
-                >
-                  Home Quiz
-                </GlassButton>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="p-4 rounded-lg bg-gradient-to-br from-indigo-900/30 to-purple-900/30 hover:from-indigo-900/40 hover:to-purple-900/40 cursor-pointer transition-colors">
+                  <h3 className="text-lg font-medium text-white mb-2">Energy Saving Tip</h3>
+                  <p className="text-gray-300 text-sm">Schedule your high-energy appliances to run during off-peak hours to save up to 20% on your electric bill.</p>
+                </div>
+                
+                <div className="p-4 rounded-lg bg-gradient-to-br from-violet-900/30 to-indigo-900/30 hover:from-violet-900/40 hover:to-indigo-900/40 cursor-pointer transition-colors">
+                  <h3 className="text-lg font-medium text-white mb-2">Meal Planning</h3>
+                  <p className="text-gray-300 text-sm">Based on your refrigerator inventory, I've suggested 3 new recipes for this week that use ingredients you already have.</p>
+                </div>
+                
+                <div className="p-4 rounded-lg bg-gradient-to-br from-fuchsia-900/30 to-pink-900/30 hover:from-fuchsia-900/40 hover:to-pink-900/40 cursor-pointer transition-colors">
+                  <h3 className="text-lg font-medium text-white mb-2">Home Maintenance</h3>
+                  <p className="text-gray-300 text-sm">Your HVAC filter is due for replacement. I can order a new one for delivery or add it to your shopping list.</p>
+                </div>
               </div>
             </GlassCard>
           </div>
           
-          <h2 className="text-2xl font-semibold mb-6 text-center bg-gradient-to-r from-indigo-400 to-purple-500 text-transparent bg-clip-text flex items-center justify-center">
-            <Star className="mr-2 h-6 w-6 text-indigo-400" /> Home Management Hub
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <GlassCard 
-              className="hover:scale-105 transition-transform cursor-pointer p-6" 
-              is3D={true}
-              onClick={() => handleFeatureClick('daily schedule')}
-            >
-              <div className="flex flex-col items-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-500/30 to-purple-500/20 flex items-center justify-center mb-4">
-                  <Calendar className="h-8 w-8 text-indigo-400" />
-                </div>
-                <h3 className="text-lg font-medium mb-2 text-indigo-400">Smart Scheduler</h3>
-                <p className="text-gray-400 text-center">Organize your time and tasks efficiently</p>
-              </div>
-            </GlassCard>
-            
-            <GlassCard 
-              className="hover:scale-105 transition-transform cursor-pointer p-6" 
-              is3D={true}
-              onClick={() => handleFeatureClick('shopping lists')}
-            >
-              <div className="flex flex-col items-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-500/30 to-purple-500/20 flex items-center justify-center mb-4">
-                  <ShoppingCart className="h-8 w-8 text-indigo-400" />
-                </div>
-                <h3 className="text-lg font-medium mb-2 text-indigo-400">Inventory Manager</h3>
-                <p className="text-gray-400 text-center">Track supplies and create smart shopping lists</p>
-              </div>
-            </GlassCard>
-            
-            <GlassCard 
-              className="hover:scale-105 transition-transform cursor-pointer p-6" 
-              is3D={true}
-              onClick={() => handleFeatureClick('recipes')}
-            >
-              <div className="flex flex-col items-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-500/30 to-purple-500/20 flex items-center justify-center mb-4">
-                  <Utensils className="h-8 w-8 text-indigo-400" />
-                </div>
-                <h3 className="text-lg font-medium mb-2 text-indigo-400">Meal Planner</h3>
-                <p className="text-gray-400 text-center">Discover and organize recipes for the week</p>
-              </div>
-            </GlassCard>
-            
-            <GlassCard 
-              className="hover:scale-105 transition-transform cursor-pointer p-6" 
-              is3D={true}
-              onClick={() => handleFeatureClick('budget')}
-            >
-              <div className="flex flex-col items-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-500/30 to-purple-500/20 flex items-center justify-center mb-4">
-                  <LineChart className="h-8 w-8 text-indigo-400" />
-                </div>
-                <h3 className="text-lg font-medium mb-2 text-indigo-400">Finance Tracker</h3>
-                <p className="text-gray-400 text-center">Monitor expenses and optimize your budget</p>
+          {/* Quick Actions */}
+          <div className="relative mb-4">
+            <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-xl blur opacity-50"></div>
+            <GlassCard className="relative bg-gradient-to-br from-[#1F1346]/90 to-[#22143B]/90 border border-indigo-500/20">
+              <h2 className="text-xl font-semibold mb-3 text-white">Quick Actions</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <button className="flex flex-col items-center p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                        onClick={() => handleFeatureClick('smart lights')}>
+                  <div className="w-12 h-12 rounded-full bg-yellow-500/20 flex items-center justify-center mb-2">
+                    <Sun className="h-6 w-6 text-yellow-400" />
+                  </div>
+                  <span className="text-white">Lights</span>
+                </button>
+                
+                <button className="flex flex-col items-center p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                        onClick={() => handleFeatureClick('temperature')}>
+                  <div className="w-12 h-12 rounded-full bg-red-500/20 flex items-center justify-center mb-2">
+                    <Thermometer className="h-6 w-6 text-red-400" />
+                  </div>
+                  <span className="text-white">Temperature</span>
+                </button>
+                
+                <button className="flex flex-col items-center p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                        onClick={() => handleFeatureClick('security')}>
+                  <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center mb-2">
+                    <Bell className="h-6 w-6 text-green-400" />
+                  </div>
+                  <span className="text-white">Security</span>
+                </button>
+                
+                <button className="flex flex-col items-center p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                        onClick={() => handleFeatureClick('shopping list')}>
+                  <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mb-2">
+                    <Calendar className="h-6 w-6 text-blue-400" />
+                  </div>
+                  <span className="text-white">Calendar</span>
+                </button>
               </div>
             </GlassCard>
           </div>
-          
-          {/* Featured Recipe */}
-          <GlassCard className="p-6 mb-8" is3D={true} metallic={true}>
-            <h2 className="text-xl font-semibold mb-4 text-indigo-400 flex items-center">
-              <Utensils className="mr-2 h-5 w-5" /> Today's Recipe Suggestion
-            </h2>
-            <div className="flex flex-col md:flex-row items-center">
-              <div className="md:w-1/3 mb-4 md:mb-0 md:mr-6">
-                <div className="rounded-xl overflow-hidden shadow-lg">
-                  {currentRecipe.image ? (
-                    <img 
-                      src={currentRecipe.image} 
-                      alt={currentRecipe.title} 
-                      className="w-full h-48 object-cover transform transition-transform hover:scale-105"
-                    />
-                  ) : (
-                    <div className="w-full h-48 bg-gradient-to-br from-black/50 to-indigo-500/10 flex items-center justify-center">
-                      <Utensils className="h-16 w-16 text-indigo-500/50" />
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="md:w-2/3">
-                <h3 className="text-lg font-medium mb-2 text-white">{currentRecipe.title}</h3>
-                <p className="text-gray-400 mb-4">{currentRecipe.description}</p>
-                <div className="flex flex-wrap gap-4">
-                  <div className="text-gray-400 text-sm px-3 py-1 rounded-full bg-white/5">
-                    <span className="font-medium text-indigo-400">Prep:</span> {currentRecipe.prepTime}
-                  </div>
-                  <div className="text-gray-400 text-sm px-3 py-1 rounded-full bg-white/5">
-                    <span className="font-medium text-indigo-400">Cook:</span> {currentRecipe.cookTime}
-                  </div>
-                  <div className="text-gray-400 text-sm px-3 py-1 rounded-full bg-white/5">
-                    <span className="font-medium text-indigo-400">Servings:</span> {currentRecipe.servings}
-                  </div>
-                </div>
-                <GlassButton 
-                  className="mt-4 bg-indigo-500/10 text-indigo-300"
-                  variant="neon"
-                  icon={<Utensils className="h-4 w-4" />}
-                  onClick={() => handleFeatureClick('recipe details')}
-                >
-                  View Recipe
-                </GlassButton>
-              </div>
-            </div>
-          </GlassCard>
         </div>
       </main>
       
       {/* Footer */}
       <footer className="w-full py-4 px-6">
         <div className="container mx-auto">
-          <GlassCard className="p-4" is3D={true} metallic={true}>
-            <div className="relative">
-              <input 
-                type="text" 
-                placeholder="Ask HomeAssist AI..." 
-                className="w-full bg-black/30 border border-indigo-500/30 rounded-full px-6 py-3 pr-12 text-white outline-none focus:ring-2 focus:ring-indigo-500/50 shadow-inner"
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
-                    setShowLiveInteraction(true);
-                  }
-                }}
-              />
-              <button 
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full p-2 shadow-lg hover:shadow-indigo-500/30 transition duration-300"
-                onClick={() => setShowLiveInteraction(true)}
-              >
-                <Sparkles className="h-5 w-5 text-white" />
-              </button>
-            </div>
-          </GlassCard>
+          <div className="relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur opacity-60"></div>
+            <GlassCard className="relative p-4 bg-gradient-to-br from-[#1F1346]/90 to-[#22143B]/90 border border-indigo-500/20">
+              <div className="relative">
+                <input 
+                  type="text" 
+                  placeholder="Ask HomeCompanion..." 
+                  className="w-full bg-black/20 border border-indigo-500/30 rounded-full px-6 py-3 pr-12 text-white outline-none focus:ring-2 focus:ring-indigo-500/50"
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      setShowLiveInteraction(true);
+                    }
+                  }}
+                />
+                <button 
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full p-2 shadow-lg shadow-indigo-500/20"
+                  onClick={() => setShowLiveInteraction(true)}
+                >
+                  <div className="h-5 w-5 text-white flex items-center justify-center">
+                    <MessageCircle className="h-4 w-4" />
+                  </div>
+                </button>
+              </div>
+            </GlassCard>
+          </div>
         </div>
       </footer>
 
-      {/* Interactive Components */}
+      {/* Live Interaction Overlay */}
       {showLiveInteraction && (
         <LiveInteraction character="homemaker" onClose={() => setShowLiveInteraction(false)} />
-      )}
-      
-      {showQuiz && (
-        <Quiz character="homemaker" onClose={() => setShowQuiz(false)} />
-      )}
-      
-      {showVideo && (
-        <InteractiveVideo character="homemaker" onClose={() => setShowVideo(false)} />
-      )}
-      
-      {showDocuments && (
-        <Documents character="homemaker" onClose={() => setShowDocuments(false)} />
       )}
     </div>
   );
 };
-
-// Helper function
-const cn = (...classes: any[]) => classes.filter(Boolean).join(' ');
 
 export default HomemakerJourney;

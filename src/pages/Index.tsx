@@ -1,9 +1,10 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlassCard from '@/components/GlassCard';
 import GlassButton from '@/components/GlassButton';
 import CharacterAvatar from '@/components/CharacterAvatar';
-import { ArrowRight, MessageCircle, Sparkles, Shield, Users, Brain, Home, Lightbulb, Rocket, Bot, Zap, Globe, CircleUser } from 'lucide-react';
+import { ArrowRight, MessageCircle, Sparkles, Shield, Users, Brain, Home, Lightbulb, Rocket, Bot, Zap, Globe, Blocks, BookOpen, HeartPulse, ShoppingCart } from 'lucide-react';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -102,7 +103,7 @@ const Index = () => {
                 </div>
               </div>
               
-              {/* Homemaker Journey */}
+              {/* HomeCompanion Journey */}
               <div 
                 className="relative group transform transition hover:scale-105" 
                 onClick={() => handlePathSelect('/homemaker')}
@@ -119,7 +120,7 @@ const Index = () => {
                       animated={hoveredCard === 'homemaker'}
                     />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-1">HomeAssist</h3>
+                  <h3 className="text-2xl font-bold text-white mb-1">HomeCompanion</h3>
                   <p className="text-gray-300 text-sm text-center">Smart home management & organization</p>
                   <div className="mt-4 w-full">
                     <GlassButton 
@@ -166,6 +167,33 @@ const Index = () => {
                 </div>
                 <h3 className="text-lg font-medium mb-2 text-indigo-400">Intelligent Help</h3>
                 <p className="text-gray-400 text-center">AI-powered assistance tailored to your specific needs</p>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-12">
+              <div className="flex flex-col items-center group transform transition hover:scale-105">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-400/20 to-emerald-600/20 flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110 group-hover:bg-green-400/30">
+                  <BookOpen className="h-8 w-8 text-green-400" />
+                </div>
+                <h3 className="text-sm font-medium mb-1 text-green-400">Interactive Stories</h3>
+              </div>
+              <div className="flex flex-col items-center group transform transition hover:scale-105">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-amber-400/20 to-orange-600/20 flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110 group-hover:bg-amber-400/30">
+                  <HeartPulse className="h-8 w-8 text-amber-400" />
+                </div>
+                <h3 className="text-sm font-medium mb-1 text-amber-400">Health Monitoring</h3>
+              </div>
+              <div className="flex flex-col items-center group transform transition hover:scale-105">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-400/20 to-blue-600/20 flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110 group-hover:bg-cyan-400/30">
+                  <Blocks className="h-8 w-8 text-cyan-400" />
+                </div>
+                <h3 className="text-sm font-medium mb-1 text-cyan-400">Smart Home</h3>
+              </div>
+              <div className="flex flex-col items-center group transform transition hover:scale-105">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-pink-400/20 to-rose-600/20 flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110 group-hover:bg-pink-400/30">
+                  <ShoppingCart className="h-8 w-8 text-pink-400" />
+                </div>
+                <h3 className="text-sm font-medium mb-1 text-pink-400">Auto-Grocery</h3>
               </div>
             </div>
           </GlassCard>

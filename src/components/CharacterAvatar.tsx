@@ -2,7 +2,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import Avatar from './Avatar';
-import { Brain, Home, Lightbulb } from 'lucide-react';
+import { Brain, Home, Lightbulb, Bot, BookOpen, HeartPulse, ShoppingCart } from 'lucide-react';
 
 interface CharacterAvatarProps {
   character: 'child' | 'elderly' | 'homemaker';
@@ -12,10 +12,11 @@ interface CharacterAvatarProps {
   animated?: boolean;
 }
 
+// Updated to use more professional 3D avatar images
 const characterImages = {
-  child: "/lovable-uploads/3d34d2f1-ddca-4ba6-bb29-150fb5c7da44.png",
-  elderly: "/lovable-uploads/891809f3-0ae1-4c17-9847-a48bce549928.png",
-  homemaker: "/lovable-uploads/7ced6851-168e-43ef-afc8-e060cb827371.png"
+  child: "/lovable-uploads/610f4704-240f-4beb-afc6-e84478522871.png", // Updated to use 3D kid-friendly avatar
+  elderly: "/lovable-uploads/4f8f135a-6243-488c-92ba-c324f470b2a9.png", // Updated to use 3D elderly avatar
+  homemaker: "/lovable-uploads/7682db02-e18a-405a-937a-7b7f525828eb.png" // Updated to use 3D gender-neutral home assistant avatar
 };
 
 const characterIcons = {
@@ -31,9 +32,9 @@ const characterAlternatives = {
 };
 
 const characterNames = {
-  child: "Alex",
-  elderly: "Professor Wilson",
-  homemaker: "HomeAssist AI"
+  child: "KidBot",
+  elderly: "ElderAssist",
+  homemaker: "HomeCompanion"
 };
 
 const characterGradients = {
