@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlassCard from '@/components/GlassCard';
@@ -35,7 +34,6 @@ const ChildJourney = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#070B34] to-[#0A1128]">
-      {/* Header */}
       <header className="w-full py-6 px-6">
         <div className="container mx-auto">
           <div className="flex items-center justify-between">
@@ -61,7 +59,6 @@ const ChildJourney = () => {
         </div>
       </header>
       
-      {/* Main content */}
       <main className="flex-grow w-full py-6 px-6">
         <div className="container mx-auto">
           <div className="relative mb-8">
@@ -95,7 +92,6 @@ const ChildJourney = () => {
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            {/* Activity Tiles - Tell me a story */}
             <div className="relative group cursor-pointer transform transition hover:scale-105" onClick={() => handleFeatureClick('interactive stories')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#101643]/90 to-[#0F2357]/90 backdrop-blur-md rounded-2xl border border-blue-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
@@ -107,7 +103,6 @@ const ChildJourney = () => {
               </div>
             </div>
             
-            {/* Fun facts */}
             <div className="relative group cursor-pointer transform transition hover:scale-105" onClick={() => handleFeatureClick('documents')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#3A1F0B]/90 to-[#2C1A14]/90 backdrop-blur-md rounded-2xl border border-orange-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
@@ -119,7 +114,6 @@ const ChildJourney = () => {
               </div>
             </div>
             
-            {/* Let's draw */}
             <div className="relative group cursor-pointer transform transition hover:scale-105" onClick={() => handleFeatureClick('videos')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#0B2A3A]/90 to-[#0D1F36]/90 backdrop-blur-md rounded-2xl border border-cyan-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
@@ -131,7 +125,6 @@ const ChildJourney = () => {
               </div>
             </div>
             
-            {/* Games */}
             <div className="relative group cursor-pointer transform transition hover:scale-105" onClick={() => handleFeatureClick('quiz')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-purple-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#2D1434]/90 to-[#1F1346]/90 backdrop-blur-md rounded-2xl border border-pink-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
@@ -143,7 +136,6 @@ const ChildJourney = () => {
               </div>
             </div>
             
-            {/* Additional activity tiles */}
             <div className="relative group cursor-pointer transform transition hover:scale-105" onClick={() => handleFeatureClick('math games')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#0F342B]/90 to-[#0D2D20]/90 backdrop-blur-md rounded-2xl border border-green-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
@@ -155,7 +147,6 @@ const ChildJourney = () => {
               </div>
             </div>
             
-            {/* Animals */}
             <div className="relative group cursor-pointer transform transition hover:scale-105" onClick={() => handleFeatureClick('animal facts')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#332D0B]/90 to-[#2D270B]/90 backdrop-blur-md rounded-2xl border border-yellow-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
@@ -167,7 +158,6 @@ const ChildJourney = () => {
               </div>
             </div>
             
-            {/* Music */}
             <div className="relative group cursor-pointer transform transition hover:scale-105" onClick={() => handleFeatureClick('music')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-violet-500 to-indigo-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#221634]/90 to-[#1A1443]/90 backdrop-blur-md rounded-2xl border border-violet-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
@@ -179,7 +169,6 @@ const ChildJourney = () => {
               </div>
             </div>
             
-            {/* Puzzles */}
             <div className="relative group cursor-pointer transform transition hover:scale-105" onClick={() => handleFeatureClick('puzzles')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-sky-500 to-blue-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#0B2A3A]/90 to-[#0D1F36]/90 backdrop-blur-md rounded-2xl border border-sky-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
@@ -226,7 +215,6 @@ const ChildJourney = () => {
         </div>
       </main>
       
-      {/* Footer */}
       <footer className="w-full py-4 px-6">
         <div className="container mx-auto">
           <div className="relative">
@@ -257,7 +245,6 @@ const ChildJourney = () => {
         </div>
       </footer>
 
-      {/* Interactive Components */}
       {showLiveInteraction && (
         <LiveInteraction character="child" onClose={() => setShowLiveInteraction(false)} />
       )}
