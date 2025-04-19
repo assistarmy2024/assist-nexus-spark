@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlassCard from '@/components/GlassCard';
@@ -47,14 +46,13 @@ const ChildJourney = () => {
             </GlassButton>
             <div className="flex items-center gap-4">
               <GlassButton 
-                className="bg-blue-500/20 border border-blue-500/30 text-white"
-                variant="neon"
                 onClick={() => setShowLiveInteraction(true)}
-                icon={<Video className="h-4 w-4 mr-2" />}
+                variant="outline"
+                className="flex items-center space-x-2"
               >
                 Live Chat
               </GlassButton>
-              <CharacterAvatar character="child" size="sm" />
+              <CharacterAvatar character="children" size="sm" />
             </div>
           </div>
         </div>
@@ -85,7 +83,7 @@ const ChildJourney = () => {
                 <div className="md:w-1/2 flex justify-center">
                   <div className="relative">
                     <div className="absolute -inset-4 rounded-full bg-blue-500/30 blur-xl animate-pulse-gentle"></div>
-                    <CharacterAvatar character="child" size="xl" />
+                    <CharacterAvatar character="children" size="xl" />
                   </div>
                 </div>
               </div>
