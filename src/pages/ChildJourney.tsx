@@ -34,8 +34,8 @@ const ChildJourney = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#070B34] to-[#0A1128]">
-      <header className="w-full py-6 px-6">
+    <div className="flex flex-col bg-gradient-to-b from-[#070B34] to-[#0A1128] min-h-screen overflow-auto">
+      <header className="w-full py-6 px-6 sticky top-0 z-10 bg-gradient-to-b from-[#070B34] to-[#070B34]/90 backdrop-blur-sm">
         <div className="container mx-auto">
           <div className="flex items-center justify-between">
             <GlassButton 
@@ -59,7 +59,7 @@ const ChildJourney = () => {
         </div>
       </header>
       
-      <main className="flex-grow w-full py-6 px-6">
+      <main className="flex-1 w-full py-6 px-6 pb-24">
         <div className="container mx-auto">
           <div className="relative mb-8">
             <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur opacity-70"></div>
@@ -215,7 +215,7 @@ const ChildJourney = () => {
         </div>
       </main>
       
-      <footer className="w-full py-4 px-6">
+      <footer className="w-full py-4 px-6 fixed bottom-0 left-0 right-0 z-10">
         <div className="container mx-auto">
           <div className="relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full blur opacity-60"></div>
