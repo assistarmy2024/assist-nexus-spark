@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlassCard from '@/components/GlassCard';
@@ -42,11 +43,11 @@ const HomemakerJourney = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#141436] to-[#22143B]">
+    <div className="flex flex-col bg-gradient-to-b from-[#141436] to-[#22143B] min-h-screen overflow-auto">
       <HomeCompanionNavBar onMenuToggle={handleMenuToggle} isMenuOpen={isMenuOpen} />
       
       {/* Main content */}
-      <main className="flex-grow w-full py-20 px-6">
+      <main className="flex-1 w-full py-20 px-6 pb-24">
         <div className="container mx-auto">
           {/* Welcome Section */}
           <div className="relative mb-8">
@@ -187,7 +188,7 @@ const HomemakerJourney = () => {
       </main>
       
       {/* Footer */}
-      <footer className="w-full py-4 px-6">
+      <footer className="w-full py-4 px-6 fixed bottom-0 left-0 right-0 z-10">
         <div className="container mx-auto">
           <div className="relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur opacity-60"></div>

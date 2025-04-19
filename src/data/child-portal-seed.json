@@ -1,0 +1,403 @@
+
+{
+  "games": [
+    {
+      "id": 1,
+      "name": "Shape Match Adventure",
+      "description": "Match shapes of different colors and sizes to complete each level!",
+      "icon_url": "/assets/icons/shape-match.png",
+      "route_path": "/child/game/shape-match"
+    },
+    {
+      "id": 2,
+      "name": "Alphabet Zoo",
+      "description": "Learn the alphabet with friendly animals for each letter",
+      "icon_url": "/assets/icons/alphabet-zoo.png",
+      "route_path": "/child/game/alphabet-zoo"
+    },
+    {
+      "id": 3,
+      "name": "Number Cruncher",
+      "description": "Solve simple math problems in this fun counting game",
+      "icon_url": "/assets/icons/number-cruncher.png",
+      "route_path": "/child/game/number-cruncher"
+    },
+    {
+      "id": 4,
+      "name": "Color Mixer",
+      "description": "Mix primary colors to create new ones in this creative puzzle game",
+      "icon_url": "/assets/icons/color-mixer.png",
+      "route_path": "/child/game/color-mixer"
+    },
+    {
+      "id": 5,
+      "name": "Memory Match",
+      "description": "Find matching pairs of cards to test your memory skills",
+      "icon_url": "/assets/icons/memory-match.png",
+      "route_path": "/child/game/memory-match"
+    },
+    {
+      "id": 6,
+      "name": "Dinosaur Discovery",
+      "description": "Dig for dinosaur fossils and learn about prehistoric creatures",
+      "icon_url": "/assets/icons/dinosaur-discovery.png",
+      "route_path": "/child/game/dinosaur-discovery"
+    },
+    {
+      "id": 7,
+      "name": "Space Explorer",
+      "description": "Travel through the solar system and learn about planets",
+      "icon_url": "/assets/icons/space-explorer.png",
+      "route_path": "/child/game/space-explorer"
+    },
+    {
+      "id": 8,
+      "name": "Word Builder",
+      "description": "Create words from given letters to improve vocabulary",
+      "icon_url": "/assets/icons/word-builder.png",
+      "route_path": "/child/game/word-builder"
+    },
+    {
+      "id": 9,
+      "name": "Animal Sounds",
+      "description": "Listen and match sounds to the correct animals",
+      "icon_url": "/assets/icons/animal-sounds.png",
+      "route_path": "/child/game/animal-sounds"
+    },
+    {
+      "id": 10,
+      "name": "Pattern Maker",
+      "description": "Complete sequences by identifying the pattern",
+      "icon_url": "/assets/icons/pattern-maker.png",
+      "route_path": "/child/game/pattern-maker"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": 1,
+      "title": "Animal Facts",
+      "question_text": "Which animal is known as the King of the Jungle?",
+      "option_a": "Elephant",
+      "option_b": "Lion",
+      "option_c": "Tiger",
+      "option_d": "Giraffe",
+      "correct_answer": "B",
+      "category": "Animals"
+    },
+    {
+      "id": 2,
+      "title": "Space Knowledge",
+      "question_text": "Which is the closest planet to the Sun?",
+      "option_a": "Earth",
+      "option_b": "Venus",
+      "option_c": "Mercury",
+      "option_d": "Mars",
+      "correct_answer": "C",
+      "category": "Science"
+    },
+    {
+      "id": 3,
+      "title": "Math Quiz",
+      "question_text": "What is 5 + 7?",
+      "option_a": "10",
+      "option_b": "11",
+      "option_c": "12",
+      "option_d": "13",
+      "correct_answer": "C",
+      "category": "Math"
+    },
+    {
+      "id": 4,
+      "title": "Colors",
+      "question_text": "What color do you get when you mix blue and yellow?",
+      "option_a": "Purple",
+      "option_b": "Orange",
+      "option_c": "Green",
+      "option_d": "Brown",
+      "correct_answer": "C",
+      "category": "Art"
+    },
+    {
+      "id": 5,
+      "title": "Body Parts",
+      "question_text": "Which organ pumps blood around your body?",
+      "option_a": "Brain",
+      "option_b": "Lungs",
+      "option_c": "Heart",
+      "option_d": "Stomach",
+      "correct_answer": "C",
+      "category": "Science"
+    },
+    {
+      "id": 6,
+      "title": "Dinosaurs",
+      "question_text": "Which dinosaur could fly?",
+      "option_a": "Tyrannosaurus Rex",
+      "option_b": "Stegosaurus",
+      "option_c": "Pterodactyl",
+      "option_d": "Triceratops",
+      "correct_answer": "C",
+      "category": "Animals"
+    },
+    {
+      "id": 7,
+      "title": "Ocean Life",
+      "question_text": "Which sea creature has eight legs?",
+      "option_a": "Jellyfish",
+      "option_b": "Octopus",
+      "option_c": "Shark",
+      "option_d": "Dolphin",
+      "correct_answer": "B",
+      "category": "Animals"
+    },
+    {
+      "id": 8,
+      "title": "Fruits",
+      "question_text": "Which fruit is yellow and curved?",
+      "option_a": "Apple",
+      "option_b": "Orange",
+      "option_c": "Banana",
+      "option_d": "Strawberry",
+      "correct_answer": "C",
+      "category": "Food"
+    },
+    {
+      "id": 9,
+      "title": "Transportation",
+      "question_text": "Which vehicle flies in the sky?",
+      "option_a": "Car",
+      "option_b": "Boat",
+      "option_c": "Train",
+      "option_d": "Airplane",
+      "correct_answer": "D",
+      "category": "Transportation"
+    },
+    {
+      "id": 10,
+      "title": "Weather",
+      "question_text": "What falls from clouds during a storm?",
+      "option_a": "Snow",
+      "option_b": "Rain",
+      "option_c": "Sunshine",
+      "option_d": "Wind",
+      "correct_answer": "B",
+      "category": "Science"
+    }
+  ],
+  "mathExercises": [
+    {
+      "id": 1,
+      "problem_statement": "5 + 3 = ?",
+      "solution": "8",
+      "difficulty_level": "Easy"
+    },
+    {
+      "id": 2,
+      "problem_statement": "10 - 2 = ?",
+      "solution": "8",
+      "difficulty_level": "Easy"
+    },
+    {
+      "id": 3,
+      "problem_statement": "2 × 4 = ?",
+      "solution": "8",
+      "difficulty_level": "Easy"
+    },
+    {
+      "id": 4,
+      "problem_statement": "3 + 5 = ?",
+      "solution": "8",
+      "difficulty_level": "Easy"
+    },
+    {
+      "id": 5,
+      "problem_statement": "9 - 1 = ?",
+      "solution": "8",
+      "difficulty_level": "Easy"
+    },
+    {
+      "id": 6,
+      "problem_statement": "6 + 6 = ?",
+      "solution": "12",
+      "difficulty_level": "Easy"
+    },
+    {
+      "id": 7,
+      "problem_statement": "15 - 5 = ?",
+      "solution": "10",
+      "difficulty_level": "Easy"
+    },
+    {
+      "id": 8,
+      "problem_statement": "7 + 8 = ?",
+      "solution": "15",
+      "difficulty_level": "Medium"
+    },
+    {
+      "id": 9,
+      "problem_statement": "20 - 7 = ?",
+      "solution": "13",
+      "difficulty_level": "Medium"
+    },
+    {
+      "id": 10,
+      "problem_statement": "4 × 3 = ?",
+      "solution": "12",
+      "difficulty_level": "Easy"
+    }
+  ],
+  "videos": [
+    {
+      "id": 1,
+      "title": "Counting with Cats",
+      "description": "Learn to count from 1 to 10 with funny cats!",
+      "video_url": "/assets/videos/counting-cats.mp4",
+      "thumbnail_url": "/assets/thumbnails/counting-cats.jpg",
+      "duration_seconds": 180
+    },
+    {
+      "id": 2,
+      "title": "The Solar System Adventure",
+      "description": "Join Alex on a journey through our solar system",
+      "video_url": "/assets/videos/solar-system.mp4",
+      "thumbnail_url": "/assets/thumbnails/solar-system.jpg",
+      "duration_seconds": 240
+    },
+    {
+      "id": 3,
+      "title": "Dinosaur Facts for Kids",
+      "description": "Learn amazing facts about dinosaurs that lived millions of years ago",
+      "video_url": "/assets/videos/dinosaur-facts.mp4",
+      "thumbnail_url": "/assets/thumbnails/dinosaur-facts.jpg",
+      "duration_seconds": 210
+    },
+    {
+      "id": 4,
+      "title": "ABC Song",
+      "description": "Sing along with the alphabet song and learn your ABCs",
+      "video_url": "/assets/videos/abc-song.mp4",
+      "thumbnail_url": "/assets/thumbnails/abc-song.jpg",
+      "duration_seconds": 150
+    },
+    {
+      "id": 5,
+      "title": "Animal Sounds for Children",
+      "description": "Learn what sounds different animals make",
+      "video_url": "/assets/videos/animal-sounds.mp4",
+      "thumbnail_url": "/assets/thumbnails/animal-sounds.jpg",
+      "duration_seconds": 200
+    },
+    {
+      "id": 6,
+      "title": "Simple Addition",
+      "description": "Learn how to add numbers together with fun examples",
+      "video_url": "/assets/videos/simple-addition.mp4",
+      "thumbnail_url": "/assets/thumbnails/simple-addition.jpg",
+      "duration_seconds": 190
+    },
+    {
+      "id": 7,
+      "title": "Colors of the Rainbow",
+      "description": "Discover all the colors of the rainbow through fun activities",
+      "video_url": "/assets/videos/rainbow-colors.mp4",
+      "thumbnail_url": "/assets/thumbnails/rainbow-colors.jpg",
+      "duration_seconds": 170
+    },
+    {
+      "id": 8,
+      "title": "The Water Cycle",
+      "description": "Learn about how water moves around our planet",
+      "video_url": "/assets/videos/water-cycle.mp4",
+      "thumbnail_url": "/assets/thumbnails/water-cycle.jpg",
+      "duration_seconds": 230
+    },
+    {
+      "id": 9,
+      "title": "Healthy Eating",
+      "description": "Discover which foods help us grow strong and healthy",
+      "video_url": "/assets/videos/healthy-eating.mp4",
+      "thumbnail_url": "/assets/thumbnails/healthy-eating.jpg",
+      "duration_seconds": 185
+    },
+    {
+      "id": 10,
+      "title": "Emotions and Feelings",
+      "description": "Learn about different emotions and how to express them",
+      "video_url": "/assets/videos/emotions.mp4",
+      "thumbnail_url": "/assets/thumbnails/emotions.jpg",
+      "duration_seconds": 195
+    }
+  ],
+  "audios": [
+    {
+      "id": 1,
+      "title": "The Three Little Pigs",
+      "description": "A classic fairy tale about three pigs and a wolf",
+      "audio_url": "/assets/audio/three-little-pigs.mp3",
+      "duration_seconds": 180
+    },
+    {
+      "id": 2,
+      "title": "Little Red Riding Hood",
+      "description": "The adventure of a little girl on her way to grandma's house",
+      "audio_url": "/assets/audio/red-riding-hood.mp3",
+      "duration_seconds": 165
+    },
+    {
+      "id": 3,
+      "title": "Twinkle Twinkle Little Star",
+      "description": "A soothing lullaby about stars in the night sky",
+      "audio_url": "/assets/audio/twinkle-star.mp3",
+      "duration_seconds": 90
+    },
+    {
+      "id": 4,
+      "title": "The Alphabet Song",
+      "description": "Learn the ABC's with this catchy tune",
+      "audio_url": "/assets/audio/alphabet-song.mp3",
+      "duration_seconds": 60
+    },
+    {
+      "id": 5,
+      "title": "Old MacDonald Had a Farm",
+      "description": "A fun song about a farmer and his animals",
+      "audio_url": "/assets/audio/old-macdonald.mp3",
+      "duration_seconds": 120
+    },
+    {
+      "id": 6,
+      "title": "The Itsy Bitsy Spider",
+      "description": "A classic nursery rhyme about a determined spider",
+      "audio_url": "/assets/audio/itsy-bitsy-spider.mp3",
+      "duration_seconds": 75
+    },
+    {
+      "id": 7,
+      "title": "Goldilocks and the Three Bears",
+      "description": "The tale of a girl who visits the home of three bears",
+      "audio_url": "/assets/audio/goldilocks.mp3",
+      "duration_seconds": 210
+    },
+    {
+      "id": 8,
+      "title": "Jack and the Beanstalk",
+      "description": "An adventure about magic beans and a giant",
+      "audio_url": "/assets/audio/jack-beanstalk.mp3",
+      "duration_seconds": 195
+    },
+    {
+      "id": 9,
+      "title": "Five Little Monkeys",
+      "description": "A fun counting rhyme about five playful monkeys",
+      "audio_url": "/assets/audio/five-monkeys.mp3",
+      "duration_seconds": 85
+    },
+    {
+      "id": 10,
+      "title": "The Wheels on the Bus",
+      "description": "A popular song about bus parts and passengers",
+      "audio_url": "/assets/audio/wheels-bus.mp3",
+      "duration_seconds": 110
+    }
+  ]
+}

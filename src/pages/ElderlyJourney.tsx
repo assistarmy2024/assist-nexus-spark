@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlassCard from '@/components/GlassCard';
@@ -34,9 +33,9 @@ const ElderlyJourney = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#0A192F] to-[#0F2540]">
+    <div className="flex flex-col bg-gradient-to-b from-[#0A192F] to-[#0F2540] min-h-screen overflow-auto">
       {/* Header */}
-      <header className="w-full py-6 px-6">
+      <header className="w-full py-6 px-6 sticky top-0 z-10 bg-gradient-to-b from-[#0A192F] to-[#0A192F]/90 backdrop-blur-sm">
         <div className="container mx-auto">
           <div className="flex items-center justify-between">
             <GlassButton 
@@ -62,7 +61,7 @@ const ElderlyJourney = () => {
       </header>
       
       {/* Main content */}
-      <main className="flex-grow w-full py-6 px-6">
+      <main className="flex-1 w-full py-6 px-6 pb-24">
         <div className="container mx-auto">
           <div className="relative mb-8">
             <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 to-blue-500 rounded-2xl blur opacity-70"></div>
@@ -262,7 +261,7 @@ const ElderlyJourney = () => {
           </div>
           
           {/* Emergency button */}
-          <div className="relative" onClick={() => handleFeatureClick('emergency services')}>
+          <div className="relative mb-4" onClick={() => handleFeatureClick('emergency services')}>
             <div className="absolute -inset-1 bg-gradient-to-r from-red-500 to-rose-500 rounded-xl blur opacity-70"></div>
             <GlassCard className="relative text-center p-5 bg-gradient-to-br from-[#3A0F13]/90 to-[#2C0F14]/90 border-2 border-red-500/40">
               <button className="w-full bg-gradient-to-r from-red-500 to-rose-500 text-white text-xl font-bold py-4 rounded-xl">
@@ -275,7 +274,7 @@ const ElderlyJourney = () => {
       </main>
       
       {/* Footer */}
-      <footer className="w-full py-4 px-6">
+      <footer className="w-full py-4 px-6 fixed bottom-0 left-0 right-0 z-10">
         <div className="container mx-auto">
           <div className="relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 to-blue-500 rounded-2xl blur opacity-60"></div>
