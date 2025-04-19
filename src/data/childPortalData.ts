@@ -1,4 +1,3 @@
-
 export interface Game {
   id: number;
   name: string;
@@ -79,7 +78,55 @@ export const games: Game[] = [
     iconUrl: '/assets/icons/memory-match.png',
     routePath: '/child/game/memory-match',
   },
-  // Add more games as in the SQL script
+  {
+    id: 6,
+    name: 'Storyteller',
+    description: 'Create your own stories with colorful characters and settings',
+    iconUrl: '/assets/icons/storyteller.png',
+    routePath: '/child/game/storyteller',
+  },
+  {
+    id: 7,
+    name: 'Puzzle World',
+    description: 'Solve jigsaw puzzles of increasing difficulty',
+    iconUrl: '/assets/icons/puzzle-world.png',
+    routePath: '/child/game/puzzle-world',
+  },
+  {
+    id: 8,
+    name: 'Animal Safari',
+    description: 'Learn about animals from around the world in this adventure game',
+    iconUrl: '/assets/icons/animal-safari.png',
+    routePath: '/child/game/animal-safari',
+  },
+  {
+    id: 9,
+    name: 'Space Explorer',
+    description: 'Travel through our solar system and learn about planets and stars',
+    iconUrl: '/assets/icons/space-explorer.png',
+    routePath: '/child/game/space-explorer',
+  },
+  {
+    id: 10,
+    name: 'Music Maker',
+    description: 'Create your own songs with different instruments',
+    iconUrl: '/assets/icons/music-maker.png',
+    routePath: '/child/game/music-maker',
+  },
+  {
+    id: 11,
+    name: 'Word Builder',
+    description: 'Form words from letters to improve vocabulary',
+    iconUrl: '/assets/icons/word-builder.png',
+    routePath: '/child/game/word-builder',
+  },
+  {
+    id: 12,
+    name: 'Drawing Canvas',
+    description: 'Express creativity with digital painting and drawing tools',
+    iconUrl: '/assets/icons/drawing-canvas.png',
+    routePath: '/child/game/drawing-canvas',
+  },
 ];
 
 export const quizzes: Quiz[] = [
@@ -116,7 +163,6 @@ export const quizzes: Quiz[] = [
     correctAnswer: 'C',
     category: 'Math',
   },
-  // Add more quizzes as in the SQL script
 ];
 
 export const mathExercises: MathExercise[] = [
@@ -138,7 +184,6 @@ export const mathExercises: MathExercise[] = [
     solution: '8',
     difficultyLevel: 'Easy',
   },
-  // Add more math exercises as in the SQL script
 ];
 
 export const videos: Video[] = [
@@ -158,7 +203,6 @@ export const videos: Video[] = [
     thumbnailUrl: '/assets/thumbnails/solar-system.jpg',
     durationSeconds: 240,
   },
-  // Add more videos as in the SQL script
 ];
 
 export const audios: Audio[] = [
@@ -176,5 +220,4 @@ export const audios: Audio[] = [
     audioUrl: '/assets/audio/red-riding-hood.mp3',
     durationSeconds: 165,
   },
-  // Add more audios as in the SQL script
 ];

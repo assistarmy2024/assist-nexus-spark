@@ -34,6 +34,7 @@ const GlassCard = ({
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
   const [isVisible, setIsVisible] = useState(appear === 'none');
+  const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const [isInitialized, setIsInitialized] = useState(false);
 
@@ -59,6 +60,7 @@ const GlassCard = ({
 
   const handle3DEffect = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!is3D || !isInitialized) return;
+    setIsHovered(true);
     
     const card = e.currentTarget;
     const { left, top, width, height } = card.getBoundingClientRect();
@@ -68,8 +70,8 @@ const GlassCard = ({
     const centerX = width / 2;
     const centerY = height / 2;
     
-    // Reduce rotation intensity for smoother effect (divided by 25 instead of 15)
-    const rotateXValue = ((y - centerY) / 35) * -1; // Even gentler rotation
+    // Reduce rotation intensity for smoother effect
+    const rotateXValue = ((y - centerY) / 35) * -1; // Gentler rotation
     const rotateYValue = (x - centerX) / 35;
     
     // Apply smooth transitions to rotation values
@@ -79,6 +81,7 @@ const GlassCard = ({
   
   const resetRotation = () => {
     if (!is3D) return;
+    setIsHovered(false);
     // Smoothly reset rotation
     setRotateX(0);
     setRotateY(0);
@@ -86,11 +89,12 @@ const GlassCard = ({
 
   const style: React.CSSProperties = {
     transform: is3D ? `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)` : undefined,
-    transition: `transform ${transitionDuration}s ease-out, opacity 0.3s ease-out, transform 0.3s ease-out`,
-    willChange: 'transform, opacity',
+    transition: `transform ${transitionDuration}s ease-out, opacity 0.5s ease-out, box-shadow 0.3s ease-out`,
+    willChange: 'transform, opacity, box-shadow',
     opacity: isVisible ? 1 : 0,
-    ...appear === 'scale' && { transform: isVisible ? (is3D ? `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)` : 'scale(1)') : 'scale(0.95)' },
-    ...appear === 'slide' && { transform: isVisible ? (is3D ? `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)` : 'translateY(0)') : 'translateY(20px)' },
+    ...appear === 'scale' && { transform: isVisible ? (is3D ? `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1)` : 'scale(1)') : 'scale(0.95)' },
+    ...appear === 'slide' && { transform: isVisible ? (is3D ? `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(0)` : 'translateY(0)') : 'translateY(20px)' },
+    boxShadow: isHovered && is3D ? '0 10px 30px rgba(0, 0, 0, 0.3), 0 0 30px rgba(96, 165, 250, 0.2)' : undefined,
   };
 
   const themeClasses = {
@@ -109,7 +113,7 @@ const GlassCard = ({
         is3D && 'card-3d transform-gpu',
         metallic && 'metallic-gradient',
         neoEffect && 'neo-morphism',
-        hoverEffect && 'hover:shadow-xl transition-all duration-300',
+        hoverEffect && 'transition-all duration-300',
         onClick && 'cursor-pointer',
         isInitialized ? 'opacity-100' : 'opacity-90',
         className

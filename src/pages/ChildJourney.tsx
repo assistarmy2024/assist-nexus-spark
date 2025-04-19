@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlassCard from '@/components/GlassCard';
 import GlassButton from '@/components/GlassButton';
@@ -10,6 +10,7 @@ import InteractiveVideo from '@/components/InteractiveVideo';
 import Documents from '@/components/Documents';
 import { ArrowLeft, Video, MessageCircle, Sparkles, Shield, Users, PhoneCall, Calendar, Clock, Brain, Gamepad2, Trophy, BookOpen, Rocket, Dices, Music, Rabbit, GraduationCap } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import { games, quizzes, videos, audios, mathExercises } from '@/data/childPortalData';
 
 const ChildJourney = () => {
   const navigate = useNavigate();
@@ -17,6 +18,16 @@ const ChildJourney = () => {
   const [showQuiz, setShowQuiz] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
   const [showDocuments, setShowDocuments] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    // Add a small delay to trigger animations after component mounts
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 300);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleFeatureClick = (feature: string) => {
     toast({
@@ -30,12 +41,17 @@ const ChildJourney = () => {
       setShowVideo(true);
     } else if (feature === 'documents') {
       setShowDocuments(true);
+    } else if (feature === 'games') {
+      // Show first game
+      if (games.length > 0) {
+        navigate(games[0].routePath);
+      }
     }
   };
 
   return (
-    <div className="flex flex-col bg-gradient-to-b from-[#070B34] to-[#0A1128] min-h-screen overflow-auto">
-      <header className="w-full py-6 px-6 sticky top-0 z-10 bg-gradient-to-b from-[#070B34] to-[#070B34]/90 backdrop-blur-sm">
+    <div className="flex flex-col bg-gradient-to-b from-[#070B34] to-[#0A1128] min-h-screen overflow-y-auto">
+      <header className="w-full py-4 px-6 sticky top-0 z-10 bg-gradient-to-b from-[#070B34] to-[#070B34]/90 backdrop-blur-sm">
         <div className="container mx-auto">
           <div className="flex items-center justify-between">
             <GlassButton 
@@ -53,17 +69,23 @@ const ChildJourney = () => {
               >
                 Live Chat
               </GlassButton>
-              <CharacterAvatar character="child" size="sm" />
+              <CharacterAvatar character="child" size="sm" animated={true} />
             </div>
           </div>
         </div>
       </header>
       
-      <main className="flex-1 w-full py-6 px-6 pb-24">
+      <main className="flex-1 w-full py-6 px-6 pb-28">
         <div className="container mx-auto">
           <div className="relative mb-8">
             <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur opacity-70"></div>
-            <GlassCard className="relative p-8 bg-gradient-to-br from-[#101643]/80 to-[#0F2357]/90 border border-blue-500/30 shadow-[0_8px_32px_rgba(31,41,55,0.4)]">
+            <GlassCard 
+              className={`relative p-8 bg-gradient-to-br from-[#101643]/80 to-[#0F2357]/90 border border-blue-500/30 shadow-[0_8px_32px_rgba(31,41,55,0.4)] ${isLoaded ? 'animate-fade-in' : 'opacity-0'}`}
+              appear="fade"
+              appearDelay={100}
+              is3D={true}
+              hoverEffect={true}
+            >
               <div className="flex flex-col md:flex-row items-center justify-between">
                 <div className="md:w-1/2 mb-6 md:mb-0">
                   <h1 className="text-3xl md:text-4xl font-bold mb-4 text-white">
@@ -84,18 +106,18 @@ const ChildJourney = () => {
                 <div className="md:w-1/2 flex justify-center">
                   <div className="relative">
                     <div className="absolute -inset-4 rounded-full bg-blue-500/30 blur-xl animate-pulse-gentle"></div>
-                    <CharacterAvatar character="child" size="xl" />
+                    <CharacterAvatar character="child" size="xl" animated={true} />
                   </div>
                 </div>
               </div>
             </GlassCard>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <div className="relative group cursor-pointer transform transition hover:scale-105" onClick={() => handleFeatureClick('interactive stories')}>
+          <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 ${isLoaded ? 'animate-fade-in' : 'opacity-0'}`} style={{transitionDelay: '200ms'}}>
+            <div className="relative group cursor-pointer transform transition-all duration-300 hover:scale-105" onClick={() => handleFeatureClick('interactive stories')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#101643]/90 to-[#0F2357]/90 backdrop-blur-md rounded-2xl border border-blue-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
-                <div className="p-3 mb-3 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
+                <div className="p-3 mb-3 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 rounded-lg w-16 h-16 flex items-center justify-center transform transition-all duration-500 hover:scale-110 animate-float">
                   <BookOpen className="h-8 w-8 text-blue-400" />
                 </div>
                 <p className="text-white font-bold text-center">Stories</p>
@@ -103,10 +125,10 @@ const ChildJourney = () => {
               </div>
             </div>
             
-            <div className="relative group cursor-pointer transform transition hover:scale-105" onClick={() => handleFeatureClick('documents')}>
+            <div className="relative group cursor-pointer transform transition-all duration-300 hover:scale-105" onClick={() => handleFeatureClick('documents')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#3A1F0B]/90 to-[#2C1A14]/90 backdrop-blur-md rounded-2xl border border-orange-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
-                <div className="p-3 mb-3 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
+                <div className="p-3 mb-3 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-lg w-16 h-16 flex items-center justify-center transform transition-all duration-500 hover:scale-110 animate-float">
                   <Brain className="h-8 w-8 text-orange-400" />
                 </div>
                 <p className="text-white font-bold text-center">Fun Facts</p>
@@ -114,10 +136,10 @@ const ChildJourney = () => {
               </div>
             </div>
             
-            <div className="relative group cursor-pointer transform transition hover:scale-105" onClick={() => handleFeatureClick('videos')}>
+            <div className="relative group cursor-pointer transform transition-all duration-300 hover:scale-105" onClick={() => handleFeatureClick('videos')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#0B2A3A]/90 to-[#0D1F36]/90 backdrop-blur-md rounded-2xl border border-cyan-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
-                <div className="p-3 mb-3 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
+                <div className="p-3 mb-3 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-lg w-16 h-16 flex items-center justify-center transform transition-all duration-500 hover:scale-110 animate-float">
                   <Rocket className="h-8 w-8 text-cyan-400" />
                 </div>
                 <p className="text-white font-bold text-center">Videos</p>
@@ -125,10 +147,10 @@ const ChildJourney = () => {
               </div>
             </div>
             
-            <div className="relative group cursor-pointer transform transition hover:scale-105" onClick={() => handleFeatureClick('quiz')}>
+            <div className="relative group cursor-pointer transform transition-all duration-300 hover:scale-105" onClick={() => handleFeatureClick('quiz')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-purple-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#2D1434]/90 to-[#1F1346]/90 backdrop-blur-md rounded-2xl border border-pink-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
-                <div className="p-3 mb-3 bg-gradient-to-br from-pink-500/20 to-purple-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
+                <div className="p-3 mb-3 bg-gradient-to-br from-pink-500/20 to-purple-500/20 rounded-lg w-16 h-16 flex items-center justify-center transform transition-all duration-500 hover:scale-110 animate-float">
                   <Gamepad2 className="h-8 w-8 text-pink-400" />
                 </div>
                 <p className="text-white font-bold text-center">Quiz</p>
@@ -136,10 +158,10 @@ const ChildJourney = () => {
               </div>
             </div>
             
-            <div className="relative group cursor-pointer transform transition hover:scale-105" onClick={() => handleFeatureClick('math games')}>
+            <div className="relative group cursor-pointer transform transition-all duration-300 hover:scale-105" onClick={() => handleFeatureClick('math games')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#0F342B]/90 to-[#0D2D20]/90 backdrop-blur-md rounded-2xl border border-green-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
-                <div className="p-3 mb-3 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
+                <div className="p-3 mb-3 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-lg w-16 h-16 flex items-center justify-center transform transition-all duration-500 hover:scale-110 animate-float">
                   <GraduationCap className="h-8 w-8 text-green-400" />
                 </div>
                 <p className="text-white font-bold text-center">Math Fun</p>
@@ -147,10 +169,10 @@ const ChildJourney = () => {
               </div>
             </div>
             
-            <div className="relative group cursor-pointer transform transition hover:scale-105" onClick={() => handleFeatureClick('animal facts')}>
+            <div className="relative group cursor-pointer transform transition-all duration-300 hover:scale-105" onClick={() => handleFeatureClick('animal facts')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#332D0B]/90 to-[#2D270B]/90 backdrop-blur-md rounded-2xl border border-yellow-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
-                <div className="p-3 mb-3 bg-gradient-to-br from-yellow-500/20 to-amber-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
+                <div className="p-3 mb-3 bg-gradient-to-br from-yellow-500/20 to-amber-500/20 rounded-lg w-16 h-16 flex items-center justify-center transform transition-all duration-500 hover:scale-110 animate-float">
                   <Rabbit className="h-8 w-8 text-yellow-400" />
                 </div>
                 <p className="text-white font-bold text-center">Animals</p>
@@ -158,10 +180,10 @@ const ChildJourney = () => {
               </div>
             </div>
             
-            <div className="relative group cursor-pointer transform transition hover:scale-105" onClick={() => handleFeatureClick('music')}>
+            <div className="relative group cursor-pointer transform transition-all duration-300 hover:scale-105" onClick={() => handleFeatureClick('music')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-violet-500 to-indigo-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#221634]/90 to-[#1A1443]/90 backdrop-blur-md rounded-2xl border border-violet-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
-                <div className="p-3 mb-3 bg-gradient-to-br from-violet-500/20 to-indigo-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
+                <div className="p-3 mb-3 bg-gradient-to-br from-violet-500/20 to-indigo-500/20 rounded-lg w-16 h-16 flex items-center justify-center transform transition-all duration-500 hover:scale-110 animate-float">
                   <Music className="h-8 w-8 text-violet-400" />
                 </div>
                 <p className="text-white font-bold text-center">Music</p>
@@ -169,25 +191,29 @@ const ChildJourney = () => {
               </div>
             </div>
             
-            <div className="relative group cursor-pointer transform transition hover:scale-105" onClick={() => handleFeatureClick('puzzles')}>
+            <div className="relative group cursor-pointer transform transition-all duration-300 hover:scale-105" onClick={() => handleFeatureClick('games')}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-sky-500 to-blue-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
               <div className="relative p-5 bg-gradient-to-br from-[#0B2A3A]/90 to-[#0D1F36]/90 backdrop-blur-md rounded-2xl border border-sky-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex flex-col items-center justify-center">
-                <div className="p-3 mb-3 bg-gradient-to-br from-sky-500/20 to-blue-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
+                <div className="p-3 mb-3 bg-gradient-to-br from-sky-500/20 to-blue-500/20 rounded-lg w-16 h-16 flex items-center justify-center transform transition-all duration-500 hover:scale-110 animate-float">
                   <Dices className="h-8 w-8 text-sky-400" />
                 </div>
-                <p className="text-white font-bold text-center">Challenges</p>
-                <p className="text-xs text-sky-300 text-center mt-1">Brain teasers</p>
+                <p className="text-white font-bold text-center">Games</p>
+                <p className="text-xs text-sky-300 text-center mt-1">Fun challenges</p>
               </div>
             </div>
           </div>
           
-          <div className="relative mb-4">
+          <div className={`relative mb-4 ${isLoaded ? 'animate-fade-in' : 'opacity-0'}`} style={{transitionDelay: '300ms'}}>
             <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur opacity-50"></div>
-            <GlassCard className="relative bg-gradient-to-br from-[#101643]/80 to-[#0F2357]/90 border border-blue-500/20">
+            <GlassCard 
+              className="relative bg-gradient-to-br from-[#101643]/80 to-[#0F2357]/90 border border-blue-500/20"
+              is3D={true}
+              hoverEffect={true}
+            >
               <h2 className="text-xl font-semibold mb-3 text-white">Continue learning</h2>
               <div className="space-y-3">
-                <div className="flex items-center p-3 rounded-lg bg-blue-500/10 hover:bg-blue-500/20 transition-all duration-300 cursor-pointer" onClick={() => handleFeatureClick('alphabet game')}>
-                  <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center mr-4 text-xl">
+                <div className="flex items-center p-3 rounded-lg bg-blue-500/10 hover:bg-blue-500/20 transition-all duration-300 cursor-pointer transform hover:scale-[1.01]" onClick={() => handleFeatureClick('alphabet game')}>
+                  <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center mr-4 text-xl animate-float">
                     <div className="text-blue-400 text-2xl font-bold">A</div>
                   </div>
                   <div className="flex-grow">
@@ -198,8 +224,8 @@ const ChildJourney = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-center p-3 rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 transition-all duration-300 cursor-pointer" onClick={() => handleFeatureClick('dinosaurs')}>
-                  <div className="w-10 h-10 rounded-lg bg-indigo-500/20 flex items-center justify-center mr-4 text-xl">
+                <div className="flex items-center p-3 rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 transition-all duration-300 cursor-pointer transform hover:scale-[1.01]" onClick={() => handleFeatureClick('dinosaurs')}>
+                  <div className="w-10 h-10 rounded-lg bg-indigo-500/20 flex items-center justify-center mr-4 text-xl animate-float">
                     <div className="text-indigo-400 text-2xl">🦕</div>
                   </div>
                   <div className="flex-grow">

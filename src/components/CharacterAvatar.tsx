@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import Avatar from './Avatar';
 import { Home, BrainCog, Lightbulb, Bot, Sparkles } from 'lucide-react';
@@ -36,13 +36,35 @@ const characterGradients = {
 const CharacterAvatar = ({ character, className, size = 'md', showName = true, animated = false }: CharacterAvatarProps) => {
   // Normalize character prop to ensure both 'child' and 'children' map to the same visual representation
   const normalizedCharacter = character === 'child' ? 'children' : character;
+  const [isHovered, setIsHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  
+  useEffect(() => {
+    // Add a small delay to trigger animation after component mounts
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
   
   return (
-    <div className={cn('flex flex-col items-center', className)}>
-      <div className="relative">
+    <div 
+      className={cn('flex flex-col items-center', 
+        className,
+        isVisible ? 'opacity-100' : 'opacity-0',
+        'transition-all duration-500'
+      )}
+    >
+      <div 
+        className="relative"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         <div className={cn(
           "absolute -inset-2 rounded-full blur-md opacity-50 animate-pulse-gentle bg-gradient-to-br",
-          characterGradients[character]
+          characterGradients[character],
+          isHovered && "opacity-80 scale-110 duration-300"
         )}></div>
         <div className={cn(
           "rounded-full overflow-hidden flex items-center justify-center",
@@ -53,11 +75,13 @@ const CharacterAvatar = ({ character, className, size = 'md', showName = true, a
           'border-2 shadow-xl transition-all duration-300',
           normalizedCharacter === 'children' ? 'border-blue-500 shadow-blue-500/30 bg-gradient-to-br from-blue-500/20 to-indigo-500/20' : 
           normalizedCharacter === 'elderly' ? 'border-teal-500 shadow-teal-500/30 bg-gradient-to-br from-teal-500/20 to-blue-500/20' : 
-          'border-indigo-500 shadow-indigo-500/30 bg-gradient-to-br from-indigo-500/20 to-purple-500/20'
+          'border-indigo-500 shadow-indigo-500/30 bg-gradient-to-br from-indigo-500/20 to-purple-500/20',
+          isHovered && "transform scale-105"
         )}>
           <div className={cn(
             "w-full h-full flex items-center justify-center p-3",
-            animated && "animate-float"
+            animated && "animate-float",
+            isHovered && "scale-110 transition-transform duration-300"
           )}>
             {characterFallbacks[character]}
           </div>
