@@ -7,7 +7,7 @@ import { toast } from '@/hooks/use-toast';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 interface LiveInteractionProps {
-  character: 'child' | 'elderly' | 'homemaker';
+  character: 'children' | 'child' | 'elderly' | 'homemaker';
   onClose: () => void;
 }
 
@@ -43,8 +43,9 @@ const dummyStories = [
   "Dinosaur Days: Travel back in time to when dinosaurs ruled the Earth!"
 ];
 
-const getGreeting = (character: 'child' | 'elderly' | 'homemaker'): string => {
+const getGreeting = (character: 'children' | 'child' | 'elderly' | 'homemaker'): string => {
   switch (character) {
+    case 'children':
     case 'child':
       return "Hi there! I'm KidBot. What would you like to learn about today?";
     case 'elderly':
@@ -54,8 +55,9 @@ const getGreeting = (character: 'child' | 'elderly' | 'homemaker'): string => {
   }
 };
 
-const getSuggestedResponses = (character: 'child' | 'elderly' | 'homemaker'): string[] => {
+const getSuggestedResponses = (character: 'children' | 'child' | 'elderly' | 'homemaker'): string[] => {
   switch (character) {
+    case 'children':
     case 'child':
       return [
         "Tell me a fun fact",
@@ -90,18 +92,21 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
   const suggestedResponses = getSuggestedResponses(character);
   
   const characterColors = {
+    children: 'from-blue-500 to-indigo-600',
     child: 'from-blue-500 to-indigo-600',
     elderly: 'from-teal-500 to-blue-600',
     homemaker: 'from-indigo-500 to-purple-600'
   };
   
   const characterNames = {
+    children: 'KidBot',
     child: 'KidBot',
     elderly: 'ElderAssist',
     homemaker: 'HomeCompanion'
   };
   
   const characterGradients = {
+    children: 'from-blue-500 to-indigo-600',
     child: 'from-blue-500 to-indigo-600',
     elderly: 'from-teal-500 to-blue-600',
     homemaker: 'from-indigo-500 to-purple-600'
