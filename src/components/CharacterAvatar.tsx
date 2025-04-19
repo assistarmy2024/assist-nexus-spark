@@ -53,7 +53,7 @@ const CharacterAvatar = ({ character, className, size = 'md', showName = true, a
       className={cn('flex flex-col items-center', 
         className,
         isVisible ? 'opacity-100' : 'opacity-0',
-        'transition-all duration-500'
+        'transition-all duration-300'
       )}
     >
       <div 
@@ -62,9 +62,9 @@ const CharacterAvatar = ({ character, className, size = 'md', showName = true, a
         onMouseLeave={() => setIsHovered(false)}
       >
         <div className={cn(
-          "absolute -inset-2 rounded-full blur-md opacity-50 animate-pulse-gentle bg-gradient-to-br",
+          "absolute -inset-2 rounded-full blur-md opacity-40 bg-gradient-to-br",
           characterGradients[character],
-          isHovered && "opacity-80 scale-110 duration-300"
+          isHovered && "opacity-60 duration-300"
         )}></div>
         <div className={cn(
           "rounded-full overflow-hidden flex items-center justify-center",
@@ -72,16 +72,16 @@ const CharacterAvatar = ({ character, className, size = 'md', showName = true, a
           size === 'md' ? 'w-20 h-20' : 
           size === 'lg' ? 'w-32 h-32' : 
           'w-40 h-40',
-          'border-2 shadow-xl transition-all duration-300',
+          'border-2 shadow-lg transition-all duration-300',
           normalizedCharacter === 'children' ? 'border-blue-500 shadow-blue-500/30 bg-gradient-to-br from-blue-500/20 to-indigo-500/20' : 
           normalizedCharacter === 'elderly' ? 'border-teal-500 shadow-teal-500/30 bg-gradient-to-br from-teal-500/20 to-blue-500/20' : 
           'border-indigo-500 shadow-indigo-500/30 bg-gradient-to-br from-indigo-500/20 to-purple-500/20',
-          isHovered && "transform scale-105"
+          isHovered && "transform scale-[1.03]"
         )}>
           <div className={cn(
             "w-full h-full flex items-center justify-center p-3",
-            animated && "animate-float",
-            isHovered && "scale-110 transition-transform duration-300"
+            animated && "animate-pulse",
+            isHovered && "scale-105 transition-transform duration-300"
           )}>
             {characterFallbacks[character]}
           </div>

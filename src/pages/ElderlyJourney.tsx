@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlassCard from '@/components/GlassCard';
@@ -33,9 +34,9 @@ const ElderlyJourney = () => {
   };
 
   return (
-    <div className="flex flex-col bg-gradient-to-b from-[#0A192F] to-[#0F2540] min-h-screen overflow-auto">
+    <div className="flex flex-col bg-gradient-to-b from-[#0A192F] to-[#0F2540] min-h-screen overflow-auto pb-24">
       {/* Header */}
-      <header className="w-full py-6 px-6 sticky top-0 z-10 bg-gradient-to-b from-[#0A192F] to-[#0A192F]/90 backdrop-blur-sm">
+      <header className="w-full py-4 px-6 sticky top-0 z-10 bg-gradient-to-b from-[#0A192F] to-[#0A192F]/90 backdrop-blur-sm">
         <div className="container mx-auto">
           <div className="flex items-center justify-between">
             <GlassButton 
@@ -43,7 +44,7 @@ const ElderlyJourney = () => {
               className="text-white text-lg" 
               onClick={() => navigate('/')}
             >
-              <ArrowLeft className="mr-2 h-6 w-6" /> Back
+              <ArrowLeft className="mr-2 h-5 w-5" /> Back
             </GlassButton>
             <div className="flex items-center gap-4">
               <GlassButton 
@@ -61,17 +62,16 @@ const ElderlyJourney = () => {
       </header>
       
       {/* Main content */}
-      <main className="flex-1 w-full py-6 px-6 pb-24">
+      <main className="flex-1 w-full p-4 md:p-6 overflow-auto">
         <div className="container mx-auto">
-          <div className="relative mb-8">
-            <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 to-blue-500 rounded-2xl blur opacity-70"></div>
-            <GlassCard className="relative p-8 bg-gradient-to-br from-[#0F2540]/90 to-[#0A192F]/90 border border-teal-500/30 shadow-[0_8px_32px_rgba(31,41,55,0.4)]">
+          <div className="mb-6">
+            <GlassCard className="p-6 bg-gradient-to-br from-[#0F2540]/90 to-[#0A192F]/90 border border-teal-500/30 shadow-lg">
               <div className="flex flex-col md:flex-row items-center justify-between">
                 <div className="md:w-1/2 mb-6 md:mb-0">
-                  <h1 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-                    Welcome back! I'm Professor Wilson
+                  <h1 className="text-2xl md:text-3xl font-bold mb-4 text-white">
+                    Welcome! I'm Professor Wilson
                   </h1>
-                  <p className="text-gray-300 mb-4 text-lg">
+                  <p className="text-gray-300 mb-4 text-base md:text-lg">
                     How may I assist you today?
                   </p>
                   <GlassButton 
@@ -85,11 +85,11 @@ const ElderlyJourney = () => {
                 </div>
                 <div className="md:w-1/2 flex justify-center">
                   <div className="relative">
-                    <div className="absolute -inset-4 rounded-full bg-teal-500/30 blur-xl animate-pulse-gentle"></div>
+                    <div className="absolute -inset-4 rounded-full bg-teal-500/30 blur-lg opacity-50"></div>
                     <img 
                       src="/lovable-uploads/4f8f135a-6243-488c-92ba-c324f470b2a9.png" 
                       alt="Elderly Assistant" 
-                      className="w-60 h-60 object-contain animate-float"
+                      className="w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 object-contain"
                     />
                   </div>
                 </div>
@@ -97,95 +97,113 @@ const ElderlyJourney = () => {
             </GlassCard>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             {/* Call Family */}
-            <div className="relative group cursor-pointer col-span-1 md:col-span-2" onClick={() => handleFeatureClick('family calls')}>
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
-              <div className="relative p-5 bg-gradient-to-br from-[#0F2540]/90 to-[#0A192F]/90 backdrop-blur-md rounded-2xl border border-teal-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex items-center">
-                <div className="p-4 mr-4 bg-gradient-to-br from-teal-500/20 to-cyan-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
-                  <PhoneCall className="h-8 w-8 text-teal-400" />
+            <div className="relative group cursor-pointer" onClick={() => handleFeatureClick('family calls')}>
+              <GlassCard className="p-4 border border-teal-500/20 h-full flex items-center">
+                <div className="p-3 mr-3 bg-gradient-to-br from-teal-500/20 to-cyan-500/20 rounded-lg w-12 h-12 flex items-center justify-center">
+                  <PhoneCall className="h-6 w-6 text-teal-400" />
                 </div>
                 <div>
                   <p className="text-white font-bold">Call Family</p>
-                  <p className="text-gray-400 text-sm">Connect with your loved ones</p>
+                  <p className="text-gray-400 text-sm">Connect with loved ones</p>
                 </div>
-              </div>
+              </GlassCard>
             </div>
             
             {/* Messages */}
-            <div className="relative group cursor-pointer col-span-1 md:col-span-2" onClick={() => handleFeatureClick('messages')}>
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
-              <div className="relative p-5 bg-gradient-to-br from-[#0F2540]/90 to-[#0A192F]/90 backdrop-blur-md rounded-2xl border border-blue-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex items-center">
-                <div className="p-4 mr-4 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
-                  <MessageCircle className="h-8 w-8 text-blue-400" />
+            <div className="relative group cursor-pointer" onClick={() => handleFeatureClick('messages')}>
+              <GlassCard className="p-4 border border-blue-500/20 h-full flex items-center">
+                <div className="p-3 mr-3 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 rounded-lg w-12 h-12 flex items-center justify-center">
+                  <MessageCircle className="h-6 w-6 text-blue-400" />
                 </div>
                 <div>
                   <p className="text-white font-bold">Messages</p>
                   <p className="text-gray-400 text-sm">Send & receive messages</p>
                 </div>
-              </div>
+              </GlassCard>
             </div>
             
             {/* Interactive Learning Tiles */}
-            <div className="relative group cursor-pointer col-span-1 md:col-span-2" onClick={() => handleFeatureClick('health knowledge')}>
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
-              <div className="relative p-5 bg-gradient-to-br from-[#0F2540]/90 to-[#0A192F]/90 backdrop-blur-md rounded-2xl border border-emerald-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex items-center">
-                <div className="p-4 mr-4 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
-                  <Brain className="h-8 w-8 text-emerald-400" />
+            <div className="relative group cursor-pointer" onClick={() => handleFeatureClick('health knowledge')}>
+              <GlassCard className="p-4 border border-emerald-500/20 h-full flex items-center">
+                <div className="p-3 mr-3 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 rounded-lg w-12 h-12 flex items-center justify-center">
+                  <Brain className="h-6 w-6 text-emerald-400" />
                 </div>
                 <div>
                   <p className="text-white font-bold">Health Quiz</p>
                   <p className="text-gray-400 text-sm">Test your knowledge</p>
                 </div>
-              </div>
+              </GlassCard>
             </div>
             
             {/* Video Tutorials */}
-            <div className="relative group cursor-pointer col-span-1 md:col-span-2" onClick={() => handleFeatureClick('video tutorials')}>
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
-              <div className="relative p-5 bg-gradient-to-br from-[#0F2540]/90 to-[#0A192F]/90 backdrop-blur-md rounded-2xl border border-blue-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex items-center">
-                <div className="p-4 mr-4 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
-                  <Video className="h-8 w-8 text-blue-400" />
+            <div className="relative group cursor-pointer" onClick={() => handleFeatureClick('video tutorials')}>
+              <GlassCard className="p-4 border border-blue-500/20 h-full flex items-center">
+                <div className="p-3 mr-3 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 rounded-lg w-12 h-12 flex items-center justify-center">
+                  <Video className="h-6 w-6 text-blue-400" />
                 </div>
                 <div>
                   <p className="text-white font-bold">Video Guides</p>
-                  <p className="text-gray-400 text-sm">Watch helpful tutorials</p>
+                  <p className="text-gray-400 text-sm">Helpful tutorials</p>
                 </div>
-              </div>
+              </GlassCard>
             </div>
             
             {/* Reminder */}
-            <div className="relative group cursor-pointer col-span-1 md:col-span-2" onClick={() => handleFeatureClick('medication reminders')}>
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-yellow-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
-              <div className="relative p-5 bg-gradient-to-br from-[#0F2540]/90 to-[#0A192F]/90 backdrop-blur-md rounded-2xl border border-amber-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex items-center">
-                <div className="p-4 mr-4 bg-gradient-to-br from-amber-500/20 to-yellow-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
-                  <Bell className="h-8 w-8 text-amber-400" />
+            <div className="relative group cursor-pointer" onClick={() => handleFeatureClick('medication reminders')}>
+              <GlassCard className="p-4 border border-amber-500/20 h-full flex items-center">
+                <div className="p-3 mr-3 bg-gradient-to-br from-amber-500/20 to-yellow-500/20 rounded-lg w-12 h-12 flex items-center justify-center">
+                  <Bell className="h-6 w-6 text-amber-400" />
                 </div>
                 <div>
                   <p className="text-white font-bold">Medication Reminder</p>
-                  <p className="text-gray-400 text-sm">Never miss your medications</p>
+                  <p className="text-gray-400 text-sm">Never miss medications</p>
                 </div>
-              </div>
+              </GlassCard>
             </div>
             
             {/* Health Guides */}
-            <div className="relative group cursor-pointer col-span-1 md:col-span-2" onClick={() => handleFeatureClick('health guides')}>
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-2xl blur opacity-60 group-hover:opacity-80 transition duration-200"></div>
-              <div className="relative p-5 bg-gradient-to-br from-[#0F2540]/90 to-[#0A192F]/90 backdrop-blur-md rounded-2xl border border-teal-500/20 transition-all duration-300 group-hover:translate-y-[-4px] h-full flex items-center">
-                <div className="p-4 mr-4 bg-gradient-to-br from-teal-500/20 to-emerald-500/20 rounded-lg w-16 h-16 flex items-center justify-center">
-                  <BookOpen className="h-8 w-8 text-teal-400" />
+            <div className="relative group cursor-pointer" onClick={() => handleFeatureClick('health guides')}>
+              <GlassCard className="p-4 border border-teal-500/20 h-full flex items-center">
+                <div className="p-3 mr-3 bg-gradient-to-br from-teal-500/20 to-emerald-500/20 rounded-lg w-12 h-12 flex items-center justify-center">
+                  <BookOpen className="h-6 w-6 text-teal-400" />
                 </div>
                 <div>
                   <p className="text-white font-bold">Health Guides</p>
                   <p className="text-gray-400 text-sm">Important information</p>
                 </div>
-              </div>
+              </GlassCard>
+            </div>
+            
+            {/* Additional service tiles can be added here */}
+            <div className="relative group cursor-pointer" onClick={() => handleFeatureClick('telehealth')}>
+              <GlassCard className="p-4 border border-green-500/20 h-full flex items-center">
+                <div className="p-3 mr-3 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-lg w-12 h-12 flex items-center justify-center">
+                  <Heart className="h-6 w-6 text-green-400" />
+                </div>
+                <div>
+                  <p className="text-white font-bold">Telehealth</p>
+                  <p className="text-gray-400 text-sm">Virtual doctor visits</p>
+                </div>
+              </GlassCard>
+            </div>
+            
+            <div className="relative group cursor-pointer" onClick={() => handleFeatureClick('brain games')}>
+              <GlassCard className="p-4 border border-purple-500/20 h-full flex items-center">
+                <div className="p-3 mr-3 bg-gradient-to-br from-purple-500/20 to-indigo-500/20 rounded-lg w-12 h-12 flex items-center justify-center">
+                  <Sparkles className="h-6 w-6 text-purple-400" />
+                </div>
+                <div>
+                  <p className="text-white font-bold">Brain Games</p>
+                  <p className="text-gray-400 text-sm">Mental exercises</p>
+                </div>
+              </GlassCard>
             </div>
           </div>
           
-          <div className="relative mb-4">
-            <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 to-blue-500 rounded-2xl blur opacity-50"></div>
-            <GlassCard className="relative bg-gradient-to-br from-[#0F2540]/90 to-[#0A192F]/90 border border-teal-500/20">
+          <div className="mb-6">
+            <GlassCard className="p-4 bg-gradient-to-br from-[#0F2540]/90 to-[#0A192F]/90 border border-teal-500/20">
               <h2 className="text-xl font-semibold mb-3 text-white">Today's Schedule</h2>
               <div className="space-y-3">
                 <div className="flex items-center p-3 rounded-lg bg-teal-500/10 hover:bg-teal-500/20 transition-all duration-300 cursor-pointer" onClick={() => handleFeatureClick('medication schedule')}>
@@ -217,29 +235,13 @@ const ElderlyJourney = () => {
                     </button>
                   </div>
                 </div>
-                
-                <div className="flex items-center p-3 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 transition-all duration-300 cursor-pointer" onClick={() => handleFeatureClick('family call')}>
-                  <div className="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center mr-4">
-                    <Users className="h-5 w-5 text-amber-400" />
-                  </div>
-                  <div className="flex-grow">
-                    <p className="text-white">Video call with family - 6:00 PM</p>
-                    <p className="text-gray-400 text-sm">Weekly call with children</p>
-                  </div>
-                  <div>
-                    <button className="p-2 rounded-full hover:bg-amber-500/10">
-                      <Bell className="h-4 w-4 text-amber-400" />
-                    </button>
-                  </div>
-                </div>
               </div>
             </GlassCard>
           </div>
           
           {/* Daily Learning */}
-          <div className="relative mb-4">
-            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur opacity-50"></div>
-            <GlassCard className="relative bg-gradient-to-br from-[#0F2540]/90 to-[#0A192F]/90 border border-blue-500/20">
+          <div className="mb-6">
+            <GlassCard className="p-4 bg-gradient-to-br from-[#0F2540]/90 to-[#0A192F]/90 border border-blue-500/20">
               <h2 className="text-xl font-semibold mb-3 text-white flex items-center">
                 <Lightbulb className="h-5 w-5 mr-2 text-yellow-400" />
                 Daily Learning
@@ -261,38 +263,31 @@ const ElderlyJourney = () => {
           </div>
           
           {/* Emergency button */}
-          <div className="relative mb-4" onClick={() => handleFeatureClick('emergency services')}>
-            <div className="absolute -inset-1 bg-gradient-to-r from-red-500 to-rose-500 rounded-xl blur opacity-70"></div>
-            <GlassCard className="relative text-center p-5 bg-gradient-to-br from-[#3A0F13]/90 to-[#2C0F14]/90 border-2 border-red-500/40">
-              <button className="w-full bg-gradient-to-r from-red-500 to-rose-500 text-white text-xl font-bold py-4 rounded-xl">
+          <div className="mb-4" onClick={() => handleFeatureClick('emergency services')}>
+            <GlassCard className="text-center p-4 bg-gradient-to-br from-[#3A0F13]/90 to-[#2C0F14]/90 border-2 border-red-500/40">
+              <button className="w-full bg-gradient-to-r from-red-500 to-rose-500 text-white text-xl font-bold py-3 rounded-xl">
                 EMERGENCY ASSISTANCE
               </button>
-              <p className="text-gray-400 mt-2">Tap for immediate help or to contact emergency services</p>
+              <p className="text-gray-400 mt-2 text-sm">Tap for immediate help or to contact emergency services</p>
             </GlassCard>
           </div>
         </div>
       </main>
       
       {/* Footer */}
-      <footer className="w-full py-4 px-6 fixed bottom-0 left-0 right-0 z-10">
+      <footer className="w-full py-4 px-4 fixed bottom-0 left-0 right-0 z-10">
         <div className="container mx-auto">
-          <div className="relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 to-blue-500 rounded-2xl blur opacity-60"></div>
-            <GlassCard className="relative p-6 bg-gradient-to-br from-[#0F2540]/90 to-[#0A192F]/90 border border-teal-500/20">
-              <div className="text-center mb-4">
-                <p className="text-xl text-teal-400">Speak to Professor Wilson</p>
-                <p className="text-gray-400">Just say "Hello Professor" or tap the button below</p>
-              </div>
-              <div className="flex justify-center">
-                <button 
-                  className="w-16 h-16 rounded-full bg-gradient-to-r from-teal-500/20 to-blue-500/20 border border-teal-500/30 flex items-center justify-center shadow-lg shadow-teal-500/20 hover:shadow-teal-500/40 hover:scale-105 transition-all duration-300"
-                  onClick={() => setShowLiveInteraction(true)}
-                >
-                  <Video className="h-8 w-8 text-teal-400" />
-                </button>
-              </div>
-            </GlassCard>
-          </div>
+          <GlassCard className="p-4 bg-gradient-to-br from-[#0F2540]/90 to-[#0A192F]/90 border border-teal-500/20">
+            <div className="text-center">
+              <p className="text-white text-lg mb-2">Speak to Professor Wilson</p>
+              <button 
+                className="w-12 h-12 mx-auto rounded-full bg-gradient-to-r from-teal-500/20 to-blue-500/20 border border-teal-500/30 flex items-center justify-center shadow-lg shadow-teal-500/20"
+                onClick={() => setShowLiveInteraction(true)}
+              >
+                <Video className="h-6 w-6 text-teal-400" />
+              </button>
+            </div>
+          </GlassCard>
         </div>
       </footer>
 
