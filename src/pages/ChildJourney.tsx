@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlassCard from '@/components/GlassCard';
@@ -55,7 +54,7 @@ const ChildJourney = () => {
               >
                 Live Chat
               </GlassButton>
-              <CharacterAvatar character="child" size="sm" />
+              <CharacterAvatar character="children" size="sm" />
             </div>
           </div>
         </div>
@@ -87,7 +86,7 @@ const ChildJourney = () => {
                 <div className="md:w-1/2 flex justify-center">
                   <div className="relative">
                     <div className="absolute -inset-4 rounded-full bg-blue-500/30 blur-xl animate-pulse-gentle"></div>
-                    <CharacterAvatar character="child" size="xl" />
+                    <CharacterAvatar character="children" size="xl" />
                   </div>
                 </div>
               </div>
@@ -259,19 +258,19 @@ const ChildJourney = () => {
 
       {/* Interactive Components */}
       {showLiveInteraction && (
-        <LiveInteraction character="child" onClose={() => setShowLiveInteraction(false)} />
+        <LiveInteraction character="children" onClose={() => setShowLiveInteraction(false)} />
       )}
       
       {showQuiz && (
-        <Quiz character="child" onClose={() => setShowQuiz(false)} />
+        <Quiz character="children" onClose={() => setShowQuiz(false)} />
       )}
       
       {showVideo && (
-        <InteractiveVideo character="child" onClose={() => setShowVideo(false)} />
+        <InteractiveVideo character="children" onClose={() => setShowVideo(false)} />
       )}
       
       {showDocuments && (
-        <Documents character="child" onClose={() => setShowDocuments(false)} />
+        <Documents character="children" onClose={() => setShowDocuments(false)} />
       )}
     </div>
   );
