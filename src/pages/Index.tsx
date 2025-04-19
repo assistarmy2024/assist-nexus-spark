@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlassCard from '@/components/GlassCard';
@@ -49,10 +50,10 @@ const Index = () => {
                 <div className="relative flex flex-col items-center p-6 bg-gradient-to-br from-[#101643]/80 to-[#0F2357]/90 backdrop-blur-md rounded-2xl border border-blue-500/20 shadow-[0_8px_16px_rgba(0,0,0,0.4)] transition-all duration-300 group-hover:translate-y-[-4px] group-hover:shadow-blue-400/20 cursor-pointer h-full">
                   <div className="p-3 bg-gradient-to-br from-blue-400/20 to-indigo-600/20 rounded-full mb-4 w-40 h-40 flex items-center justify-center transform transition-transform hover:scale-105">
                     <CharacterAvatar 
-                      character="children" 
+                      character="child" 
                       size="lg" 
                       showName={false} 
-                      animated={hoveredCard === 'children'}
+                      animated={hoveredCard === 'child'}
                     />
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-1">KidBot</h3>

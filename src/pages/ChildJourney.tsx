@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlassCard from '@/components/GlassCard';
@@ -53,7 +54,7 @@ const ChildJourney = () => {
               >
                 Live Chat
               </GlassButton>
-              <CharacterAvatar character="children" size="sm" />
+              <CharacterAvatar character="child" size="sm" />
             </div>
           </div>
         </div>
@@ -84,7 +85,7 @@ const ChildJourney = () => {
                 <div className="md:w-1/2 flex justify-center">
                   <div className="relative">
                     <div className="absolute -inset-4 rounded-full bg-blue-500/30 blur-xl animate-pulse-gentle"></div>
-                    <CharacterAvatar character="children" size="xl" />
+                    <CharacterAvatar character="child" size="xl" />
                   </div>
                 </div>
               </div>

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Mic, MicOff, Video, VideoOff, Users, MessageCircle, ScreenShare, Phone, Smile, Paperclip, Image, Video as VideoIcon, FileText, Loader, BookOpen, HeartPulse, ShoppingCart, Calendar, Clock, BrainCog } from 'lucide-react';
 import GlassCard from './GlassCard';
@@ -8,7 +7,7 @@ import { toast } from '@/hooks/use-toast';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 interface LiveInteractionProps {
-  character: 'children' | 'elderly' | 'homemaker';
+  character: 'child' | 'elderly' | 'homemaker';
   onClose: () => void;
 }
 
@@ -44,9 +43,9 @@ const dummyStories = [
   "Dinosaur Days: Travel back in time to when dinosaurs ruled the Earth!"
 ];
 
-const getGreeting = (character: 'children' | 'elderly' | 'homemaker'): string => {
+const getGreeting = (character: 'child' | 'elderly' | 'homemaker'): string => {
   switch (character) {
-    case 'children':
+    case 'child':
       return "Hi there! I'm KidBot. What would you like to learn about today?";
     case 'elderly':
       return "Hello! I'm ElderAssist. How may I assist you today?";
@@ -55,9 +54,9 @@ const getGreeting = (character: 'children' | 'elderly' | 'homemaker'): string =>
   }
 };
 
-const getSuggestedResponses = (character: 'children' | 'elderly' | 'homemaker'): string[] => {
+const getSuggestedResponses = (character: 'child' | 'elderly' | 'homemaker'): string[] => {
   switch (character) {
-    case 'children':
+    case 'child':
       return [
         "Tell me a fun fact",
         "Can we play a game?",
