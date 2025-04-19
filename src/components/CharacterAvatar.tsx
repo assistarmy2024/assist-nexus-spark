@@ -42,9 +42,7 @@ const CharacterAvatar = ({ character, className, size = 'md', showName = true, a
       <div className="relative">
         <div className={cn(
           "absolute -inset-2 rounded-full blur-md opacity-50 animate-pulse-gentle bg-gradient-to-br",
-          normalizedCharacter === 'children' ? "from-blue-400 to-indigo-600" : 
-          normalizedCharacter === 'elderly' ? "from-teal-400 to-blue-600" : 
-          "from-indigo-400 to-purple-600"
+          characterGradients[character]
         )}></div>
         <div className={cn(
           "rounded-full overflow-hidden flex items-center justify-center",
