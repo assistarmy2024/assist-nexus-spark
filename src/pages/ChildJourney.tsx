@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlassCard from '@/components/GlassCard';
@@ -245,19 +246,19 @@ const ChildJourney = () => {
       </footer>
 
       {showLiveInteraction && (
-        <LiveInteraction character="child" onClose={() => setShowLiveInteraction(false)} />
+        <LiveInteraction character="children" onClose={() => setShowLiveInteraction(false)} />
       )}
       
       {showQuiz && (
-        <Quiz character="child" onClose={() => setShowQuiz(false)} />
+        <Quiz character="children" onClose={() => setShowQuiz(false)} />
       )}
       
       {showVideo && (
-        <InteractiveVideo character="child" onClose={() => setShowVideo(false)} />
+        <InteractiveVideo character="children" onClose={() => setShowVideo(false)} />
       )}
       
       {showDocuments && (
-        <Documents character="child" onClose={() => setShowDocuments(false)} />
+        <Documents character="children" onClose={() => setShowDocuments(false)} />
       )}
     </div>
   );

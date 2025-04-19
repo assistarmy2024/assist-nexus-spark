@@ -89,6 +89,8 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
   const [activeTab, setActiveTab] = useState<'chat' | 'quiz' | 'health' | 'grocery' | 'stories'>('chat');
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   
+  const normalizedCharacter = character === 'child' ? 'children' : character;
+  
   const suggestedResponses = getSuggestedResponses(character);
   
   const characterColors = {
@@ -359,9 +361,9 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
                 >
                   <p className={`font-medium ${
                     message.sender === 'assistant' 
-                    ? character === 'homemaker' 
+                    ? normalizedCharacter === 'homemaker' 
                       ? 'text-indigo-400' 
-                      : character === 'elderly' 
+                      : normalizedCharacter === 'elderly' 
                         ? 'text-teal-400' 
                         : 'text-blue-400'
                     : 'text-green-400'
@@ -377,9 +379,9 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
               {isTyping && (
                 <div className="bg-blue-500/10 self-start p-2 rounded-lg">
                   <p className={`font-medium ${
-                    character === 'homemaker' 
+                    normalizedCharacter === 'homemaker' 
                       ? 'text-indigo-400' 
-                      : character === 'elderly' 
+                      : normalizedCharacter === 'elderly' 
                         ? 'text-teal-400' 
                         : 'text-blue-400'
                   }`}>
@@ -387,23 +389,23 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
                   </p>
                   <div className="flex space-x-1">
                     <div className={`w-2 h-2 rounded-full animate-bounce ${
-                      character === 'homemaker' 
+                      normalizedCharacter === 'homemaker' 
                         ? 'bg-indigo-400' 
-                        : character === 'elderly' 
+                        : normalizedCharacter === 'elderly' 
                           ? 'bg-teal-400' 
                           : 'bg-blue-400'
                     }`}></div>
                     <div className={`w-2 h-2 rounded-full animate-bounce ${
-                      character === 'homemaker' 
+                      normalizedCharacter === 'homemaker' 
                         ? 'bg-indigo-400' 
-                        : character === 'elderly' 
+                        : normalizedCharacter === 'elderly' 
                           ? 'bg-teal-400' 
                           : 'bg-blue-400'
                     }`} style={{ animationDelay: '0.2s' }}></div>
                     <div className={`w-2 h-2 rounded-full animate-bounce ${
-                      character === 'homemaker' 
+                      normalizedCharacter === 'homemaker' 
                         ? 'bg-indigo-400' 
-                        : character === 'elderly' 
+                        : normalizedCharacter === 'elderly' 
                           ? 'bg-teal-400' 
                           : 'bg-blue-400'
                     }`} style={{ animationDelay: '0.4s' }}></div>
@@ -427,7 +429,7 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
         transitionDuration={0.4}
         appear="scale"
         appearDelay={200}
-        theme={character}
+        theme={normalizedCharacter}
       >
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-white">Live Interaction with {characterNames[character]}</h2>
@@ -444,7 +446,7 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
           <div className="absolute inset-0 flex items-center justify-center">
             {!videoOn ? (
               <div className="flex flex-col items-center animate-fade-in">
-                <CharacterAvatar character={character} size="xl" animated={true} />
+                <CharacterAvatar character={normalizedCharacter} size="xl" animated={true} />
                 <p className="text-white mt-4 text-lg bg-black/30 px-4 py-2 rounded-full backdrop-blur-sm">
                   Turn on video to see {characterNames[character]}
                 </p>
@@ -452,7 +454,7 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
             ) : (
               <div className="w-full h-full flex items-center justify-center animate-scale-in">
                 <div className={`w-64 h-64 rounded-full bg-gradient-to-r ${characterGradients[character]} animate-pulse-gentle flex items-center justify-center backdrop-blur-md`}>
-                  <CharacterAvatar character={character} size="lg" animated={true} />
+                  <CharacterAvatar character={normalizedCharacter} size="lg" animated={true} />
                 </div>
               </div>
             )}
@@ -498,7 +500,7 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
             className="md:col-span-1 p-4 h-full flex flex-col"
             appear="fade"
             appearDelay={300}
-            theme={character}
+            theme={normalizedCharacter}
           >
             <h3 className="text-lg font-semibold mb-4 text-white">Features</h3>
             <div className="space-y-2 flex-grow">
@@ -587,7 +589,7 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
             className="p-4 flex flex-col md:col-span-2"
             appear="fade"
             appearDelay={400}
-            theme={character}
+            theme={normalizedCharacter}
           >
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-white">
@@ -619,9 +621,9 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
                         key={index}
                         onClick={() => sendMessage(response)}
                         className={`px-3 py-1 text-sm bg-white/10 hover:bg-white/20 rounded-full text-gray-300 transition-all duration-300 hover:scale-105 transform ${
-                          character === 'homemaker' 
+                          normalizedCharacter === 'homemaker' 
                             ? 'hover:bg-indigo-500/20 hover:text-indigo-300' 
-                            : character === 'elderly' 
+                            : normalizedCharacter === 'elderly' 
                               ? 'hover:bg-teal-500/20 hover:text-teal-300' 
                               : 'hover:bg-blue-500/20 hover:text-blue-300'
                         }`}
@@ -652,11 +654,11 @@ const LiveInteraction = ({ character, onClose }: LiveInteractionProps) => {
                     </div>
                   </div>
                   <GlassButton 
-                    variant={character === 'homemaker' ? 'primary' : character === 'elderly' ? 'secondary' : 'default'}
+                    variant={normalizedCharacter === 'homemaker' ? 'primary' : normalizedCharacter === 'elderly' ? 'secondary' : 'default'}
                     onClick={() => sendMessage()}
                     disabled={!inputValue.trim()}
                     className={`
-                      ${character === 'homemaker' ? 'bg-indigo-500/20' : character === 'elderly' ? 'bg-teal-500/20' : 'bg-blue-500/20'}
+                      ${normalizedCharacter === 'homemaker' ? 'bg-indigo-500/20' : normalizedCharacter === 'elderly' ? 'bg-teal-500/20' : 'bg-blue-500/20'}
                       ${!inputValue.trim() ? 'opacity-50 cursor-not-allowed' : ''}
                       shadow-lg hover:shadow-xl
                     `}
