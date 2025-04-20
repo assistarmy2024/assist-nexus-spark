@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlassCard from '@/components/GlassCard';
@@ -42,11 +43,13 @@ const HomemakerJourney = () => {
   };
 
   return (
-    <div className="flex flex-col bg-gradient-to-b from-[#141436] to-[#22143B] min-h-screen">
+    <div className="flex flex-col bg-gradient-to-b from-[#141436] to-[#22143B] min-h-screen overflow-auto pb-24">
       <HomeCompanionNavBar onMenuToggle={handleMenuToggle} isMenuOpen={isMenuOpen} />
       
-      <main className="flex-1 w-full pt-16 px-4 md:px-6 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 120px)' }}>
-        <div className="container mx-auto pb-16">
+      {/* Main content */}
+      <main className="flex-1 w-full py-16 px-4 md:px-6 overflow-auto">
+        <div className="container mx-auto">
+          {/* Welcome Section */}
           <div className="mb-6">
             <GlassCard className="p-6 bg-gradient-to-br from-[#1F1346]/90 to-[#22143B]/90 border border-indigo-500/30 shadow-lg">
               <div className="flex flex-col md:flex-row items-center justify-between">
@@ -78,13 +81,14 @@ const HomemakerJourney = () => {
                 <div className="md:w-1/2 flex justify-center">
                   <div className="relative">
                     <div className="absolute -inset-4 rounded-full bg-indigo-500/30 blur-lg opacity-50"></div>
-                    <CharacterAvatar character="homemaker" size="xl" animated={false} />
+                    <CharacterAvatar character="homemaker" size="xl" />
                   </div>
                 </div>
               </div>
             </GlassCard>
           </div>
           
+          {/* Search Bar */}
           <div className="mb-6">
             <div className="relative">
               <input 
@@ -104,6 +108,7 @@ const HomemakerJourney = () => {
             </div>
           </div>
           
+          {/* Modules Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
             <SmartKitchenModule onViewMore={() => handleFeatureClick('smart kitchen')} />
             <FamilyHealthModule onViewMore={() => handleFeatureClick('family health')} />
@@ -113,6 +118,7 @@ const HomemakerJourney = () => {
             <CalendarReminderModule onViewMore={() => handleFeatureClick('calendar')} />
           </div>
           
+          {/* Tips and Insights */}
           <div className="mb-6">
             <GlassCard className="p-5 bg-gradient-to-br from-[#1F1346]/90 to-[#22143B]/90 border border-indigo-500/20">
               <h2 className="text-xl font-bold mb-4 text-white">Tips & Insights</h2>
@@ -136,6 +142,7 @@ const HomemakerJourney = () => {
             </GlassCard>
           </div>
           
+          {/* Quick Actions */}
           <div className="mb-6">
             <GlassCard className="p-5 bg-gradient-to-br from-[#1F1346]/90 to-[#22143B]/90 border border-indigo-500/20">
               <h2 className="text-xl font-semibold mb-3 text-white">Quick Actions</h2>
@@ -177,7 +184,8 @@ const HomemakerJourney = () => {
         </div>
       </main>
       
-      <footer className="w-full py-4 px-4 sticky bottom-0 left-0 right-0 z-10 bg-[#141436]/80 backdrop-blur-md">
+      {/* Footer */}
+      <footer className="w-full py-4 px-4 fixed bottom-0 left-0 right-0 z-10">
         <div className="container mx-auto">
           <GlassCard className="p-4 bg-gradient-to-br from-[#1F1346]/90 to-[#22143B]/90 border border-indigo-500/20">
             <div className="relative">
@@ -204,6 +212,7 @@ const HomemakerJourney = () => {
         </div>
       </footer>
 
+      {/* Live Interaction Overlay */}
       {showLiveInteraction && (
         <LiveInteraction character="homemaker" onClose={() => setShowLiveInteraction(false)} />
       )}

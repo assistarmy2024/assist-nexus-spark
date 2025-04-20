@@ -19,7 +19,7 @@ const variantClasses = {
   outline: 'glass-button border-2',
   ghost: 'bg-transparent hover:bg-white/5',
   metallic: 'glass-button metallic-gradient',
-  neon: 'glass-button shadow-[0_0_5px_var(--card-glow)]', // Reduced shadow
+  neon: 'glass-button shadow-[0_0_10px_var(--card-glow)]',
   primary: 'glass-button bg-gradient-to-r from-primary/80 to-primary/60 text-white',
   secondary: 'glass-button bg-gradient-to-r from-secondary/80 to-secondary/60 text-white'
 };
@@ -31,9 +31,9 @@ const sizeClasses = {
 };
 
 const themeGradients = {
-  children: 'from-blue-500/20 to-indigo-500/20 hover:from-blue-500/25 hover:to-indigo-500/25', // Reduced hover intensity
-  elderly: 'from-teal-500/20 to-blue-500/20 hover:from-teal-500/25 hover:to-blue-500/25', // Reduced hover intensity
-  homemaker: 'from-indigo-500/20 to-purple-500/20 hover:from-indigo-500/25 hover:to-purple-500/25' // Reduced hover intensity
+  children: 'from-blue-500/20 to-indigo-500/20 hover:from-blue-500/30 hover:to-indigo-500/30',
+  elderly: 'from-teal-500/20 to-blue-500/20 hover:from-teal-500/30 hover:to-blue-500/30',
+  homemaker: 'from-indigo-500/20 to-purple-500/20 hover:from-indigo-500/30 hover:to-purple-500/30'
 };
 
 const GlassButton = ({ 
@@ -54,15 +54,15 @@ const GlassButton = ({
         variantClasses[variant],
         sizeClasses[size],
         theme && `${theme}-theme bg-gradient-to-r ${themeGradients[theme]}`,
-        // Remove transform effects for 3D
+        is3D && 'transform hover:-translate-y-0.5 active:translate-y-0',
         glow && 'relative',
-        'inline-flex items-center justify-center transition-colors duration-200', // Only transition colors, not position
+        'inline-flex items-center justify-center transition-all duration-200',
         className
       )}
       {...props}
     >
       {glow && (
-        <span className="absolute inset-0 rounded-full opacity-30 blur-md -z-10 bg-gradient-to-r from-white/10 to-white/5"></span>
+        <span className="absolute inset-0 rounded-full opacity-40 blur-md -z-10 bg-gradient-to-r from-white/10 to-white/5"></span>
       )}
       {icon && iconPosition === 'left' && <span className="mr-2">{icon}</span>}
       {children}
