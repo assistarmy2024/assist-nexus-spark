@@ -8,6 +8,8 @@ interface GlassCardProps {
   glowing?: boolean;
   theme?: 'children' | 'elderly' | 'homemaker';
   onClick?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
   is3D?: boolean;
   metallic?: boolean;
   hoverEffect?: boolean;
@@ -23,6 +25,8 @@ const GlassCard = ({
   glowing = false, 
   theme, 
   onClick,
+  onMouseEnter,
+  onMouseLeave,
   is3D = false,
   metallic = false,
   hoverEffect = true,
@@ -60,6 +64,16 @@ const GlassCard = ({
     homemaker: 'from-indigo-600/10 to-purple-600/5 border-indigo-500/20 shadow-indigo-500/10'
   };
 
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    if (onMouseEnter) onMouseEnter();
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    if (onMouseLeave) onMouseLeave();
+  };
+
   return (
     <div 
       ref={cardRef}
@@ -74,8 +88,8 @@ const GlassCard = ({
         className
       )}
       onClick={onClick}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       style={style}
     >
       {children}
