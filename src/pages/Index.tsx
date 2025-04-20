@@ -33,7 +33,7 @@ const Index = () => {
             character="children"
             route="/child"
             fallbackIcon={<BrainCog className="h-16 w-16 text-blue-400" />}
-            glbUrl="/assets/child-avatar.glb"
+            glbUrl="/models/child-studying.glb"
           />
           
           <AvatarCard3D
@@ -42,7 +42,7 @@ const Index = () => {
             character="elderly"
             route="/elderly"
             fallbackIcon={<Lightbulb className="h-16 w-16 text-teal-400" />}
-            glbUrl="/assets/elderly-avatar.glb"
+            glbUrl="/models/elderly-reading.glb"
           />
           
           <AvatarCard3D
@@ -51,7 +51,7 @@ const Index = () => {
             character="homemaker"
             route="/homemaker"
             fallbackIcon={<Home className="h-16 w-16 text-indigo-400" />}
-            glbUrl="/assets/homemaker-avatar.glb"
+            glbUrl="/models/chef-cooking.glb"
           />
         </div>
       </div>
