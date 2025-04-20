@@ -7,19 +7,20 @@ import { TextureLoader } from 'three';
 interface AvatarSphereProps {
   seed: string;
   size?: number;
-  autoRotate?: boolean;
+  width?: number;
+  height?: number;
 }
 
 function SphereWithAvatar({ seed, size = 2 }: AvatarSphereProps) {
-  const url = `https://avatars.dicebear.com/api/pixel-art/${encodeURIComponent(seed)}.png`;
-  const avatarTex = useLoader(TextureLoader, url);
+  const avatarUrl = `https://avatars.dicebear.com/api/pixel-art/${encodeURIComponent(seed)}.png`;
+  const texture = useLoader(TextureLoader, avatarUrl);
 
   return (
     <>
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={0.4} />
       <directionalLight position={[5, 5, 5]} intensity={1} />
 
-      <mesh position={[0, 0, 0]}>
+      <mesh>
         <sphereGeometry args={[size, 64, 64]} />
         <MeshTransmissionMaterial
           thickness={1.5}
@@ -30,25 +31,24 @@ function SphereWithAvatar({ seed, size = 2 }: AvatarSphereProps) {
         />
       </mesh>
 
-      <mesh position={[0, 0, 0.01]}>
+      <mesh position={[0, 0, size * 0.01]}>
         <planeGeometry args={[size * 1.4, size * 1.4]} />
-        <meshBasicMaterial map={avatarTex} transparent />
+        <meshBasicMaterial map={texture} transparent />
       </mesh>
     </>
   );
 }
 
-export const AvatarSphere: React.FC<AvatarSphereProps> = ({ seed, size, autoRotate = true }) => (
-  <Canvas style={{ width: "100%", height: "100%" }}>
+export const AvatarSphere: React.FC<AvatarSphereProps> = ({ 
+  seed, 
+  size, 
+  width = 200, 
+  height = 200 
+}) => (
+  <Canvas style={{ width, height }}>
     <Suspense fallback={null}>
       <SphereWithAvatar seed={seed} size={size} />
     </Suspense>
-    <OrbitControls 
-      enableZoom={false} 
-      enablePan={false} 
-      autoRotate={autoRotate}
-      autoRotateSpeed={4}
-    />
+    <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
   </Canvas>
 );
-

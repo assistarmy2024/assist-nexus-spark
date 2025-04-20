@@ -1,6 +1,7 @@
+
 import React, { useState } from 'react';
-import AvatarCard3D from '@/components/AvatarCard3D';
-import { BrainCog, Lightbulb, Home, Sparkles } from 'lucide-react';
+import { GroupCard } from '@/components/GroupCard';
+import { Sparkles } from 'lucide-react';
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -26,28 +27,22 @@ const Index = () => {
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
-          <AvatarCard3D
+          <GroupCard
+            groupKey="children"
             title="KidBot"
-            description="Engaging and educational assistance for children"
-            character="children"
-            route="/child"
-            fallbackIcon={<BrainCog className="h-16 w-16 text-blue-400" />}
+            className="transition-all duration-300 hover:transform hover:scale-105"
           />
           
-          <AvatarCard3D
+          <GroupCard
+            groupKey="elderly"
             title="ElderAssist"
-            description="Support and companionship for elderly individuals"
-            character="elderly"
-            route="/elderly"
-            fallbackIcon={<Lightbulb className="h-16 w-16 text-teal-400" />}
+            className="transition-all duration-300 hover:transform hover:scale-105"
           />
           
-          <AvatarCard3D
+          <GroupCard
+            groupKey="homemaker"
             title="HomeCompanion"
-            description="Efficient home management and lifestyle assistance"
-            character="homemaker"
-            route="/homemaker"
-            fallbackIcon={<Home className="h-16 w-16 text-indigo-400" />}
+            className="transition-all duration-300 hover:transform hover:scale-105"
           />
         </div>
       </div>
