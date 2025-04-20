@@ -1,8 +1,7 @@
 
-import React, { Suspense, useState } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, useGLTF } from '@react-three/drei';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AvatarSphere } from './AvatarSphere';
 import GlassCard from './GlassCard';
 import { cn } from '@/lib/utils';
 
@@ -11,30 +10,24 @@ interface AvatarCard3DProps {
   description: string;
   character: 'children' | 'elderly' | 'homemaker';
   route: string;
-  glbUrl?: string;
   fallbackIcon: React.ReactNode;
 }
 
-interface ModelProps {
-  url: string;
-}
-
-const Model = ({ url }: ModelProps) => {
-  const { scene } = useGLTF(url);
-  return <primitive object={scene} scale={1.5} position={[0, -1, 0]} />;
-};
+const seedMap = {
+  children: 'playful-student',
+  elderly: 'wise-reader',
+  homemaker: 'friendly-chef'
+} as const;
 
 const AvatarCard3D = ({
   title,
   description,
   character,
   route,
-  glbUrl,
   fallbackIcon
 }: AvatarCard3DProps) => {
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
 
   const themeColors = {
     children: 'from-blue-600/30 to-indigo-600/20 hover:from-blue-600/40 hover:to-indigo-600/30',
@@ -69,32 +62,11 @@ const AvatarCard3D = ({
             "backdrop-blur-sm"
           )}
         >
-          {glbUrl ? (
-            <Suspense fallback={
-              <div className="w-full h-full flex items-center justify-center">
-                {fallbackIcon}
-              </div>
-            }>
-              <Canvas
-                camera={{ position: [0, 0, 4], fov: 50 }}
-                style={{ width: '100%', height: '100%' }}
-              >
-                <ambientLight intensity={0.5} />
-                <pointLight position={[10, 10, 10]} />
-                <Model url={glbUrl} />
-                <OrbitControls 
-                  enableZoom={false}
-                  enablePan={false}
-                  autoRotate={isHovered}
-                  autoRotateSpeed={4}
-                />
-              </Canvas>
-            </Suspense>
-          ) : (
-            <div className="w-full h-full flex items-center justify-center">
-              {fallbackIcon}
-            </div>
-          )}
+          <AvatarSphere 
+            seed={seedMap[character]} 
+            size={1.2} 
+            autoRotate={isHovered} 
+          />
         </div>
 
         <div className={cn(

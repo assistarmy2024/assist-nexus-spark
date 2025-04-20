@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import AvatarCard3D from '@/components/AvatarCard3D';
 import { BrainCog, Lightbulb, Home, Sparkles } from 'lucide-react';
@@ -33,7 +32,6 @@ const Index = () => {
             character="children"
             route="/child"
             fallbackIcon={<BrainCog className="h-16 w-16 text-blue-400" />}
-            glbUrl="/models/child-studying.glb"
           />
           
           <AvatarCard3D
@@ -42,7 +40,6 @@ const Index = () => {
             character="elderly"
             route="/elderly"
             fallbackIcon={<Lightbulb className="h-16 w-16 text-teal-400" />}
-            glbUrl="/models/elderly-reading.glb"
           />
           
           <AvatarCard3D
@@ -51,7 +48,6 @@ const Index = () => {
             character="homemaker"
             route="/homemaker"
             fallbackIcon={<Home className="h-16 w-16 text-indigo-400" />}
-            glbUrl="/models/chef-cooking.glb"
           />
         </div>
       </div>
