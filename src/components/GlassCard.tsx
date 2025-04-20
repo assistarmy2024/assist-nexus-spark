@@ -25,7 +25,7 @@ const GlassCard = ({
   onClick,
   is3D = false,
   metallic = false,
-  hoverEffect = true,
+  hoverEffect = false, // Changed default to false
   neoEffect = false,
   transitionDuration = 0.3,
   appear = 'none',
@@ -47,11 +47,10 @@ const GlassCard = ({
   }, [appear, appearDelay]);
 
   const style: React.CSSProperties = {
-    transition: `transform ${transitionDuration}s ease-out, opacity 0.5s ease-out, box-shadow 0.3s ease-out`,
-    willChange: 'opacity, box-shadow',
+    transition: `opacity 0.5s ease-out, box-shadow 0.3s ease-out`,
+    willChange: 'opacity',
     opacity: isVisible ? 1 : 0,
-    ...appear === 'scale' && { transform: isVisible ? 'scale(1)' : 'scale(0.95)' },
-    ...appear === 'slide' && { transform: isVisible ? 'translateY(0)' : 'translateY(20px)' },
+    // Remove transform effects for scale and slide
   };
 
   const themeClasses = {
