@@ -5,8 +5,8 @@ import GlassCard from '@/components/GlassCard';
 import GlassButton from '@/components/GlassButton';
 import CharacterAvatar from '@/components/CharacterAvatar';
 import LiveInteraction from '@/components/LiveInteraction';
-import { Brain, Gamepad, Book, Video, Headphones, Heart, Shield } from 'lucide-react';
-import { games, quizzes, mathExercises, videos, audios } from '@/data/childPortalData';
+import { Brain, GameController, Book, Video, Headphones, Heart, ShieldHelp } from 'lucide-react';
+import { childPortalData } from '@/data/childPortalData';
 
 const ChildJourney = () => {
   const navigate = useNavigate();
@@ -41,8 +41,8 @@ const ChildJourney = () => {
         </div>
       </header>
       
-      {/* Main Content - Using fixed height and overflow auto to ensure content stays in frame */}
-      <main className="container mx-auto px-4 py-6 overflow-y-auto" style={{ height: 'calc(100vh - 160px)' }}>
+      {/* Main Content - Using max-height and overflow auto to ensure content stays in frame */}
+      <main className="container mx-auto px-4 py-6 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 160px)' }}>
         {/* Welcome Section */}
         <section className="mb-8">
           <GlassCard 
@@ -81,7 +81,7 @@ const ChildJourney = () => {
               onClick={() => navigate('/child/games')}
             >
               <div className="w-14 h-14 rounded-full bg-purple-500/20 flex items-center justify-center mb-2">
-                <Gamepad className="h-7 w-7 text-purple-300" />
+                <GameController className="h-7 w-7 text-purple-300" />
               </div>
               <span className="text-white font-medium">Games</span>
             </button>
@@ -111,7 +111,7 @@ const ChildJourney = () => {
               onClick={() => navigate('/child/help')}
             >
               <div className="w-14 h-14 rounded-full bg-amber-500/20 flex items-center justify-center mb-2">
-                <Shield className="h-7 w-7 text-amber-300" />
+                <ShieldHelp className="h-7 w-7 text-amber-300" />
               </div>
               <span className="text-white font-medium">Help</span>
             </button>
