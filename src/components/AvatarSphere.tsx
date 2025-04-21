@@ -1,8 +1,9 @@
 
-import React, { Suspense } from 'react';
-import { Canvas, useLoader } from '@react-three/fiber';
-import { MeshTransmissionMaterial, OrbitControls } from '@react-three/drei';
+import React, { Suspense, useRef } from 'react';
+import { Canvas, useFrame, useLoader } from '@react-three/fiber';
+import { MeshTransmissionMaterial, OrbitControls, useGLTF } from '@react-three/drei';
 import { TextureLoader } from 'three';
+import { Mesh } from 'three';
 
 interface AvatarSphereProps {
   seed: string;
@@ -12,9 +13,17 @@ interface AvatarSphereProps {
   autoRotate?: boolean;
 }
 
-function SphereWithAvatar({ seed, size = 2 }: AvatarSphereProps) {
+function SphereWithAvatar({ seed, size = 2, autoRotate = false }: AvatarSphereProps) {
+  const meshRef = useRef<Mesh>(null);
   const avatarUrl = `https://avatars.dicebear.com/api/pixel-art/${encodeURIComponent(seed)}.png`;
   const texture = useLoader(TextureLoader, avatarUrl);
+
+  // Animate the sphere rotation
+  useFrame((state, delta) => {
+    if (autoRotate && meshRef.current) {
+      meshRef.current.rotation.y += delta * 0.5;
+    }
+  });
 
   return (
     <>
@@ -22,7 +31,7 @@ function SphereWithAvatar({ seed, size = 2 }: AvatarSphereProps) {
       <directionalLight position={[5, 5, 5]} intensity={1} />
       <pointLight position={[-5, -5, -5]} intensity={0.5} color="#4f93ff" />
 
-      <mesh>
+      <mesh ref={meshRef}>
         <sphereGeometry args={[size, 64, 64]} />
         <MeshTransmissionMaterial
           thickness={1.5}
@@ -54,7 +63,7 @@ export const AvatarSphere: React.FC<AvatarSphereProps> = ({
 }) => (
   <Canvas style={{ width, height }}>
     <Suspense fallback={null}>
-      <SphereWithAvatar seed={seed} size={size} />
+      <SphereWithAvatar seed={seed} size={size} autoRotate={autoRotate} />
     </Suspense>
     <OrbitControls 
       enableZoom={false} 
