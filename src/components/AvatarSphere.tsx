@@ -20,6 +20,7 @@ function SphereWithAvatar({ seed, size = 2 }: AvatarSphereProps) {
     <>
       <ambientLight intensity={0.4} />
       <directionalLight position={[5, 5, 5]} intensity={1} />
+      <pointLight position={[-5, -5, -5]} intensity={0.5} color="#4f93ff" />
 
       <mesh>
         <sphereGeometry args={[size, 64, 64]} />
@@ -28,6 +29,10 @@ function SphereWithAvatar({ seed, size = 2 }: AvatarSphereProps) {
           clearcoat={1}
           clearcoatRoughness={0}
           transmission={0.9}
+          chromaticAberration={0.05}
+          roughness={0.1}
+          distortion={0.3}
+          temporalDistortion={0.1}
           envMapIntensity={1}
         />
       </mesh>
@@ -54,7 +59,7 @@ export const AvatarSphere: React.FC<AvatarSphereProps> = ({
     <OrbitControls 
       enableZoom={false} 
       enablePan={false} 
-      enableRotate={autoRotate}
+      enableRotate={true}
       autoRotate={autoRotate}
       autoRotateSpeed={4}
     />
