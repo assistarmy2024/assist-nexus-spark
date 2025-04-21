@@ -9,6 +9,7 @@ interface AvatarSphereProps {
   size?: number;
   width?: number;
   height?: number;
+  autoRotate?: boolean;
 }
 
 function SphereWithAvatar({ seed, size = 2 }: AvatarSphereProps) {
@@ -43,12 +44,19 @@ export const AvatarSphere: React.FC<AvatarSphereProps> = ({
   seed, 
   size, 
   width = 200, 
-  height = 200 
+  height = 200,
+  autoRotate = false
 }) => (
   <Canvas style={{ width, height }}>
     <Suspense fallback={null}>
       <SphereWithAvatar seed={seed} size={size} />
     </Suspense>
-    <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
+    <OrbitControls 
+      enableZoom={false} 
+      enablePan={false} 
+      enableRotate={autoRotate}
+      autoRotate={autoRotate}
+      autoRotateSpeed={4}
+    />
   </Canvas>
 );
