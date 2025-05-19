@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
@@ -146,7 +147,7 @@ const Index = () => {
           <PersonaCard
             type="student"
             title="StudyBuddy"
-            description="Study plans, flashcards, and group chat rooms"
+            description="Study plans, flashcards, exam timers, and group chat rooms"
             route="/student"
             icon={<BookOpen className="w-8 h-8 text-violet-400" />}
             className="p-4 sm:p-5"
@@ -156,9 +157,9 @@ const Index = () => {
           <PersonaCard
             type="healthcare"
             title="MedicoMate"
-            description="Drug lookup, symptom checker, and reminders"
+            description="Drug lookup, symptom checker, appointment reminders, and case-review chat rooms"
             route="/healthcare"
-            icon={<Medkit className="w-8 h-8 text-red-400" />}
+            icon={<Heart className="w-8 h-8 text-red-400" />}
             className="p-4 sm:p-5"
             delay={500}
           />
@@ -280,7 +281,7 @@ const Index = () => {
             <NavItem icon={<Bell className="w-5 h-5" />} label="ElderAssist" onClick={() => navigate('/elderly')} />
             <NavItem icon={<Home className="w-5 h-5" />} label="HomeCompanion" onClick={() => navigate('/homemaker')} />
             <NavItem icon={<BookOpen className="w-5 h-5" />} label="StudyBuddy" onClick={() => navigate('/student')} />
-            <NavItem icon={<Medkit className="w-5 h-5" />} label="MedicoMate" onClick={() => navigate('/healthcare')} />
+            <NavItem icon={<Heart className="w-5 h-5" />} label="MedicoMate" onClick={() => navigate('/healthcare')} />
             <NavItem icon={<Briefcase className="w-5 h-5" />} label="BizAdvisor" onClick={() => navigate('/business')} />
             <NavItem icon={<MessageSquare className="w-5 h-5" />} label="General Chat" onClick={() => setIsOpenDialog(true)} />
             <NavItem icon={<Video className="w-5 h-5" />} label="Video Call" onClick={() => setSelectedVideo('general')} />
