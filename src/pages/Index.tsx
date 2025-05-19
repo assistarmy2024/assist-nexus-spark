@@ -14,6 +14,8 @@ import {
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
 import { Skeleton } from "@/components/ui/skeleton";
+import QuickUtilities from '@/components/QuickUtilities';
+import PrimaryActions from '@/components/PrimaryActions';
 
 const Index = () => {
   const [isAppLoading, setIsAppLoading] = useState(true);
@@ -75,35 +77,6 @@ const Index = () => {
     );
   }
 
-  const renderQuickActions = () => (
-    <div className={`mt-12 px-4 transition-all duration-700 ${quickActionsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-      <h3 className="text-xl font-semibold mb-4 text-white/90">Quick Actions</h3>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <ActionButton icon={<MessageSquare className="w-5 h-5" />} label="Chat" onClick={() => setIsOpenDialog(true)} />
-        <ActionButton icon={<Video className="w-5 h-5" />} label="Videos" />
-        <ActionButton icon={<BookOpen className="w-5 h-5" />} label="Health" />
-        <ActionButton icon={<ShoppingCart className="w-5 h-5" />} label="Shopping" />
-      </div>
-      
-      <div className="mt-6 space-y-3">
-        <SuggestionButton text="How do I stay healthy?" />
-        <SuggestionButton text="Show me how to video call my family" />
-        <SuggestionButton text="Tell me about today's news" />
-      </div>
-      
-      <div className="mt-6 relative">
-        <input 
-          type="text" 
-          placeholder="Type your message..." 
-          className="w-full p-3 pr-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-        />
-        <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/70 hover:text-white">
-          <Sparkles className="w-5 h-5" />
-        </button>
-      </div>
-    </div>
-  );
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#03071E] to-[#1E3A8A] text-white flex flex-col items-center p-4 overflow-auto">
       <div className="container mx-auto max-w-7xl py-6 md:py-12 flex-1 flex flex-col">
@@ -118,6 +91,14 @@ const Index = () => {
             Your personalized AI assistant for every stage of life
           </p>
         </header>
+
+        {/* Primary Actions - Video Call and General Chat */}
+        <div className={`transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <PrimaryActions 
+            onChatClick={() => setIsOpenDialog(true)}
+            onVideoClick={() => console.log("Video call clicked")}
+          />
+        </div>
 
         <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 px-2 transition-all duration-700 ${cardsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <GroupCard
@@ -142,7 +123,10 @@ const Index = () => {
           />
         </div>
         
-        {renderQuickActions()}
+        {/* Quick Utilities Section */}
+        <div className={`transition-all duration-700 ${quickActionsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <QuickUtilities />
+        </div>
         
         <footer className={`mt-10 text-center text-sm text-gray-400 transition-all duration-700 delay-500 ${cardsVisible ? 'opacity-100' : 'opacity-0'}`}>
           <p>© 2025 AssistAI - Enhancing lives with intelligent assistance</p>
