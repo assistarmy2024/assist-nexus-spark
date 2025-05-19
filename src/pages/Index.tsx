@@ -1,19 +1,30 @@
-
 import React, { useState, useEffect } from 'react';
-import { GroupCard } from '@/components/GroupCard';
-import { Sparkles, MessageSquare, BookOpen, ShoppingCart, Video, Loader } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { 
-  Sheet, 
-  SheetContent, 
-  SheetDescription, 
-  SheetHeader, 
-  SheetTitle, 
-  SheetTrigger 
-} from "@/components/ui/sheet";
+  Sparkles, 
+  MessageSquare, 
+  BookOpen, 
+  ShoppingCart, 
+  Video, 
+  Loader,
+  Book,
+  Bell,
+  Home,
+  Briefcase,
+  Calculator,
+  ListTodo,
+  Newspaper,
+  CloudSun,
+  Translate,
+  Medkit
+} from 'lucide-react';
+
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { PersonaCard } from '@/components/PersonaCard';
+import { UtilityTile } from '@/components/UtilityTile';
+import { ChatBanner } from '@/components/ChatBanner';
 
 const Index = () => {
   const [isAppLoading, setIsAppLoading] = useState(true);
@@ -21,6 +32,7 @@ const Index = () => {
   const [cardsVisible, setCardsVisible] = useState(false);
   const [quickActionsVisible, setQuickActionsVisible] = useState(false);
   const [isOpenDialog, setIsOpenDialog] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const navigate = useNavigate();
   const isMobile = window.innerWidth <= 768;
 
@@ -57,6 +69,14 @@ const Index = () => {
     navigate(route);
   };
 
+  const handleChatClick = () => {
+    setIsOpenDialog(true);
+  };
+
+  const handleVideoCallSelect = (persona: string) => {
+    setSelectedVideo(persona);
+  };
+
   // Initial loading screen
   if (isAppLoading) {
     return (
@@ -75,43 +95,15 @@ const Index = () => {
     );
   }
 
-  const renderQuickActions = () => (
-    <div className={`mt-12 px-4 transition-all duration-700 ${quickActionsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-      <h3 className="text-xl font-semibold mb-4 text-white/90">Quick Actions</h3>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <ActionButton icon={<MessageSquare className="w-5 h-5" />} label="Chat" onClick={() => setIsOpenDialog(true)} />
-        <ActionButton icon={<Video className="w-5 h-5" />} label="Videos" />
-        <ActionButton icon={<BookOpen className="w-5 h-5" />} label="Health" />
-        <ActionButton icon={<ShoppingCart className="w-5 h-5" />} label="Shopping" />
-      </div>
-      
-      <div className="mt-6 space-y-3">
-        <SuggestionButton text="How do I stay healthy?" />
-        <SuggestionButton text="Show me how to video call my family" />
-        <SuggestionButton text="Tell me about today's news" />
-      </div>
-      
-      <div className="mt-6 relative">
-        <input 
-          type="text" 
-          placeholder="Type your message..." 
-          className="w-full p-3 pr-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-        />
-        <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/70 hover:text-white">
-          <Sparkles className="w-5 h-5" />
-        </button>
-      </div>
-    </div>
-  );
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#03071E] to-[#1E3A8A] text-white flex flex-col items-center p-4 overflow-auto">
       <div className="container mx-auto max-w-7xl py-6 md:py-12 flex-1 flex flex-col">
+        {/* Hero Section */}
         <header className={`text-center mb-8 md:mb-16 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           <div className="relative inline-block mb-4">
             <div className="absolute -inset-2 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-blue-500/30 blur-lg rounded-full animate-pulse-gentle"></div>
             <h1 className="text-4xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-400 text-transparent bg-clip-text relative z-10">
-              AssistAI <Sparkles className="inline-block h-6 w-6 md:h-8 md:w-8 ml-2 text-blue-300" />
+              Welcome to AssistAI <Sparkles className="inline-block h-6 w-6 md:h-8 md:w-8 ml-2 text-blue-300" />
             </h1>
           </div>
           <p className="text-base md:text-xl text-gray-300 max-w-2xl mx-auto">
@@ -119,32 +111,96 @@ const Index = () => {
           </p>
         </header>
 
-        <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 px-2 transition-all duration-700 ${cardsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <GroupCard
-            groupKey="children"
+        {/* Main Persona Cards */}
+        <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-2 transition-all duration-700 ${cardsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <PersonaCard
+            type="children"
             title="KidBot"
-            onClick={() => handleCardClick('/child')}
-            className="transition-all duration-500 delay-100 transform hover:shadow-lg hover:shadow-blue-500/20 cursor-pointer"
+            description="Engaging educational stories, quizzes, and video lessons"
+            route="/child"
+            icon={<Book className="w-10 h-10 text-blue-400" />}
+            delay={100}
           />
           
-          <GroupCard
-            groupKey="elderly"
+          <PersonaCard
+            type="elderly"
             title="ElderAssist"
-            onClick={() => handleCardClick('/elderly')}
-            className="transition-all duration-500 delay-200 transform hover:shadow-lg hover:shadow-teal-500/20 cursor-pointer"
+            description="News, medication reminders, and mindfulness exercises"
+            route="/elderly"
+            icon={<Bell className="w-10 h-10 text-teal-400" />}
+            delay={200}
           />
           
-          <GroupCard
-            groupKey="homemaker"
+          <PersonaCard
+            type="homemaker"
             title="HomeCompanion"
-            onClick={() => handleCardClick('/homemaker')}
-            className="transition-all duration-500 delay-300 transform hover:shadow-lg hover:shadow-indigo-500/20 cursor-pointer"
+            description="Task management, recipes, and home automation"
+            route="/homemaker"
+            icon={<Home className="w-10 h-10 text-indigo-400" />}
+            delay={300}
           />
         </div>
         
-        {renderQuickActions()}
+        {/* Secondary Persona Cards - Smaller Size */}
+        <div className={`grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4 px-2 transition-all duration-700 ${cardsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <PersonaCard
+            type="student"
+            title="StudyBuddy"
+            description="Study plans, flashcards, and group chat rooms"
+            route="/student"
+            icon={<BookOpen className="w-8 h-8 text-violet-400" />}
+            className="p-4 sm:p-5"
+            delay={400}
+          />
+          
+          <PersonaCard
+            type="healthcare"
+            title="MedicoMate"
+            description="Drug lookup, symptom checker, and reminders"
+            route="/healthcare"
+            icon={<Medkit className="w-8 h-8 text-red-400" />}
+            className="p-4 sm:p-5"
+            delay={500}
+          />
+          
+          <PersonaCard
+            type="business"
+            title="BizAdvisor"
+            description="Meeting tools, reminders, and document summaries"
+            route="/business"
+            icon={<Briefcase className="w-8 h-8 text-amber-400" />}
+            className="p-4 sm:p-5"
+            delay={600}
+          />
+        </div>
         
-        <footer className={`mt-10 text-center text-sm text-gray-400 transition-all duration-700 delay-500 ${cardsVisible ? 'opacity-100' : 'opacity-0'}`}>
+        {/* Chat Banner */}
+        <ChatBanner 
+          onChatClick={handleChatClick}
+          onVideoCallSelect={handleVideoCallSelect}
+          className="my-8"
+        />
+        
+        {/* Utility Tiles */}
+        <div className={`mt-4 transition-all duration-700 ${quickActionsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h3 className="text-xl font-semibold mb-4 text-white/90 px-2">Quick Utilities</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 px-2">
+            <UtilityTile title="Calculator" icon={<Calculator className="w-6 h-6" />} delay={700} />
+            <UtilityTile title="Translator" icon={<Translate className="w-6 h-6" />} delay={750} />
+            <UtilityTile title="To-Do List" icon={<ListTodo className="w-6 h-6" />} delay={800} />
+            <UtilityTile title="Meditation" icon={<Sparkles className="w-6 h-6" />} delay={850} />
+            <UtilityTile title="News Flash" icon={<Newspaper className="w-6 h-6" />} delay={900} />
+            <UtilityTile title="Weather" icon={<CloudSun className="w-6 h-6" />} delay={950} />
+          </div>
+        </div>
+        
+        <footer className={`mt-16 text-center text-sm text-gray-400 transition-all duration-700 delay-500 ${cardsVisible ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="flex flex-wrap justify-center gap-4 mb-4">
+            <a href="#" className="text-gray-400 hover:text-white transition-colors">About</a>
+            <a href="#" className="text-gray-400 hover:text-white transition-colors">Careers</a>
+            <a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy</a>
+            <a href="#" className="text-gray-400 hover:text-white transition-colors">Terms</a>
+          </div>
           <p>© 2025 AssistAI - Enhancing lives with intelligent assistance</p>
         </footer>
       </div>
@@ -178,6 +234,33 @@ const Index = () => {
         </Dialog>
       )}
 
+      {/* Video Call Modal */}
+      {selectedVideo && (
+        <Dialog open={!!selectedVideo} onOpenChange={() => setSelectedVideo(null)}>
+          <DialogContent className="bg-[#121a3a] border border-white/10 text-white max-w-lg">
+            <DialogHeader>
+              <DialogTitle>Video Call - {selectedVideo === 'general' ? 'General Lobby' : 
+                selectedVideo === 'children' ? 'KidBot' :
+                selectedVideo === 'elderly' ? 'ElderAssist' :
+                selectedVideo === 'homemaker' ? 'HomeCompanion' :
+                selectedVideo === 'student' ? 'StudyBuddy' :
+                selectedVideo === 'healthcare' ? 'MedicoMate' :
+                selectedVideo === 'business' ? 'BizAdvisor' : ''
+              }</DialogTitle>
+              <DialogDescription className="text-white/70">
+                Your video call session would start here
+              </DialogDescription>
+            </DialogHeader>
+            <div className="aspect-video bg-black/50 rounded-md flex items-center justify-center">
+              <Video className="w-16 h-16 text-white/30" />
+            </div>
+            <p className="text-center text-white/70">
+              Video call functionality would be implemented here
+            </p>
+          </DialogContent>
+        </Dialog>
+      )}
+
       {/* Side Sheet for Navigation on Mobile */}
       <Sheet>
         <SheetTrigger asChild>
@@ -193,10 +276,14 @@ const Index = () => {
             </SheetDescription>
           </SheetHeader>
           <nav className="mt-8 space-y-4">
-            <NavItem icon={<MessageSquare className="w-5 h-5" />} label="Chat" onClick={() => setIsOpenDialog(true)} />
-            <NavItem icon={<Video className="w-5 h-5" />} label="Videos" onClick={() => {}} />
-            <NavItem icon={<BookOpen className="w-5 h-5" />} label="Health Tips" onClick={() => {}} />
-            <NavItem icon={<ShoppingCart className="w-5 h-5" />} label="Grocery List" onClick={() => {}} />
+            <NavItem icon={<Book className="w-5 h-5" />} label="KidBot" onClick={() => navigate('/child')} />
+            <NavItem icon={<Bell className="w-5 h-5" />} label="ElderAssist" onClick={() => navigate('/elderly')} />
+            <NavItem icon={<Home className="w-5 h-5" />} label="HomeCompanion" onClick={() => navigate('/homemaker')} />
+            <NavItem icon={<BookOpen className="w-5 h-5" />} label="StudyBuddy" onClick={() => navigate('/student')} />
+            <NavItem icon={<Medkit className="w-5 h-5" />} label="MedicoMate" onClick={() => navigate('/healthcare')} />
+            <NavItem icon={<Briefcase className="w-5 h-5" />} label="BizAdvisor" onClick={() => navigate('/business')} />
+            <NavItem icon={<MessageSquare className="w-5 h-5" />} label="General Chat" onClick={() => setIsOpenDialog(true)} />
+            <NavItem icon={<Video className="w-5 h-5" />} label="Video Call" onClick={() => setSelectedVideo('general')} />
           </nav>
         </SheetContent>
       </Sheet>
@@ -204,17 +291,7 @@ const Index = () => {
   );
 };
 
-// Helper Components
-const ActionButton = ({ icon, label, onClick }: { icon: React.ReactNode; label: string; onClick?: () => void }) => (
-  <button 
-    onClick={onClick}
-    className="flex items-center justify-center flex-col p-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/15 transition-all duration-300 transform hover:scale-105 active:scale-95"
-  >
-    <div className="mb-1 text-white/90">{icon}</div>
-    <span className="text-sm font-medium text-white/80">{label}</span>
-  </button>
-);
-
+// Helper Components remain the same
 const NavItem = ({ icon, label, onClick }: { icon: React.ReactNode; label: string; onClick: () => void }) => (
   <button 
     onClick={onClick}
@@ -222,12 +299,6 @@ const NavItem = ({ icon, label, onClick }: { icon: React.ReactNode; label: strin
   >
     <div className="mr-3">{icon}</div>
     <span>{label}</span>
-  </button>
-);
-
-const SuggestionButton = ({ text }: { text: string }) => (
-  <button className="w-full text-left p-3 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/15 transition-all duration-300 text-white/80 hover:text-white text-sm transform hover:translate-x-1">
-    {text}
   </button>
 );
 
