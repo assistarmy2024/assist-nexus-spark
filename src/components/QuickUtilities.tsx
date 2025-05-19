@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Calculator, Languages, ListTodo, Meditation, NewsFlash, CloudSun } from 'lucide-react';
+import { Calculator, Languages, CheckSquare, Brain, Newspaper, CloudSun } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface UtilityItemProps {
@@ -47,17 +47,17 @@ const QuickUtilities = () => {
           onClick={() => handleUtilityClick('languages')}
         />
         <UtilityItem 
-          icon={<ListTodo className="w-6 h-6" />} 
+          icon={<CheckSquare className="w-6 h-6" />} 
           label="To-Do List" 
           onClick={() => handleUtilityClick('todo')}
         />
         <UtilityItem 
-          icon={<Meditation className="w-6 h-6" />} 
+          icon={<Brain className="w-6 h-6" />} 
           label="Meditation" 
           onClick={() => handleUtilityClick('meditation')}
         />
         <UtilityItem 
-          icon={<NewsFlash className="w-6 h-6" />} 
+          icon={<Newspaper className="w-6 h-6" />} 
           label="News Flash" 
           onClick={() => handleUtilityClick('news')}
         />
