@@ -15,8 +15,8 @@ import {
   ListTodo,
   Newspaper,
   CloudSun,
-  Translate,
-  Medkit
+  Languages,
+  Heart
 } from 'lucide-react';
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -186,7 +186,7 @@ const Index = () => {
           <h3 className="text-xl font-semibold mb-4 text-white/90 px-2">Quick Utilities</h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 px-2">
             <UtilityTile title="Calculator" icon={<Calculator className="w-6 h-6" />} delay={700} />
-            <UtilityTile title="Translator" icon={<Translate className="w-6 h-6" />} delay={750} />
+            <UtilityTile title="Languages" icon={<Languages className="w-6 h-6" />} delay={750} />
             <UtilityTile title="To-Do List" icon={<ListTodo className="w-6 h-6" />} delay={800} />
             <UtilityTile title="Meditation" icon={<Sparkles className="w-6 h-6" />} delay={850} />
             <UtilityTile title="News Flash" icon={<Newspaper className="w-6 h-6" />} delay={900} />
