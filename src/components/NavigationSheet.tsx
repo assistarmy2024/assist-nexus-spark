@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Sparkles, MessageSquare, Video, Home, Bell, Book } from 'lucide-react';
+import { Sparkles, MessageSquare, Video, Home, Lightbulb, BrainCog } from 'lucide-react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTrigger } from "@/components/ui/sheet";
 import { NavItem } from './NavItem';
 
@@ -28,8 +28,8 @@ export const NavigationSheet = ({ onOpenDialog, onVideoSelect }: NavigationSheet
           </SheetDescription>
         </SheetHeader>
         <nav className="mt-8 space-y-4">
-          <NavItem icon={<Book className="w-5 h-5" />} label="KidBot" onClick={() => navigate('/child')} />
-          <NavItem icon={<Bell className="w-5 h-5" />} label="ElderAssist" onClick={() => navigate('/elderly')} />
+          <NavItem icon={<BrainCog className="w-5 h-5" />} label="KidBot" onClick={() => navigate('/child')} />
+          <NavItem icon={<Lightbulb className="w-5 h-5" />} label="ElderAssist" onClick={() => navigate('/elderly')} />
           <NavItem icon={<Home className="w-5 h-5" />} label="HomeCompanion" onClick={() => navigate('/homemaker')} />
           <NavItem icon={<MessageSquare className="w-5 h-5" />} label="General Chat" onClick={onOpenDialog} />
           <NavItem icon={<Video className="w-5 h-5" />} label="Video Call" onClick={() => onVideoSelect('general')} />

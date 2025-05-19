@@ -1,17 +1,15 @@
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { 
-  Sparkles, 
-  MessageSquare, 
-  Book, 
-  Bell,
+  BrainCog, 
+  Lightbulb, 
   Home,
   Calculator,
   ListTodo,
   Newspaper,
   CloudSun,
   Languages,
+  Sparkles
 } from 'lucide-react';
 
 import { PersonaCard } from '@/components/PersonaCard';
@@ -29,7 +27,6 @@ const Index = () => {
   const [quickActionsVisible, setQuickActionsVisible] = useState(false);
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
-  const navigate = useNavigate();
   const isMobile = window.innerWidth <= 768;
 
   useEffect(() => {
@@ -81,12 +78,12 @@ const Index = () => {
         <header className={`text-center mb-8 md:mb-16 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           <div className="relative inline-block mb-4">
             <div className="absolute -inset-2 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-blue-500/30 blur-lg rounded-full animate-pulse-gentle"></div>
-            <h1 className="text-4xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-400 text-transparent bg-clip-text relative z-10">
+            <h1 className="text-4xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-white via-blue-400 to-white text-transparent bg-clip-text relative z-10">
               Welcome to AssistAI <Sparkles className="inline-block h-6 w-6 md:h-8 md:w-8 ml-2 text-blue-300" />
             </h1>
           </div>
           <p className="text-base md:text-xl text-gray-300 max-w-2xl mx-auto">
-            Your personalized AI assistant for every stage of life
+            Your personalized AI assistant for every stage of life.
           </p>
         </header>
 
@@ -95,27 +92,27 @@ const Index = () => {
           <PersonaCard
             type="children"
             title="KidBot"
-            description="Engaging educational stories, quizzes, and video lessons"
+            description="Engaging educational assistance for children."
             route="/child"
-            icon={<Book className="w-10 h-10 text-blue-400" />}
+            icon={<BrainCog className="w-12 h-12" />}
             delay={100}
           />
           
           <PersonaCard
             type="elderly"
             title="ElderAssist"
-            description="Support and companionship for elderly individuals"
+            description="Support and companionship for elderly individuals."
             route="/elderly"
-            icon={<Bell className="w-10 h-10 text-teal-400" />}
+            icon={<Lightbulb className="w-12 h-12" />}
             delay={200}
           />
           
           <PersonaCard
             type="homemaker"
             title="HomeCompanion"
-            description="Efficient home management and lifestyle assistance"
+            description="Efficient home management and lifestyle assistance."
             route="/homemaker"
-            icon={<Home className="w-10 h-10 text-indigo-400" />}
+            icon={<Home className="w-12 h-12" />}
             delay={300}
           />
         </div>
