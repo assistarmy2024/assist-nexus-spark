@@ -4,19 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { 
   Sparkles, 
   MessageSquare, 
-  BookOpen, 
-  ShoppingCart, 
-  Video, 
-  Book,
+  Book, 
   Bell,
   Home,
-  Briefcase,
   Calculator,
   ListTodo,
   Newspaper,
   CloudSun,
   Languages,
-  Heart
 } from 'lucide-react';
 
 import { PersonaCard } from '@/components/PersonaCard';
@@ -96,7 +91,7 @@ const Index = () => {
         </header>
 
         {/* Main Persona Cards */}
-        <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-2 transition-all duration-700 ${cardsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 px-4 md:px-6 transition-all duration-700 ${cardsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <PersonaCard
             type="children"
             title="KidBot"
@@ -109,7 +104,7 @@ const Index = () => {
           <PersonaCard
             type="elderly"
             title="ElderAssist"
-            description="News, medication reminders, and mindfulness exercises"
+            description="Support and companionship for elderly individuals"
             route="/elderly"
             icon={<Bell className="w-10 h-10 text-teal-400" />}
             delay={200}
@@ -118,43 +113,10 @@ const Index = () => {
           <PersonaCard
             type="homemaker"
             title="HomeCompanion"
-            description="Task management, recipes, and home automation"
+            description="Efficient home management and lifestyle assistance"
             route="/homemaker"
             icon={<Home className="w-10 h-10 text-indigo-400" />}
             delay={300}
-          />
-        </div>
-        
-        {/* Secondary Persona Cards - Smaller Size */}
-        <div className={`grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4 px-2 transition-all duration-700 ${cardsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <PersonaCard
-            type="student"
-            title="StudyBuddy"
-            description="Study plans, flashcards, exam timers, and group chat rooms"
-            route="/student"
-            icon={<BookOpen className="w-8 h-8 text-violet-400" />}
-            className="p-4 sm:p-5"
-            delay={400}
-          />
-          
-          <PersonaCard
-            type="healthcare"
-            title="MedicoMate"
-            description="Drug lookup, symptom checker, appointment reminders, and case-review chat rooms"
-            route="/healthcare"
-            icon={<Heart className="w-8 h-8 text-red-400" />}
-            className="p-4 sm:p-5"
-            delay={500}
-          />
-          
-          <PersonaCard
-            type="business"
-            title="BizAdvisor"
-            description="Meeting tools, reminders, and document summaries"
-            route="/business"
-            icon={<Briefcase className="w-8 h-8 text-amber-400" />}
-            className="p-4 sm:p-5"
-            delay={600}
           />
         </div>
         
@@ -166,9 +128,9 @@ const Index = () => {
         />
         
         {/* Utility Tiles */}
-        <div className={`mt-4 transition-all duration-700 ${quickActionsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h3 className="text-xl font-semibold mb-4 text-white/90 px-2">Quick Utilities</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 px-2">
+        <div className={`mt-8 transition-all duration-700 ${quickActionsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h3 className="text-xl font-semibold mb-4 text-white/90 px-2 md:px-6">Quick Utilities</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 px-2 md:px-6">
             <UtilityTile title="Calculator" icon={<Calculator className="w-6 h-6" />} delay={700} />
             <UtilityTile title="Languages" icon={<Languages className="w-6 h-6" />} delay={750} />
             <UtilityTile title="To-Do List" icon={<ListTodo className="w-6 h-6" />} delay={800} />

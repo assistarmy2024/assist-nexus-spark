@@ -44,7 +44,7 @@ export function UtilityTile({
       onMouseLeave={handleMouseLeave}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <div className="mb-2 text-white/90">
+      <div className="mb-2 p-3 rounded-full bg-white/10 text-white/90">
         {icon}
       </div>
       <span className="text-sm font-medium text-white/80">{title}</span>

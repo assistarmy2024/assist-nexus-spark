@@ -16,7 +16,9 @@ export const NavItem = ({
 }: NavItemProps) => (
   <button 
     onClick={onClick}
-    className={`flex items-center w-full p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300 text-white/80 hover:text-white transform hover:translate-x-1`}
+    className={`flex items-center w-full p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300 text-white/80 hover:text-white transform hover:translate-x-1 ${
+      isActive ? 'bg-white/10 text-white' : ''
+    }`}
   >
     <div className="mr-3">{icon}</div>
     <span>{label}</span>
