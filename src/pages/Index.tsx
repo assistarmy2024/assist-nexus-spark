@@ -1,9 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { 
-  BrainCog, 
-  Lightbulb, 
-  Home,
   Calculator,
   ListTodo,
   Newspaper,
@@ -12,13 +9,14 @@ import {
   Sparkles
 } from 'lucide-react';
 
-import { PersonaCard } from '@/components/PersonaCard';
 import { UtilityTile } from '@/components/UtilityTile';
 import { ChatBanner } from '@/components/ChatBanner';
 import { LoadingScreen } from '@/components/LoadingScreen';
 import { NavigationSheet } from '@/components/NavigationSheet';
 import { ChatDialog } from '@/components/ChatDialog';
 import { VideoCallDialog } from '@/components/VideoCallDialog';
+import HeroSection from '@/components/HeroSection';
+import PersonaGrid from '@/components/PersonaGrid';
 
 const Index = () => {
   const [isAppLoading, setIsAppLoading] = useState(true);
@@ -75,47 +73,10 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-[#03071E] to-[#1E3A8A] text-white flex flex-col items-center p-4 overflow-auto">
       <div className="container mx-auto max-w-7xl py-6 md:py-12 flex-1 flex flex-col">
         {/* Hero Section */}
-        <header className={`text-center mb-8 md:mb-16 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <div className="relative inline-block mb-4">
-            <div className="absolute -inset-2 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-blue-500/30 blur-lg rounded-full animate-pulse-gentle"></div>
-            <h1 className="text-4xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-white via-blue-400 to-white text-transparent bg-clip-text relative z-10">
-              Welcome to AssistAI <Sparkles className="inline-block h-6 w-6 md:h-8 md:w-8 ml-2 text-blue-300" />
-            </h1>
-          </div>
-          <p className="text-base md:text-xl text-gray-300 max-w-2xl mx-auto">
-            Your personalized AI assistant for every stage of life.
-          </p>
-        </header>
+        <HeroSection isLoaded={isLoaded} />
 
         {/* Main Persona Cards */}
-        <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 px-4 md:px-6 transition-all duration-700 ${cardsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <PersonaCard
-            type="children"
-            title="KidBot"
-            description="Engaging educational assistance for children."
-            route="/child"
-            icon={<BrainCog className="w-12 h-12" />}
-            delay={100}
-          />
-          
-          <PersonaCard
-            type="elderly"
-            title="ElderAssist"
-            description="Support and companionship for elderly individuals."
-            route="/elderly"
-            icon={<Lightbulb className="w-12 h-12" />}
-            delay={200}
-          />
-          
-          <PersonaCard
-            type="homemaker"
-            title="HomeCompanion"
-            description="Efficient home management and lifestyle assistance."
-            route="/homemaker"
-            icon={<Home className="w-12 h-12" />}
-            delay={300}
-          />
-        </div>
+        <PersonaGrid isVisible={cardsVisible} />
         
         {/* Chat Banner */}
         <ChatBanner 

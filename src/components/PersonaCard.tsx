@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export type PersonaType = 'children' | 'elderly' | 'homemaker' | 'student' | 'healthcare' | 'business';
 
@@ -70,11 +71,14 @@ export function PersonaCard({
   };
 
   return (
-    <div 
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
+      transition={{ duration: 0.5, delay: delay / 1000 }}
       className={cn(
         "flex flex-col items-center p-8 text-center rounded-3xl backdrop-blur-md transition-all duration-500 cursor-pointer border border-white/10 overflow-hidden bg-gradient-to-br",
         getGradient(),
-        isHovered ? 'shadow-lg' : '',
+        isHovered ? 'shadow-xl transform scale-105' : 'shadow-lg',
         !isVisible ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0',
         className
       )}
@@ -103,6 +107,6 @@ export function PersonaCard({
       
       <h3 className="text-2xl font-bold mb-2 text-white">{title}</h3>
       <p className="text-white/80">{description}</p>
-    </div>
+    </motion.div>
   );
 }
