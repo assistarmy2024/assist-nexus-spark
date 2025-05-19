@@ -7,7 +7,6 @@ import {
   BookOpen, 
   ShoppingCart, 
   Video, 
-  Loader,
   Book,
   Bell,
   Home,
@@ -20,12 +19,13 @@ import {
   Heart
 } from 'lucide-react';
 
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { PersonaCard } from '@/components/PersonaCard';
 import { UtilityTile } from '@/components/UtilityTile';
 import { ChatBanner } from '@/components/ChatBanner';
+import { LoadingScreen } from '@/components/LoadingScreen';
+import { NavigationSheet } from '@/components/NavigationSheet';
+import { ChatDialog } from '@/components/ChatDialog';
+import { VideoCallDialog } from '@/components/VideoCallDialog';
 
 const Index = () => {
   const [isAppLoading, setIsAppLoading] = useState(true);
@@ -66,10 +66,6 @@ const Index = () => {
     };
   }, []);
 
-  const handleCardClick = (route: string) => {
-    navigate(route);
-  };
-
   const handleChatClick = () => {
     setIsOpenDialog(true);
   };
@@ -80,20 +76,7 @@ const Index = () => {
 
   // Initial loading screen
   if (isAppLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-[#03071E] to-[#1E3A8A] flex flex-col items-center justify-center">
-        <div className="animate-pulse-gentle">
-          <Sparkles className="w-16 h-16 text-blue-400 mb-6" />
-        </div>
-        <h1 className="text-4xl font-bold text-white mb-3 animate-pulse-slow">
-          AssistAI
-        </h1>
-        <div className="flex items-center space-x-2">
-          <Loader className="h-5 w-5 animate-spin text-blue-400" />
-          <p className="text-white/70">Loading your AI assistant...</p>
-        </div>
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   return (
@@ -206,168 +189,24 @@ const Index = () => {
         </footer>
       </div>
 
-      {/* Mobile Dialog */}
-      {isMobile ? (
-        <Drawer open={isOpenDialog} onOpenChange={setIsOpenDialog}>
-          <DrawerContent className="bg-[#121a3a] border-t border-white/10">
-            <DrawerHeader>
-              <DrawerTitle className="text-white">Chat with AssistAI</DrawerTitle>
-              <DrawerDescription className="text-white/70">
-                Ask me anything and I'll help you find answers
-              </DrawerDescription>
-            </DrawerHeader>
-            <div className="p-4">
-              <ChatInterface />
-            </div>
-          </DrawerContent>
-        </Drawer>
-      ) : (
-        <Dialog open={isOpenDialog} onOpenChange={setIsOpenDialog}>
-          <DialogContent className="bg-[#121a3a] border border-white/10 text-white max-w-md">
-            <DialogHeader>
-              <DialogTitle>Chat with AssistAI</DialogTitle>
-              <DialogDescription className="text-white/70">
-                Ask me anything and I'll help you find answers
-              </DialogDescription>
-            </DialogHeader>
-            <ChatInterface />
-          </DialogContent>
-        </Dialog>
-      )}
+      {/* Chat Dialog/Drawer */}
+      <ChatDialog 
+        isOpen={isOpenDialog} 
+        onOpenChange={setIsOpenDialog} 
+        isMobile={isMobile} 
+      />
 
       {/* Video Call Modal */}
-      {selectedVideo && (
-        <Dialog open={!!selectedVideo} onOpenChange={() => setSelectedVideo(null)}>
-          <DialogContent className="bg-[#121a3a] border border-white/10 text-white max-w-lg">
-            <DialogHeader>
-              <DialogTitle>Video Call - {selectedVideo === 'general' ? 'General Lobby' : 
-                selectedVideo === 'children' ? 'KidBot' :
-                selectedVideo === 'elderly' ? 'ElderAssist' :
-                selectedVideo === 'homemaker' ? 'HomeCompanion' :
-                selectedVideo === 'student' ? 'StudyBuddy' :
-                selectedVideo === 'healthcare' ? 'MedicoMate' :
-                selectedVideo === 'business' ? 'BizAdvisor' : ''
-              }</DialogTitle>
-              <DialogDescription className="text-white/70">
-                Your video call session would start here
-              </DialogDescription>
-            </DialogHeader>
-            <div className="aspect-video bg-black/50 rounded-md flex items-center justify-center">
-              <Video className="w-16 h-16 text-white/30" />
-            </div>
-            <p className="text-center text-white/70">
-              Video call functionality would be implemented here
-            </p>
-          </DialogContent>
-        </Dialog>
-      )}
+      <VideoCallDialog 
+        selectedVideo={selectedVideo} 
+        onOpenChange={() => setSelectedVideo(null)} 
+      />
 
       {/* Side Sheet for Navigation on Mobile */}
-      <Sheet>
-        <SheetTrigger asChild>
-          <button className="fixed top-4 left-4 p-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-colors z-50">
-            <Sparkles className="w-5 h-5" />
-          </button>
-        </SheetTrigger>
-        <SheetContent side="left" className="bg-[#121a3a] border-r border-white/10 w-[300px]">
-          <SheetHeader>
-            <SheetTitle className="text-white">AssistAI Menu</SheetTitle>
-            <SheetDescription className="text-white/70">
-              Navigate to your personalized AI assistants
-            </SheetDescription>
-          </SheetHeader>
-          <nav className="mt-8 space-y-4">
-            <NavItem icon={<Book className="w-5 h-5" />} label="KidBot" onClick={() => navigate('/child')} />
-            <NavItem icon={<Bell className="w-5 h-5" />} label="ElderAssist" onClick={() => navigate('/elderly')} />
-            <NavItem icon={<Home className="w-5 h-5" />} label="HomeCompanion" onClick={() => navigate('/homemaker')} />
-            <NavItem icon={<BookOpen className="w-5 h-5" />} label="StudyBuddy" onClick={() => navigate('/student')} />
-            <NavItem icon={<Heart className="w-5 h-5" />} label="MedicoMate" onClick={() => navigate('/healthcare')} />
-            <NavItem icon={<Briefcase className="w-5 h-5" />} label="BizAdvisor" onClick={() => navigate('/business')} />
-            <NavItem icon={<MessageSquare className="w-5 h-5" />} label="General Chat" onClick={() => setIsOpenDialog(true)} />
-            <NavItem icon={<Video className="w-5 h-5" />} label="Video Call" onClick={() => setSelectedVideo('general')} />
-          </nav>
-        </SheetContent>
-      </Sheet>
-    </div>
-  );
-};
-
-// Helper Components remain the same
-const NavItem = ({ icon, label, onClick }: { icon: React.ReactNode; label: string; onClick: () => void }) => (
-  <button 
-    onClick={onClick}
-    className="flex items-center w-full p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300 text-white/80 hover:text-white transform hover:translate-x-1"
-  >
-    <div className="mr-3">{icon}</div>
-    <span>{label}</span>
-  </button>
-);
-
-const ChatInterface = () => {
-  const [isTyping, setIsTyping] = useState(false);
-  const [messages, setMessages] = useState([
-    { isBot: true, text: "Hello! How can I assist you today?" },
-    { isBot: false, text: "I'd like to know more about healthy habits." },
-    { isBot: true, text: "Great choice! Some key healthy habits include:\n- Getting 7-8 hours of sleep\n- Drinking plenty of water\n- Regular physical activity\n- Balanced nutrition\nWould you like more specific information on any of these?" }
-  ]);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const input = document.getElementById('chat-input') as HTMLInputElement;
-    if (!input.value.trim()) return;
-    
-    // Add user message
-    setMessages(prev => [...prev, { isBot: false, text: input.value }]);
-    input.value = '';
-    
-    // Show typing indicator
-    setIsTyping(true);
-    
-    // Simulate AI response
-    setTimeout(() => {
-      setIsTyping(false);
-      setMessages(prev => [...prev, { 
-        isBot: true, 
-        text: "I understand your interest. For the best personalized advice, could you tell me more about your current lifestyle habits?" 
-      }]);
-    }, 1500);
-  };
-  
-  return (
-    <div className="flex flex-col h-[400px]">
-      <div className="flex-1 overflow-y-auto mb-4 space-y-4 p-2">
-        {messages.map((msg, i) => (
-          <div key={i} className={`${msg.isBot 
-            ? "bg-blue-600/20 p-3 rounded-lg rounded-tl-none max-w-[80%]" 
-            : "bg-white/10 p-3 rounded-lg rounded-tr-none max-w-[80%] ml-auto"} text-white/90`}>
-            {msg.text.split('\n').map((line, j) => (
-              line.startsWith('-') ? 
-                <li key={j} className="ml-5">{line.substring(1).trim()}</li> : 
-                <p key={j} className={j > 0 ? "mt-2" : ""}>{line}</p>
-            ))}
-          </div>
-        ))}
-        
-        {isTyping && (
-          <div className="bg-blue-600/20 p-3 rounded-lg rounded-tl-none max-w-[80%] text-white/90 flex space-x-1">
-            <div className="w-2 h-2 bg-white/80 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-            <div className="w-2 h-2 bg-white/80 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-            <div className="w-2 h-2 bg-white/80 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
-          </div>
-        )}
-      </div>
-      
-      <form onSubmit={handleSubmit} className="relative">
-        <input 
-          id="chat-input"
-          type="text" 
-          placeholder="Type your message..." 
-          className="w-full p-3 pr-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-        />
-        <button type="submit" className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/70 hover:text-white">
-          <Sparkles className="w-5 h-5" />
-        </button>
-      </form>
+      <NavigationSheet 
+        onOpenDialog={handleChatClick}
+        onVideoSelect={handleVideoCallSelect}
+      />
     </div>
   );
 };
